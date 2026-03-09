@@ -229,7 +229,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
 </div></div>
 
 <script>
-const SHEET_URL='https://script.google.com/macros/s/AKfycbwBbx1UVa6bUum60ZZst8a_rOoQU6qK8eaHRDYkM1QN34DkYP8RjNAiwNRh9ExK7h8p/exec';
+const SHEET_URL='https://script.google.com/macros/s/AKfycbwoWQVjtS0iOblwyK8QXqjpH25ia4Ei_8EMsscfNe9o_IXEQJz-GOkgdwSjVAHMto8B/exec';
 const AC=['#840132','#a01545','#C8666D','#EB9F00','#5e0124','#808080','#4B1757','#2E7D32','#1565C0','#D84315','#6A1B9A','#00695C'];
 const CC={'beirut':[33.8938,35.5018],'lebanon':[33.8938,35.5018],'metn':[33.8833,35.55],'dubai':[25.2048,55.2708],'uae':[25.2048,55.2708],'abu dhabi':[24.4539,54.3773],'amman':[31.9454,35.9284],'jordan':[31.9454,35.9284],'riyadh':[24.7136,46.6753],'saudi arabia':[24.7136,46.6753],'london':[51.5074,-0.1278],'uk':[51.5074,-0.1278],'paris':[48.8566,2.3522],'france':[48.8566,2.3522],'toronto':[43.6532,-79.3832],'canada':[43.6532,-79.3832],'boston':[42.3601,-71.0589],'doha':[25.2854,51.531],'qatar':[25.2854,51.531],'kuwait':[29.3759,47.9774],'rome':[41.9028,12.4964],'italy':[41.9028,12.4964],'greece':[37.9838,23.7275],'germany':[52.52,13.405],'switzerland':[47.3769,8.5417],'geneva':[46.2044,6.1432],'marseille':[43.2965,5.3698],'oman':[23.588,58.3829],'san francisco':[37.7749,-122.4194],'washington d.c.':[38.9072,-77.0369],'washington':[38.9072,-77.0369],'chicago':[41.8781,-87.6298],'new york':[40.7128,-74.006],'los angeles':[34.0522,-118.2437],'houston':[29.7604,-95.3698],'jeddah':[21.4858,39.1925],'montreal':[45.5017,-73.5673],'bahrain':[26.0667,50.5577]};
 
@@ -494,27 +494,16 @@ async function addMember(){
   }
   btn.disabled=true;btn.innerHTML='<span class="loading-spinner"></span>Saving...';
   try{
-    // Use form submission to bypass CORS for POST
-    const payload=JSON.stringify({Name:n,Year:y,Major:m,City:ci,Country:co,Role:r});
+    // Use GET with JSONP to bypass CORS (same as data loading)
     await new Promise((resolve,reject)=>{
-      const iframe=document.createElement('iframe');
-      iframe.style.display='none';
-      iframe.name='_postFrame';
-      document.body.appendChild(iframe);
-      const form=document.createElement('form');
-      form.method='POST';
-      form.action=SHEET_URL;
-      form.target='_postFrame';
-      const input=document.createElement('input');
-      input.type='hidden';input.name='payload';input.value=payload;
-      form.appendChild(input);
-      document.body.appendChild(form);
-      iframe.onload=function(){
-        setTimeout(()=>{iframe.remove();form.remove();resolve()},500);
-      };
-      form.submit();
-      // Resolve after timeout in case onload doesn't fire
-      setTimeout(()=>{try{iframe.remove();form.remove()}catch(e){}resolve()},3000);
+      const cbName='_addCb_'+Date.now();
+      window[cbName]=function(res){delete window[cbName];resolve(res)};
+      const params=new URLSearchParams({action:'add',Name:n,Year:y,Major:m,City:ci,Country:co,Role:r,callback:cbName});
+      const script=document.createElement('script');
+      script.src=SHEET_URL+'?'+params.toString();
+      script.onerror=function(){script.remove();delete window[cbName];reject(new Error('Failed'))};
+      document.head.appendChild(script);
+      setTimeout(()=>{try{script.remove();delete window[cbName]}catch(e){}resolve()},5000);
     });
     alumni.push({name:n,year:parseInt(y),major:m,city:ci,country:co,role:r});
     refreshAll();buildFilters();
