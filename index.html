@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AUB Alumni 2010–2011 | Where Are We Now?</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,800;1,9..144,300&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+:root {
+  /* AUB Official Brand Colors */
+  --aub-red: #840132;         /* Berytus Red - Primary */
+  --aub-red-light: #a01545;
+  --aub-red-dark: #5e0124;
+  --aub-black: #1a1a1a;
+  --aub-gray: #808080;
+  --aub-gray-light: #b0b0b0;
+  --aub-yellow: #EB9F00;      /* Accent - Warm Yellow */
+  --aub-coral: #C8666D;       /* Accent - Coral */
+  --aub-white: #FFFFFF;
+  --aub-off-white: #F7F5F2;
+  --aub-bg: #FAFAFA;
+  --text-primary: #1a1a1a;
+  --text-secondary: #555555;
+  --text-muted: #888888;
+  --card-bg: #FFFFFF;
+  --card-border: #E8E4E0;
+  --card-hover: #F5F0EB;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:var(--aub-bg);color:var(--text-primary);min-height:100vh}
+
+/* Top Bar - AUB Red */
+.top-bar{position:sticky;top:0;z-index:1000;background:var(--aub-red);box-shadow:0 2px 12px rgba(132,1,50,0.15)}
+.top-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{font-size:22px}
+.logo-text{font-family:'Fraunces',serif;font-weight:600;font-size:1.05rem;color:var(--aub-white)}
+.logo-sub{font-size:0.65rem;font-weight:400;color:rgba(255,255,255,0.7);letter-spacing:2px;text-transform:uppercase}
+.nav-tabs{display:flex;gap:4px}
+.nav-tab{padding:8px 20px;border:none;background:none;color:rgba(255,255,255,0.75);font-family:'Outfit',sans-serif;font-size:0.85rem;font-weight:500;cursor:pointer;border-radius:8px;transition:all 0.25s;white-space:nowrap}
+.nav-tab:hover{color:#fff;background:rgba(255,255,255,0.12)}
+.nav-tab.active{color:#fff;background:rgba(255,255,255,0.2)}
+
+/* Hero */
+.hero{max-width:1200px;margin:0 auto;padding:48px 24px 20px}
+.hero h1{font-family:'Fraunces',serif;font-weight:800;font-size:clamp(2rem,5vw,3.2rem);line-height:1.1;margin-bottom:8px;color:var(--aub-red)}
+.hero p{color:var(--text-secondary);font-size:1.05rem;max-width:550px}
+.stat-strip{display:flex;gap:32px;margin-top:28px;flex-wrap:wrap}
+.stat-item{display:flex;flex-direction:column}
+.stat-num{font-family:'Fraunces',serif;font-weight:800;font-size:2rem;color:var(--aub-red);line-height:1}
+.stat-label{font-size:0.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:2px;margin-top:4px}
+
+/* Sections */
+.section{max-width:1200px;margin:0 auto;padding:32px 24px;display:none}
+.section.active{display:block;animation:fadeUp 0.5s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* Map */
+#mapSection .map-wrap{width:100%;height:500px;border-radius:16px;overflow:hidden;border:1px solid var(--card-border);margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,0.06)}
+#map{width:100%;height:100%}
+.alumni-marker{background:var(--aub-red);border:3px solid var(--aub-white);border-radius:50%;width:14px;height:14px;box-shadow:0 0 8px rgba(132,1,50,0.4)}
+.cluster-marker{background:var(--aub-red);border:3px solid var(--aub-white);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:var(--aub-white);box-shadow:0 0 12px rgba(132,1,50,0.4)}
+.leaflet-popup-content-wrapper{background:var(--aub-white)!important;border:1px solid var(--card-border)!important;border-radius:12px!important;color:var(--text-primary)!important;box-shadow:0 8px 32px rgba(0,0,0,0.12)!important}
+.leaflet-popup-tip{background:var(--aub-white)!important}
+.popup-inner{padding:4px;font-family:'Outfit',sans-serif}
+.popup-inner h3{font-family:'Fraunces',serif;font-size:1rem;color:var(--aub-red);margin-bottom:4px}
+.popup-inner .popup-detail{font-size:0.8rem;color:var(--text-secondary);line-height:1.5}
+.popup-inner .popup-person{padding:4px 0;border-bottom:1px solid var(--card-border)}
+.popup-inner .popup-person:last-child{border-bottom:none}
+.map-legend{display:flex;gap:24px;flex-wrap:wrap;font-size:0.8rem;color:var(--text-muted)}
+.legend-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:middle}
+
+/* Search & Filters */
+.search-bar{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+.search-input{flex:1;min-width:200px;padding:14px 20px;background:var(--aub-white);border:1px solid var(--card-border);border-radius:12px;color:var(--text-primary);font-family:'Outfit',sans-serif;font-size:0.95rem;outline:none;transition:all 0.3s}
+.search-input::placeholder{color:var(--text-muted)}
+.search-input:focus{border-color:var(--aub-red);box-shadow:0 0 0 3px rgba(132,1,50,0.08)}
+.filter-btn{padding:10px 18px;background:var(--aub-white);border:1px solid var(--card-border);border-radius:10px;color:var(--text-secondary);font-family:'Outfit',sans-serif;font-size:0.8rem;font-weight:500;cursor:pointer;transition:all 0.25s}
+.filter-btn:hover{border-color:var(--aub-red);color:var(--aub-red)}
+.filter-btn.active{color:var(--aub-white);border-color:var(--aub-red);background:var(--aub-red)}
+
+/* Alumni Cards */
+.alumni-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+.alumni-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:20px;transition:all 0.3s;position:relative;overflow:hidden}
+.alumni-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--aub-red);opacity:0;transition:opacity 0.3s}
+.alumni-card:hover{border-color:rgba(132,1,50,0.25);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.08)}
+.alumni-card:hover::before{opacity:1}
+.card-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:800;font-size:1rem;flex-shrink:0}
+.card-name{font-family:'Fraunces',serif;font-weight:600;font-size:1.05rem;color:var(--text-primary);line-height:1.2}
+.card-year{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--aub-red)}
+.card-details{display:flex;flex-direction:column;gap:6px}
+.card-detail{display:flex;align-items:center;gap:10px;font-size:0.82rem;color:var(--text-secondary)}
+.card-detail .icon{font-size:0.9rem;width:18px;text-align:center}
+
+/* Stats */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}
+.stats-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:28px;box-shadow:0 2px 8px rgba(0,0,0,0.03)}
+.stats-card-title{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--aub-red);letter-spacing:3px;text-transform:uppercase;margin-bottom:20px}
+.bar-chart-item{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.bar-label{font-size:0.82rem;color:var(--text-secondary);min-width:110px;text-align:right}
+.bar-track{flex:1;height:26px;background:var(--aub-off-white);border-radius:8px;overflow:hidden}
+.bar-fill{height:100%;border-radius:8px;display:flex;align-items:center;padding-left:10px;font-family:'JetBrains Mono',monospace;font-size:0.72rem;font-weight:500;color:var(--aub-white);transition:width 1s ease;min-width:28px}
+.superlative-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:28px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.03)}
+.superlative-emoji{font-size:2.5rem;margin-bottom:12px}
+.superlative-label{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--aub-red);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+.superlative-name{font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;margin-bottom:4px;color:var(--text-primary)}
+.superlative-detail{font-size:0.85rem;color:var(--text-secondary)}
+
+/* Add Form */
+.add-form{max-width:500px}
+.form-group{margin-bottom:20px}
+.form-label{display:block;font-size:0.8rem;font-weight:500;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+.form-input,.form-select{width:100%;padding:14px 18px;background:var(--aub-white);border:1px solid var(--card-border);border-radius:12px;color:var(--text-primary);font-family:'Outfit',sans-serif;font-size:0.95rem;outline:none;transition:all 0.3s}
+.form-select{appearance:none;cursor:pointer}
+.form-input:focus,.form-select:focus{border-color:var(--aub-red);box-shadow:0 0 0 3px rgba(132,1,50,0.08)}
+.form-input::placeholder{color:var(--text-muted)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.btn-submit{padding:16px 40px;background:var(--aub-red);color:var(--aub-white);border:none;border-radius:60px;font-family:'Outfit',sans-serif;font-weight:600;font-size:1rem;cursor:pointer;transition:all 0.3s;box-shadow:0 4px 16px rgba(132,1,50,0.25)}
+.btn-submit:hover{background:var(--aub-red-light);transform:translateY(-2px);box-shadow:0 6px 24px rgba(132,1,50,0.3)}
+.success-msg{display:none;padding:16px 24px;background:#f0faf0;border:1px solid #4CAF50;border-radius:12px;color:#2E7D32;margin-top:20px;font-size:0.95rem;animation:fadeUp 0.4s ease}
+
+@media(max-width:640px){.top-inner{flex-direction:column;height:auto;padding:12px 16px;gap:8px}.nav-tabs{width:100%;overflow-x:auto;justify-content:flex-start;padding-bottom:4px}.nav-tab{padding:6px 14px;font-size:0.8rem}.hero{padding:32px 16px 16px}.stat-strip{gap:20px}.section{padding:24px 16px}#mapSection .map-wrap{height:340px}.alumni-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.bar-label{min-width:80px;font-size:0.75rem}}
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <div class="logo"><span class="logo-icon">🌲</span><div><div class="logo-text">AUB Alumni Tracker</div><div class="logo-sub">Class of 2010 – 2011</div></div></div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showSection('map',this)">🗺️ Map</button>
+    <button class="nav-tab" onclick="showSection('directory',this)">👥 Directory</button>
+    <button class="nav-tab" onclick="showSection('stats',this)">📊 Stats</button>
+    <button class="nav-tab" onclick="showSection('add',this)">➕ Add</button>
+  </div>
+</div></div>
+<div class="hero">
+  <h1>Where Are We Now?</h1>
+  <p>Tracking the AUB class of 2010–2011 across the world. See where everyone ended up, search the directory, and check out the stats.</p>
+  <div class="stat-strip">
+    <div class="stat-item"><span class="stat-num" id="totalCount">0</span><span class="stat-label">Alumni</span></div>
+    <div class="stat-item"><span class="stat-num" id="countryCount">0</span><span class="stat-label">Countries</span></div>
+    <div class="stat-item"><span class="stat-num" id="majorCount">0</span><span class="stat-label">Majors</span></div>
+    <div class="stat-item"><span class="stat-num" id="yearSpan">2009–11</span><span class="stat-label">Grad Years</span></div>
+  </div>
+</div>
+<div class="section active" id="mapSection"><div class="map-wrap"><div id="map"></div></div><div class="map-legend"><span><span class="legend-dot" style="background:var(--aub-red);border:2px solid #fff"></span> Alumni</span><span><span class="legend-dot" style="background:var(--aub-yellow);border:2px solid var(--aub-red)"></span> AUB Beirut</span></div></div>
+<div class="section" id="directorySection">
+  <div class="search-bar">
+    <input class="search-input" type="text" id="searchInput" placeholder="Search by name, major, location, or company..." oninput="renderDirectory()">
+    <button class="filter-btn active" onclick="toggleFilter('all',this)">All</button>
+    <button class="filter-btn" onclick="toggleFilter('2010',this)">2010</button>
+    <button class="filter-btn" onclick="toggleFilter('2011',this)">2011</button>
+  </div>
+  <div class="alumni-grid" id="alumniGrid"></div>
+</div>
+<div class="section" id="statsSection"><div class="stats-grid" id="statsGrid"></div></div>
+<div class="section" id="addSection"><div class="add-form">
+  <h2 style="font-family:'Fraunces',serif;font-weight:600;font-size:1.5rem;margin-bottom:6px;color:var(--aub-red)">Add an Alumni</h2>
+  <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:32px">Know someone from the class? Add them to the tracker.</p>
+  <div class="form-group"><label class="form-label">Full Name</label><input class="form-input" type="text" id="addName" placeholder="e.g. Rami Khalil"></div>
+  <div class="form-row"><div class="form-group"><label class="form-label">Graduation Year</label><select class="form-select" id="addYear"><option value="2010">2010</option><option value="2011">2011</option></select></div><div class="form-group"><label class="form-label">Major</label><input class="form-input" type="text" id="addMajor" placeholder="e.g. Economics"></div></div>
+  <div class="form-row"><div class="form-group"><label class="form-label">City</label><input class="form-input" type="text" id="addCity" placeholder="e.g. Dubai"></div><div class="form-group"><label class="form-label">Country</label><input class="form-input" type="text" id="addCountry" placeholder="e.g. UAE"></div></div>
+  <div class="form-group"><label class="form-label">Company & Role (optional)</label><input class="form-input" type="text" id="addRole" placeholder="e.g. Google, Product Manager"></div>
+  <button class="btn-submit" onclick="addMember()">Add to Tracker 🌲</button>
+  <div class="success-msg" id="successMsg"></div>
+</div></div>
+
+<script>
+const AVATAR_COLORS=['#840132','#a01545','#C8666D','#EB9F00','#5e0124','#808080','#4B1757','#2E7D32','#1565C0','#D84315','#6A1B9A','#00695C'];
+const CC={'beirut':[33.8938,35.5018],'lebanon':[33.8938,35.5018],'metn':[33.8833,35.55],'dubai':[25.2048,55.2708],'uae':[25.2048,55.2708],'abu dhabi':[24.4539,54.3773],'amman':[31.9454,35.9284],'jordan':[31.9454,35.9284],'riyadh':[24.7136,46.6753],'saudi arabia':[24.7136,46.6753],'london':[51.5074,-0.1278],'uk':[51.5074,-0.1278],'paris':[48.8566,2.3522],'france':[48.8566,2.3522],'toronto':[43.6532,-79.3832],'canada':[43.6532,-79.3832],'boston':[42.3601,-71.0589],'doha':[25.2854,51.531],'qatar':[25.2854,51.531],'kuwait':[29.3759,47.9774],'rome':[41.9028,12.4964],'italy':[41.9028,12.4964],'greece':[37.9838,23.7275],'germany':[52.52,13.405],'switzerland':[47.3769,8.5417],'geneva':[46.2044,6.1432],'marseille':[43.2965,5.3698],'oman':[23.588,58.3829],'san francisco':[37.7749,-122.4194],'washington d.c.':[38.9072,-77.0369],'washington':[38.9072,-77.0369],'chicago':[41.8781,-87.6298]};
+
+let alumni=[
+{name:'Cyril Zouein',year:2011,major:'Finance',city:'Lebanon',country:'Lebanon',role:'Nestlé, Supply Chain'},
+{name:'Rayana El Asmar',year:2010,major:'Economics',city:'Lebanon',country:'Lebanon',role:''},
+{name:'Sara Farhat',year:2011,major:'Marketing',city:'Dubai',country:'UAE',role:''},
+{name:'Lara Abi Raad',year:2011,major:'Business Administration',city:'Lebanon',country:'Lebanon',role:''},
+{name:'Zeid Hreish',year:2010,major:'Finance',city:'Amman',country:'Jordan',role:''},
+{name:'Michele Sayah',year:2010,major:'Economics',city:'Lebanon',country:'Lebanon',role:''},
+{name:'Nayla Mazloum',year:2011,major:'Business Administration',city:'',country:'',role:''},
+{name:'Serene Bacouni',year:2010,major:'Business Administration',city:'Jordan',country:'Jordan',role:''},
+{name:'Adonis Mhanna',year:2011,major:'Business Administration',city:'Riyadh',country:'Saudi Arabia',role:'NTT Data'},
+{name:'Amro El Mais',year:2010,major:'Business',city:'Abu Dhabi',country:'UAE',role:''},
+{name:'Ameer Abou Dehen',year:2011,major:'Marketing',city:'Dubai',country:'UAE',role:''},
+{name:'Sara El Khoury',year:2010,major:'Education',city:'Greece',country:'Greece',role:''},
+{name:'Amer Chediac',year:2011,major:'Marketing',city:'Dubai',country:'UAE',role:''},
+{name:'Amer Sulaiman',year:2010,major:'Business',city:'Jordan',country:'Jordan',role:''},
+{name:'Maya Hamieh',year:2010,major:'Business',city:'Lebanon',country:'Lebanon',role:''},
+{name:'Dina Houssainy',year:2010,major:'Business',city:'Lebanon',country:'Lebanon',role:''},
+{name:'Michel Aoun',year:2011,major:'Geology',city:'Beirut',country:'Lebanon',role:''},
+{name:'Hind Alameddine',year:2010,major:'Biology / MPH',city:'Switzerland',country:'Switzerland',role:''},
+{name:'Steffi Birack',year:2011,major:'Business',city:'UAE',country:'UAE',role:''},
+{name:'Rima Bazzi',year:2010,major:'Economics',city:'Dubai',country:'UAE',role:''},
+{name:'Mira Zeidan',year:2010,major:'Business',city:'Toronto',country:'Canada',role:''},
+{name:'Michel Salameh',year:2010,major:'Business',city:'UAE',country:'UAE',role:''},
+{name:'Ahmed Tannir',year:2010,major:'Business',city:'Dubai',country:'UAE',role:''},
+{name:'Rana Melki',year:2010,major:'Business',city:'Dubai',country:'UAE',role:''},
+{name:'Mariam Bashir',year:2011,major:'Business',city:'Dubai',country:'UAE',role:''},
+{name:'Leyla Rizkallah',year:2010,major:'Economics',city:'Boston',country:'USA',role:''},
+{name:'Rasha Moghnieh',year:2010,major:'Food Science',city:'Dubai',country:'UAE',role:''},
+{name:'Hussam Choucair',year:2010,major:'Business',city:'Kuwait',country:'Kuwait',role:''},
+{name:'Mariam Serhan',year:2011,major:'Business',city:'Lebanon',country:'Lebanon',role:''},
+{name:'Nancy Mitri',year:2010,major:'Economics',city:'London',country:'UK',role:''},
+{name:'Rasha Kalash',year:2010,major:'Economics',city:'Lebanon',country:'Lebanon',role:''},
+{name:'Hind Fayad',year:2010,major:'Economics',city:'Lebanon',country:'Lebanon',role:''},
+{name:'Mazen El Mawla',year:2010,major:'Chemistry',city:'Oman',country:'Oman',role:''},
+{name:'Jad Haidar',year:2010,major:'Marketing',city:'Canada',country:'Canada',role:''},
+{name:'Cyril Finan',year:2010,major:'Economics',city:'Dubai',country:'UAE',role:''},
+{name:'Rouba Tarraf',year:2010,major:'Food Science',city:'Lebanon',country:'Lebanon',role:''},
+{name:'Hiba Al Halabi',year:2010,major:'Finance',city:'',country:'',role:''},
+{name:'Lama Deeba',year:2010,major:'Finance',city:'Dubai',country:'UAE',role:''},
+{name:'Chloé Asmar',year:2010,major:'Geology',city:'Germany',country:'Germany',role:''},
+{name:'Salim Chahine',year:2011,major:'Economics',city:'Boston',country:'USA',role:''},
+{name:'Dima Chebaro',year:2010,major:'Economics',city:'Riyadh',country:'Saudi Arabia',role:''},
+{name:'Michel Ghanem',year:2010,major:'Economics',city:'Riyadh',country:'Saudi Arabia',role:''},
+{name:'Wessam Al Najjar',year:2011,major:'Business Administration',city:'Saudi Arabia',country:'Saudi Arabia',role:''},
+{name:'Dima Khatib',year:2011,major:'Finance',city:'Lebanon',country:'Lebanon',role:''},
+{name:'Serene Tello',year:2009,major:'Business',city:'Toronto',country:'Canada',role:'Cadillac Fairview, Dir. ETRM'},
+{name:'Maysam Shaar',year:2011,major:'Business',city:'Dubai',country:'UAE',role:'Saint-Gobain, Head of Treasury GCC'},
+{name:'Maya Mounayer',year:2011,major:'Business',city:'Dubai',country:'UAE',role:''},
+{name:'Faten Bou Issa',year:2010,major:'Business',city:'Dubai',country:'UAE',role:''},
+{name:'Nadia Safa',year:2009,major:'Business',city:'Lebanon',country:'Lebanon',role:'BOB Finance, Head of Product Growth'},
+{name:'Joe Noun',year:2011,major:'Biology / MPH',city:'Dubai',country:'UAE',role:'Cigna Insurance'},
+{name:'Adrian Rieck',year:2011,major:'Business',city:'Dubai',country:'UAE',role:''},
+{name:'Ramzy Salhab',year:2011,major:'Business',city:'Dubai',country:'UAE',role:''},
+{name:'Darim Khouja',year:2011,major:'English Language',city:'Beirut',country:'Lebanon',role:'German Foreign Ministry, PR'},
+{name:'Mirriam Mansour',year:2010,major:'Biology',city:'Beirut',country:'Lebanon',role:'Roche, Head of Comms ME'},
+{name:'Grace Makari',year:2010,major:'Business',city:'Dubai',country:'UAE',role:'Ralph Lauren, Buyer ME'},
+{name:'Jennifer Barhoum',year:2010,major:'Business',city:'Toronto',country:'Canada',role:''},
+{name:'Hana Dakwar',year:2010,major:'English Literature',city:'Beirut',country:'Lebanon',role:'Head of Content'},
+{name:'Amr Miri',year:2011,major:'Business',city:'Riyadh',country:'Saudi Arabia',role:''},
+{name:'Ghassan Jawhar',year:2011,major:'Business',city:'Marseille',country:'France',role:''},
+{name:'Jad Bou Reslan',year:2011,major:'Business',city:'Dubai',country:'UAE',role:''},
+{name:'Basma Abdelhack',year:2011,major:'Business',city:'Dubai',country:'UAE',role:''},
+{name:'Johnny Abi Allam',year:2010,major:'Public Administration',city:'Dubai',country:'UAE',role:'Sirius/IHC, Dir. Marketing & Comms'},
+{name:'Elsie Chamoun',year:2010,major:'Business',city:'Dubai',country:'UAE',role:"L'Oréal Luxury"},
+{name:'Jad Naamani',year:2010,major:'Business',city:'Dubai',country:'UAE',role:'Seez/Pinewood.AI, Dir. Marketing'},
+{name:'Dima Barbir',year:2011,major:'Graphic Design',city:'Toronto',country:'Canada',role:'Marketing'},
+{name:'Rozana Khalil',year:2011,major:'Business Administration',city:'Canada',country:'Canada',role:''},
+{name:'Diana Hantas',year:2010,major:'Economics',city:'Lebanon',country:'Lebanon',role:''},
+{name:'Tamara Abi Raad',year:2011,major:'Economics',city:'Canada',country:'Canada',role:''},
+{name:'Lea Touma',year:2011,major:'Business Administration',city:'Dubai',country:'UAE',role:''},
+{name:'Jad Hayek',year:2011,major:'Finance',city:'Lebanon',country:'Lebanon',role:''},
+{name:'Moe Chebaklo',year:2010,major:'Finance',city:'Toronto',country:'Canada',role:''},
+{name:'Aya Jaafar',year:2010,major:'Economics',city:'Lebanon',country:'Lebanon',role:''},
+{name:'Nour Tawk',year:2010,major:'Economics',city:'Washington D.C.',country:'USA',role:''},
+{name:'Reem Fatayri',year:2010,major:'Business',city:'San Francisco',country:'USA',role:''},
+{name:'Vanessa Moussan',year:2010,major:'Business',city:'Beirut',country:'Lebanon',role:''},
+{name:'Nadine Ghaith',year:2010,major:'Education',city:'Chicago',country:'USA',role:''},
+{name:'Maya Mansour',year:2010,major:'Business',city:'London',country:'UK',role:''},
+{name:'Sabeh Badran',year:2011,major:'Business Administration',city:'Canada',country:'Canada',role:''},
+{name:'Joanna Haddad',year:2011,major:'Marketing',city:'',country:'',role:''},
+{name:'Jad El Jamous',year:2010,major:'Finance',city:'',country:'',role:''},
+{name:'Carl El Hage',year:2010,major:'Business',city:'Doha',country:'Qatar',role:''},
+{name:'Firas Kaakour',year:2011,major:'Business',city:'UAE',country:'UAE',role:''},
+{name:'Harout Dekermendjian',year:2010,major:'Business',city:'Rome',country:'Italy',role:''},
+{name:'Darwish Noureldin',year:2011,major:'Mechanical Engineering',city:'UK',country:'UK',role:''},
+{name:'Rami Saad',year:2010,major:'Economics',city:'Dubai',country:'UAE',role:''},
+{name:'Sleiman Milan',year:2010,major:'Economics',city:'Riyadh',country:'Saudi Arabia',role:''},
+{name:'Ola Hanafi',year:2010,major:'Economics',city:'France',country:'France',role:'Consulting, Open Data & GDP'},
+{name:'Rayane Dandache',year:2010,major:'Economics',city:'Dubai',country:'UAE',role:'Kearney, Manager'},
+{name:'Mohamad Baradei',year:2010,major:'Business',city:'Dubai',country:'UAE',role:''},
+{name:'Aurore Mouawad',year:2010,major:'Economics',city:'Geneva',country:'Switzerland',role:''},
+{name:'Nathalie Abou Jaoude',year:2011,major:'HR',city:'Lebanon',country:'Lebanon',role:'Founder, Career Guidance & Global Agents'},
+{name:'Mohammad Hijazi',year:2010,major:'Biology / Marketing',city:'Doha',country:'Qatar',role:'Head of Marketing, United Planet'},
+{name:'Jade El Hajjar',year:2010,major:'Computer Science',city:'',country:'',role:''},
+{name:'Maya Hodroj',year:2010,major:'Economics',city:'London',country:'UK',role:''},
+];
+
+const seen=new Set();
+alumni=alumni.filter(a=>{const k=a.name.toLowerCase();if(seen.has(k))return false;seen.add(k);return true});
+
+let activeFilter='all';
+function gc(m){const t=[m.city.toLowerCase().trim(),m.country.toLowerCase().trim()];for(const k of t)if(CC[k])return CC[k];return null}
+function gd(a,b,c,d){const R=6371,dL=(c-a)*Math.PI/180,dN=(d-b)*Math.PI/180,x=Math.sin(dL/2)**2+Math.cos(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.sin(dN/2)**2;return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x))}
+function gi(n){return n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2)}
+
+let map;
+function initMap(){
+  map=L.map('map',{center:[30,35],zoom:3,zoomControl:true,attributionControl:false});
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:18}).addTo(map);
+  renderMarkers();
+}
+function renderMarkers(){
+  map.eachLayer(l=>{if(l instanceof L.Marker||l instanceof L.Polyline)map.removeLayer(l)});
+  // AUB marker
+  const aubI=L.divIcon({className:'',html:'<div style="background:#EB9F00;border:3px solid #840132;border-radius:50%;width:24px;height:24px;box-shadow:0 0 12px rgba(132,1,50,0.4);display:flex;align-items:center;justify-content:center;font-size:12px">🌲</div>',iconSize:[24,24],iconAnchor:[12,12]});
+  L.marker([33.8938,35.5018],{icon:aubI}).addTo(map).bindPopup('<div class="popup-inner"><h3>🌲 AUB – Beirut</h3><div class="popup-detail">Where it all began · Est. 1866</div></div>');
+  const gr={};
+  alumni.forEach(m=>{const c=gc(m);if(!c)return;const k=c.join(',');if(!gr[k])gr[k]={coords:c,members:[]};gr[k].members.push(m)});
+  const ac=[33.8938,35.5018];
+  Object.values(gr).forEach(g=>{
+    const{coords,members}=g;
+    if(members.length>2){
+      const sz=Math.min(52,28+members.length*1.5);
+      const icon=L.divIcon({className:'',html:`<div class="cluster-marker" style="width:${sz}px;height:${sz}px">${members.length}</div>`,iconSize:[sz,sz],iconAnchor:[sz/2,sz/2]});
+      const pop=members.map(m=>`<div class="popup-person"><strong style="color:#840132">${m.name}</strong><br><span style="font-size:0.72rem;color:#555">${m.major} '${String(m.year).slice(-2)}${m.role?' · '+m.role:''}</span></div>`).join('');
+      L.marker(coords,{icon}).addTo(map).bindPopup(`<div class="popup-inner" style="max-height:300px;overflow-y:auto">${pop}</div>`,{maxWidth:300});
+    } else {
+      members.forEach((m,i)=>{
+        const icon=L.divIcon({className:'',html:'<div class="alumni-marker"></div>',iconSize:[14,14],iconAnchor:[7,7]});
+        L.marker([coords[0]+i*0.004,coords[1]+i*0.004],{icon}).addTo(map).bindPopup(`<div class="popup-inner"><h3>${m.name}</h3><div class="popup-detail">${m.major} · ${m.year}<br>📍 ${m.city||m.country}${m.role?'<br>💼 '+m.role:''}</div></div>`);
+      });
+    }
+    if(coords[0]!==ac[0]||coords[1]!==ac[1])L.polyline([ac,coords],{color:'rgba(132,1,50,0.12)',weight:1,dashArray:'4 6'}).addTo(map);
+  });
+}
+
+function renderDirectory(){
+  const q=document.getElementById('searchInput').value.toLowerCase();
+  const grid=document.getElementById('alumniGrid');
+  let f=alumni.filter(m=>{
+    if(activeFilter!=='all'&&String(m.year)!==activeFilter)return false;
+    if(q)return`${m.name} ${m.major} ${m.city} ${m.country} ${m.role}`.toLowerCase().includes(q);
+    return true;
+  });
+  grid.innerHTML=f.map((m,i)=>{
+    const c=AVATAR_COLORS[i%AVATAR_COLORS.length],loc=[m.city,m.country].filter(Boolean),ls=loc.length?loc.join(', '):'Unknown';
+    return`<div class="alumni-card"><div class="card-top"><div class="avatar" style="background:${c}15;color:${c};border:2px solid ${c}30">${gi(m.name)}</div><div><div class="card-name">${m.name}</div><div class="card-year">Class of ${m.year}</div></div></div><div class="card-details"><div class="card-detail"><span class="icon">📚</span>${m.major}</div><div class="card-detail"><span class="icon">📍</span>${ls}</div>${m.role?`<div class="card-detail"><span class="icon">💼</span>${m.role}</div>`:''}</div></div>`;
+  }).join('');
+}
+
+function toggleFilter(f,btn){activeFilter=f;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderDirectory()}
+
+function renderStats(){
+  const grid=document.getElementById('statsGrid');
+  const countries={},majors={},years={},cities={};
+  alumni.forEach(m=>{
+    const co=m.country||'Unknown';countries[co]=(countries[co]||0)+1;
+    majors[m.major]=(majors[m.major]||0)+1;
+    years[m.year]=(years[m.year]||0)+1;
+    if(m.city)cities[m.city]=(cities[m.city]||0)+1;
+  });
+  const sc=Object.entries(countries).sort((a,b)=>b[1]-a[1]);
+  const sm=Object.entries(majors).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  const sci=Object.entries(cities).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const mc=sc[0]?.[1]||1,mm=sm[0]?.[1]||1,mci=sci[0]?.[1]||1;
+  const ac=[33.8938,35.5018];
+  const wd=alumni.filter(m=>gc(m)).map(m=>({...m,dist:gd(ac[0],ac[1],...gc(m))})).sort((a,b)=>b.dist-a.dist);
+  const far=wd[0];
+  const leb=alumni.filter(m=>m.country==='Lebanon').length;
+  const dub=alumni.filter(m=>m.city==='Dubai').length;
+  const can=alumni.filter(m=>m.country==='Canada').length;
+  const tor=alumni.filter(m=>m.city==='Toronto').length;
+  const usa=alumni.filter(m=>m.country==='USA').length;
+
+  grid.innerHTML=`
+    <div class="stats-card"><div class="stats-card-title">🌍 Countries</div>${sc.map(([c,n])=>`<div class="bar-chart-item"><div class="bar-label">${c}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/mc)*100}%;background:#840132">${n}</div></div></div>`).join('')}</div>
+    <div class="stats-card"><div class="stats-card-title">🏙️ Top Cities</div>${sci.map(([c,n])=>`<div class="bar-chart-item"><div class="bar-label">${c}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/mci)*100}%;background:#EB9F00">${n}</div></div></div>`).join('')}</div>
+    <div class="stats-card"><div class="stats-card-title">📚 Top Majors</div>${sm.map(([m,n])=>`<div class="bar-chart-item"><div class="bar-label">${m}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/mm)*100}%;background:#C8666D">${n}</div></div></div>`).join('')}</div>
+    <div class="superlative-card"><div class="superlative-emoji">🎓</div><div class="superlative-label">Class Split</div><div class="superlative-name">${years[2010]||0} × 2010 · ${years[2011]||0} × 2011${years[2009]?' · '+years[2009]+' × 2009':''}</div><div class="superlative-detail">${(years[2010]||0)>(years[2011]||0)?'Class of 2010 dominates!':'Class of 2011 represents!'}</div></div>
+    <div class="superlative-card"><div class="superlative-emoji">🌍</div><div class="superlative-label">Farthest from AUB</div><div class="superlative-name">${far?far.name:'—'}</div><div class="superlative-detail">${far?far.city+', '+far.country+' · ~'+Math.round(far.dist).toLocaleString()+' km':''}</div></div>
+    <div class="superlative-card"><div class="superlative-emoji">🏠</div><div class="superlative-label">Stayed in Lebanon</div><div class="superlative-name">${leb} Alumni</div><div class="superlative-detail">Keeping the flame alive 🌲</div></div>
+    <div class="superlative-card"><div class="superlative-emoji">🏙️</div><div class="superlative-label">Dubai Takeover</div><div class="superlative-name">${dub} Alumni</div><div class="superlative-detail">The #1 city for AUB grads</div></div>
+    <div class="superlative-card"><div class="superlative-emoji">🇨🇦</div><div class="superlative-label">Canada Crew</div><div class="superlative-name">${can} Alumni</div><div class="superlative-detail">${tor} in Toronto</div></div>
+    <div class="superlative-card"><div class="superlative-emoji">🇺🇸</div><div class="superlative-label">Stateside</div><div class="superlative-name">${usa} Alumni</div><div class="superlative-detail">From Boston to San Francisco</div></div>
+  `;
+}
+
+function addMember(){
+  const n=document.getElementById('addName').value.trim(),y=parseInt(document.getElementById('addYear').value),m=document.getElementById('addMajor').value.trim(),ci=document.getElementById('addCity').value.trim(),co=document.getElementById('addCountry').value.trim(),r=document.getElementById('addRole').value.trim();
+  if(!n||!m){alert('Please fill in at least name and major');return}
+  alumni.push({name:n,year:y,major:m,city:ci,country:co,role:r});
+  updateCounts();renderMarkers();renderDirectory();renderStats();
+  const msg=document.getElementById('successMsg');msg.textContent='✅ '+n+' added!';msg.style.display='block';setTimeout(()=>msg.style.display='none',4000);
+  ['addName','addMajor','addCity','addCountry','addRole'].forEach(id=>document.getElementById(id).value='');
+}
+
+function updateCounts(){
+  document.getElementById('totalCount').textContent=alumni.length;
+  document.getElementById('countryCount').textContent=new Set(alumni.filter(m=>m.country).map(m=>m.country)).size;
+  document.getElementById('majorCount').textContent=new Set(alumni.map(m=>m.major)).size;
+}
+
+function showSection(id,btn){
+  const mp={map:'mapSection',directory:'directorySection',stats:'statsSection',add:'addSection'};
+  Object.values(mp).forEach(s=>document.getElementById(s).classList.remove('active'));
+  document.getElementById(mp[id]).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  if(id==='map')setTimeout(()=>map.invalidateSize(),100);
+  if(id==='stats')renderStats();
+  if(id==='directory')renderDirectory();
+}
+
+window.addEventListener('DOMContentLoaded',()=>{initMap();renderDirectory();updateCounts()});
+</script>
+</body>
+</html>
