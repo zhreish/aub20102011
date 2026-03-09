@@ -222,7 +222,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
   <div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" type="text" id="addName" placeholder="e.g. Rami Khalil"></div>
   <div class="form-row"><div class="form-group"><label class="form-label">Graduation Year *</label><select class="form-select" id="addYear"><option value="2010">2010</option><option value="2011">2011</option></select></div><div class="form-group"><label class="form-label">Major *</label><input class="form-input" type="text" id="addMajor" placeholder="e.g. Economics"></div></div>
   <div class="form-row"><div class="form-group"><label class="form-label">City</label><input class="form-input" type="text" id="addCity" placeholder="e.g. Dubai"></div><div class="form-group"><label class="form-label">Country</label><input class="form-input" type="text" id="addCountry" placeholder="e.g. UAE"></div></div>
-  <div class="form-group"><label class="form-label">Company & Role (optional)</label><input class="form-input" type="text" id="addRole" placeholder="e.g. Google, Product Manager"></div>
+  <div class="form-row"><div class="form-group"><label class="form-label">Field / Role</label><input class="form-input" type="text" id="addRole" placeholder="e.g. Head of Marketing"></div><div class="form-group"><label class="form-label">Current Company</label><input class="form-input" type="text" id="addCompany" placeholder="e.g. Google"></div></div>
   <button class="btn-submit" id="submitBtn" onclick="addMember()">Add to Tracker 🌲</button>
   <div class="success-msg" id="successMsg"></div>
   <div class="error-msg" id="errorMsg"></div>
@@ -274,7 +274,8 @@ function processData(data){
     major:String(r.Major||'').trim(),
     city:String(r.City||'').trim(),
     country:String(r.Country||'').trim(),
-    role:String(r.Role||'').trim()
+    role:String(r.Role||'').trim(),
+    company:String(r['Current Company']||r.Company||'').trim()
   }));
   const seen=new Set();
   alumni=alumni.filter(a=>{const k=a.name.toLowerCase();if(seen.has(k))return false;seen.add(k);return true});
@@ -350,12 +351,12 @@ function renderMarkers(){
     if(members.length>2){
       const sz=Math.min(52,28+members.length*1.5);
       const icon=L.divIcon({className:'',html:`<div class="cluster-marker" style="width:${sz}px;height:${sz}px">${members.length}</div>`,iconSize:[sz,sz],iconAnchor:[sz/2,sz/2]});
-      const pop=members.map(m=>`<div class="popup-person"><strong style="color:#840132">${m.name}</strong><br><span style="font-size:0.72rem;color:#555">${m.major} '${String(m.year).slice(-2)}${m.role?' · '+m.role:''}</span></div>`).join('');
+      const pop=members.map(m=>`<div class="popup-person"><strong style="color:#840132">${m.name}</strong><br><span style="font-size:0.72rem;color:#555">${m.major} '${String(m.year).slice(-2)}${m.company?' · '+m.company:''}${m.role?' · '+m.role:''}</span></div>`).join('');
       L.marker(coords,{icon}).addTo(map).bindPopup(`<div class="popup-inner" style="max-height:300px;overflow-y:auto">${pop}</div>`,{maxWidth:300});
     }else{
       members.forEach((m,i)=>{
         const icon=L.divIcon({className:'',html:'<div class="alumni-marker"></div>',iconSize:[14,14],iconAnchor:[7,7]});
-        L.marker([coords[0]+i*0.004,coords[1]+i*0.004],{icon}).addTo(map).bindPopup(`<div class="popup-inner"><h3>${m.name}</h3><div class="popup-detail">${m.major} · ${m.year}<br>📍 ${m.city||m.country}${m.role?'<br>💼 '+m.role:''}</div></div>`);
+        L.marker([coords[0]+i*0.004,coords[1]+i*0.004],{icon}).addTo(map).bindPopup(`<div class="popup-inner"><h3>${m.name}</h3><div class="popup-detail">${m.major} · ${m.year}<br>📍 ${m.city||m.country}${m.company?'<br>🏢 '+m.company:''}${m.role?'<br>💼 '+m.role:''}</div></div>`);
       });
     }
     if(coords[0]!==ac[0]||coords[1]!==ac[1])L.polyline([ac,coords],{color:'rgba(132,1,50,0.1)',weight:1,dashArray:'4 6'}).addTo(map);
@@ -401,12 +402,12 @@ function renderDirectory(){
   const grid=document.getElementById('alumniGrid');
   let f=alumni.filter(m=>{
     if(activeFilter!=='all'&&String(m.year)!==activeFilter)return false;
-    if(q)return`${m.name} ${m.major} ${m.city} ${m.country} ${m.role}`.toLowerCase().includes(q);
+    if(q)return`${m.name} ${m.major} ${m.city} ${m.country} ${m.role} ${m.company}`.toLowerCase().includes(q);
     return true;
   });
   grid.innerHTML=f.map((m,i)=>{
     const c=AC[i%AC.length],loc=[m.city,m.country].filter(Boolean),ls=loc.length?loc.join(', '):'Unknown';
-    return`<div class="alumni-card"><div class="card-top"><div class="avatar" style="background:${c}15;color:${c};border:2px solid ${c}30">${gi(m.name)}</div><div><div class="card-name">${m.name}</div><div class="card-year">Class of ${m.year}</div></div></div><div class="card-details"><div class="card-detail"><span class="icon">📚</span>${m.major}</div><div class="card-detail"><span class="icon">📍</span>${ls}</div>${m.role?`<div class="card-detail"><span class="icon">💼</span>${m.role}</div>`:''}</div></div>`;
+    return`<div class="alumni-card"><div class="card-top"><div class="avatar" style="background:${c}15;color:${c};border:2px solid ${c}30">${gi(m.name)}</div><div><div class="card-name">${m.name}</div><div class="card-year">Class of ${m.year}</div></div></div><div class="card-details"><div class="card-detail"><span class="icon">📚</span>${m.major}</div><div class="card-detail"><span class="icon">📍</span>${ls}</div>${m.company?`<div class="card-detail"><span class="icon">🏢</span>${m.company}</div>`:''}${m.role?`<div class="card-detail"><span class="icon">💼</span>${m.role}</div>`:''}</div></div>`;
   }).join('');
 }
 function toggleFilter(f,btn){activeFilter=f;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderDirectory()}
@@ -488,6 +489,7 @@ async function addMember(){
   const ci=document.getElementById('addCity').value.trim();
   const co=document.getElementById('addCountry').value.trim();
   const r=document.getElementById('addRole').value.trim();
+  const comp=document.getElementById('addCompany').value.trim();
   if(!n||!m){alert('Please fill in at least name and major');return}
   if(alumni.some(a=>a.name.toLowerCase()===n.toLowerCase())){
     const err=document.getElementById('errorMsg');err.textContent='⚠️ '+n+' is already in the tracker!';err.style.display='block';setTimeout(()=>err.style.display='none',4000);return;
@@ -498,17 +500,17 @@ async function addMember(){
     await new Promise((resolve,reject)=>{
       const cbName='_addCb_'+Date.now();
       window[cbName]=function(res){delete window[cbName];resolve(res)};
-      const params=new URLSearchParams({action:'add',Name:n,Year:y,Major:m,City:ci,Country:co,Role:r,callback:cbName});
+      const params=new URLSearchParams({action:'add',Name:n,Year:y,Major:m,City:ci,Country:co,Role:r,Company:comp,callback:cbName});
       const script=document.createElement('script');
       script.src=SHEET_URL+'?'+params.toString();
       script.onerror=function(){script.remove();delete window[cbName];reject(new Error('Failed'))};
       document.head.appendChild(script);
       setTimeout(()=>{try{script.remove();delete window[cbName]}catch(e){}resolve()},5000);
     });
-    alumni.push({name:n,year:parseInt(y),major:m,city:ci,country:co,role:r});
+    alumni.push({name:n,year:parseInt(y),major:m,city:ci,country:co,role:r,company:comp});
     refreshAll();buildFilters();
     const msg=document.getElementById('successMsg');msg.textContent='✅ '+n+' permanently added!';msg.style.display='block';setTimeout(()=>msg.style.display='none',5000);
-    ['addName','addMajor','addCity','addCountry','addRole'].forEach(id=>document.getElementById(id).value='');
+    ['addName','addMajor','addCity','addCountry','addRole','addCompany'].forEach(id=>document.getElementById(id).value='');
   }catch(e){
     const err=document.getElementById('errorMsg');err.textContent='❌ Could not save. Try again.';err.style.display='block';setTimeout(()=>err.style.display='none',4000);
   }
