@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AUB Alumni 2010–2011 | Where Are We Now?</title>
+<title>AUB Alumni 2010‚Äì2011 | Where Are We Now?</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,800;1,9..144,300&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <style>
 :root{--r:#840132;--rl:#a01545;--rd:#5e0124;--y:#EB9F00;--co:#C8666D;--w:#FFFFFF;--ow:#F7F5F2;--bg:#FAFAFA;--tp:#1a1a1a;--ts:#555;--tm:#888;--cb:rgba(255,255,255,0.03);--cd:#E8E4E0}
-*{margin:0;padding:0;box-sizing:border-box}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-height:100vh}
 .top-bar{position:sticky;top:0;z-index:1000;background:var(--r);box-shadow:0 2px 12px rgba(132,1,50,0.15)}
 .top-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px}
@@ -131,6 +131,27 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
 .error-msg{display:none;padding:16px 24px;background:#fdf0f0;border:1px solid #e53935;border-radius:12px;color:#c62828;margin-top:20px;font-size:0.95rem}
 .loading-spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.6s linear infinite;vertical-align:middle;margin-right:8px}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* Propose Edit Button */
+.btn-edit{margin-top:12px;padding:6px 14px;background:none;border:1px solid var(--cd);border-radius:8px;font-family:'Outfit',sans-serif;font-size:0.72rem;font-weight:500;color:var(--tm);cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:5px}
+.btn-edit:hover{border-color:var(--r);color:var(--r);background:rgba(132,1,50,0.04)}
+
+/* Edit Modal */
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.45);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px;animation:fadeIn 0.2s}
+.modal-overlay.open{display:flex}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{background:var(--w);border-radius:20px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;padding:32px;box-shadow:0 20px 60px rgba(0,0,0,0.2);animation:slideUp 0.3s ease}
+@keyframes slideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.modal-title{font-family:'Fraunces',serif;font-weight:600;font-size:1.3rem;color:var(--r)}
+.modal-close{width:32px;height:32px;border:none;background:var(--ow);border-radius:8px;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--tm);transition:all 0.2s}
+.modal-close:hover{background:var(--cd);color:var(--tp)}
+.modal .form-group{margin-bottom:16px}
+.modal .form-label{font-size:0.72rem}
+.modal .form-input,.modal .form-select{padding:11px 14px;font-size:0.88rem}
+.modal .form-row{gap:12px}
+.modal-note{font-size:0.78rem;color:var(--tm);margin-bottom:20px;line-height:1.5}
+.modal-current{font-size:0.72rem;color:var(--tm);margin-top:2px;font-style:italic}
 .sheet-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:#e8f5e9;border:1px solid #a5d6a7;border-radius:20px;font-size:0.75rem;color:#2E7D32;margin-top:12px}
 .sheet-badge .dot{width:8px;height:8px;background:#4CAF50;border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
@@ -142,29 +163,155 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
 .page-loading .pl-text{font-family:'Fraunces',serif;font-size:1.2rem;color:var(--r)}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
-@media(max-width:640px){.top-inner{flex-direction:column;height:auto;padding:12px 16px;gap:8px}.nav-tabs{width:100%;overflow-x:auto;padding-bottom:4px}.nav-tab{padding:6px 12px;font-size:0.78rem}.hero{padding:32px 16px 16px}.stat-strip{gap:20px}.section{padding:24px 16px}#mapSection .map-wrap{height:340px}.alumni-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.bar-label{min-width:80px;font-size:0.75rem}.region-counters{grid-template-columns:repeat(3,1fr)}}
+/* Dark Mode */
+[data-theme="dark"]{--w:#1e1e1e;--ow:#2a2a2a;--bg:#121212;--tp:#e8e8e8;--ts:#aaa;--tm:#777;--cd:#333;--cb:rgba(255,255,255,0.05)}
+[data-theme="dark"] .top-bar{background:#2a0a16;box-shadow:0 2px 12px rgba(0,0,0,0.4)}
+[data-theme="dark"] .alumni-card::before{background:var(--y)}
+[data-theme="dark"] .leaflet-popup-content-wrapper{background:#1e1e1e!important;border-color:#333!important;color:#e8e8e8!important}
+[data-theme="dark"] .leaflet-popup-tip{background:#1e1e1e!important}
+[data-theme="dark"] .modal{background:#1e1e1e}
+[data-theme="dark"] .success-msg{background:#1a2e1a;border-color:#2E7D32;color:#66BB6A}
+[data-theme="dark"] .error-msg{background:#2e1a1a;border-color:#c62828;color:#ef5350}
+[data-theme="dark"] .sheet-badge{background:#1a2e1a;border-color:#2E7D32;color:#66BB6A}
+.dark-toggle{width:36px;height:36px;border:none;background:rgba(255,255,255,0.15);border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all 0.3s;flex-shrink:0;margin-left:auto}
+.dark-toggle:hover{background:rgba(255,255,255,0.25);transform:scale(1.1)}
+
+/* Spotlight */
+.spotlight{max-width:1200px;margin:0 auto;padding:0 24px}
+.spotlight-card{background:linear-gradient(135deg,var(--r),#5e0124);border-radius:20px;padding:28px 32px;display:flex;align-items:center;gap:24px;color:#fff;position:relative;overflow:hidden;margin-bottom:8px}
+.spotlight-card::before{content:'';position:absolute;top:-40%;right:-10%;width:300px;height:300px;background:rgba(235,159,0,0.08);border-radius:50%}
+.spotlight-avatar{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:800;font-size:1.4rem;background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.3);flex-shrink:0;position:relative;z-index:1}
+.spotlight-info{flex:1;position:relative;z-index:1}
+.spotlight-tag{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--y);margin-bottom:6px}
+.spotlight-name{font-family:'Fraunces',serif;font-weight:700;font-size:1.3rem;margin-bottom:4px}
+.spotlight-detail{font-size:0.85rem;opacity:0.85;line-height:1.5}
+.spotlight-refresh{background:none;border:1px solid rgba(255,255,255,0.25);border-radius:8px;color:rgba(255,255,255,0.7);padding:6px 12px;font-family:'Outfit',sans-serif;font-size:0.72rem;cursor:pointer;transition:all 0.2s;position:relative;z-index:1;flex-shrink:0}
+.spotlight-refresh:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,0.1)}
+
+/* WhatsApp FAB */
+.wa-fab{position:fixed;bottom:28px;right:28px;z-index:1500;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.wa-fab-btn{width:60px;height:60px;border-radius:50%;background:#25D366;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(37,211,102,0.4);display:flex;align-items:center;justify-content:center;transition:all 0.3s;font-size:28px}
+.wa-fab-btn:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,0.5)}
+.wa-tooltip{background:var(--w);border:1px solid var(--cd);border-radius:12px;padding:10px 16px;font-size:0.8rem;color:var(--ts);box-shadow:0 4px 16px rgba(0,0,0,0.1);white-space:nowrap;opacity:0;transform:translateY(8px);transition:all 0.3s;pointer-events:none}
+.wa-fab:hover .wa-tooltip{opacity:1;transform:translateY(0)}
+
+/* ===== TABLET ===== */
+@media(max-width:900px){
+  .alumni-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+  .stats-grid{grid-template-columns:1fr}
+  .region-counters{grid-template-columns:repeat(3,1fr)}
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:640px){
+  /* Nav */
+  .top-inner{flex-direction:column;height:auto;padding:10px 14px;gap:6px}
+  .logo{width:100%;justify-content:space-between}
+  .nav-tabs{width:100%;justify-content:space-around;overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch}
+  .nav-tab{padding:8px 10px;font-size:0.75rem;flex:1;text-align:center;min-width:0}
+  .dark-toggle{margin-left:auto}
+
+  /* Hero */
+  .hero{padding:24px 16px 12px}
+  .hero h1{font-size:1.7rem}
+  .hero p{font-size:0.92rem}
+  .stat-strip{gap:16px}
+  .stat-num{font-size:1.5rem}
+  .stat-label{font-size:0.65rem}
+
+  /* Feed bar */
+  .feed-bar{padding:0 16px}
+  .feed-item{padding:6px 12px;font-size:0.72rem}
+
+  /* Sections */
+  .section{padding:20px 14px}
+
+  /* Map */
+  #mapSection .map-wrap{height:300px;border-radius:12px}
+  .map-controls{gap:6px}
+  .map-filter{padding:6px 10px;font-size:0.72rem}
+  .region-counters{grid-template-columns:repeat(2,1fr);gap:8px}
+  .region-card{padding:12px}
+  .region-num{font-size:1.4rem}
+  .near-me-bar{flex-direction:column;align-items:stretch}
+  .near-me-select{min-width:unset;width:100%}
+
+  /* Directory */
+  .search-bar{flex-direction:column;gap:8px}
+  .search-input{min-width:unset;width:100%;padding:12px 16px;font-size:0.9rem}
+  .filter-btn{padding:8px 14px;font-size:0.75rem}
+  .alumni-grid{grid-template-columns:1fr;gap:10px}
+  .alumni-card{padding:16px}
+  .card-name{font-size:0.95rem}
+  .card-detail{font-size:0.78rem}
+  .btn-edit{width:100%;justify-content:center;padding:8px 14px;font-size:0.75rem}
+
+  /* Stats */
+  .stats-grid{grid-template-columns:1fr;gap:14px}
+  .stats-card{padding:20px}
+  .bar-label{min-width:70px;font-size:0.72rem}
+  .bar-fill{font-size:0.65rem}
+  .superlative-card{padding:20px}
+
+  /* Add Form */
+  .add-form{max-width:100%}
+  .form-row{grid-template-columns:1fr}
+  .form-input,.form-select{padding:12px 14px;font-size:0.9rem}
+  .btn-submit{width:100%;padding:14px 20px;font-size:0.95rem}
+
+  /* Modal */
+  .modal-overlay{padding:0;align-items:flex-end}
+  .modal{max-width:100%;max-height:92vh;border-radius:20px 20px 0 0;padding:24px 20px 32px}
+  .modal-header{margin-bottom:16px}
+  .modal-title{font-size:1.1rem}
+  .modal .form-row{grid-template-columns:1fr}
+  .modal .form-input,.modal .form-select{padding:10px 12px;font-size:0.85rem}
+
+  /* Spotlight */
+  .spotlight{padding:0 14px}
+  .spotlight-card{flex-direction:column;text-align:center;gap:14px;padding:22px 18px}
+  .spotlight-name{font-size:1.1rem}
+  .spotlight-detail{font-size:0.8rem}
+
+  /* WhatsApp FAB */
+  .wa-fab{bottom:20px;right:16px}
+  .wa-fab-btn{width:50px;height:50px;font-size:22px}
+  .wa-tooltip{display:none}
+}
+
+/* ===== VERY SMALL PHONES ===== */
+@media(max-width:375px){
+  .top-inner{padding:8px 10px}
+  .nav-tab{padding:6px 6px;font-size:0.68rem}
+  .hero h1{font-size:1.4rem}
+  .section{padding:16px 10px}
+  .alumni-card{padding:14px}
+  .region-counters{grid-template-columns:1fr 1fr}
+  .spotlight-card{padding:18px 14px}
+  .modal{padding:20px 16px 28px}
+}
 </style>
 </head>
 <body>
 
 <div class="page-loading" id="pageLoading">
-  <div class="pl-icon">🌲</div>
+  <div class="pl-icon">üå≤</div>
   <div class="pl-text">Loading alumni data...</div>
 </div>
 
 <div class="top-bar"><div class="top-inner">
-  <div class="logo"><span class="logo-icon">🌲</span><div><div class="logo-text">AUB Alumni Tracker</div><div class="logo-sub">Class of 2010 – 2011</div></div></div>
+  <div class="logo"><span class="logo-icon">üå≤</span><div><div class="logo-text">AUB Alumni Tracker</div><div class="logo-sub">Class of 2010 ‚Äì 2011</div></div><button class="dark-toggle" onclick="toggleDark()" title="Toggle dark mode">üåô</button></div>
   <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showSection('map',this)">🗺️ Map</button>
-    <button class="nav-tab" onclick="showSection('directory',this)">👥 Directory</button>
-    <button class="nav-tab" onclick="showSection('stats',this)">📊 Stats</button>
-    <button class="nav-tab" onclick="showSection('add',this)">➕ Add</button>
+    <button class="nav-tab active" onclick="showSection('map',this)">üó∫Ô∏è Map</button>
+    <button class="nav-tab" onclick="showSection('directory',this)">üë• Directory</button>
+    <button class="nav-tab" onclick="showSection('stats',this)">üìä Stats</button>
+    <button class="nav-tab" onclick="showSection('add',this)">‚ûï Add</button>
   </div>
 </div></div>
 
 <div class="hero">
   <h1>Where Are We Now?</h1>
-  <p>Tracking the AUB class of 2010–2011 across the world.</p>
+  <p>Tracking the AUB class of 2010‚Äì2011 across the world.</p>
   <div class="stat-strip">
     <div class="stat-item"><span class="stat-num" id="totalCount">0</span><span class="stat-label">Alumni</span></div>
     <div class="stat-item"><span class="stat-num" id="countryCount">0</span><span class="stat-label">Countries</span></div>
@@ -173,8 +320,19 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
   </div>
 </div>
 
+<!-- Alumni Spotlight -->
+<div class="spotlight" id="spotlightWrap" style="display:none">
+  <div class="spotlight-card" id="spotlightCard"></div>
+</div>
+
 <!-- Live Feed -->
 <div class="feed-bar"><div class="feed-scroll" id="feedScroll"></div></div>
+
+<!-- WhatsApp FAB -->
+<a class="wa-fab" href="https://chat.whatsapp.com/DxMZxmWdXxBGe93iK67tha" target="_blank" rel="noopener" id="waFab">
+  <div class="wa-tooltip">Join the AUB 2010-2011 WhatsApp group</div>
+  <button class="wa-fab-btn">üí¨</button>
+</a>
 
 <!-- MAP -->
 <div class="section active" id="mapSection">
@@ -191,7 +349,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
   </div>
   <div class="map-wrap"><div id="map"></div></div>
   <div class="near-me-bar">
-    <span class="map-filter-label">📍 Find alumni near:</span>
+    <span class="map-filter-label">üìç Find alumni near:</span>
     <select class="near-me-select" id="nearMeSelect" onchange="findNearMe()">
       <option value="">Select a city...</option>
     </select>
@@ -216,32 +374,54 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
 <!-- ADD -->
 <div class="section" id="addSection"><div class="add-form">
   <h2 style="font-family:'Fraunces',serif;font-weight:600;font-size:1.5rem;margin-bottom:6px;color:var(--r)">Add an Alumni</h2>
-  <p style="color:var(--ts);font-size:0.9rem;margin-bottom:8px">Add yourself or a classmate — it saves permanently for everyone.</p>
+  <p style="color:var(--ts);font-size:0.9rem;margin-bottom:8px">Add yourself or a classmate ‚Äî it saves permanently for everyone.</p>
   <div class="sheet-badge"><span class="dot"></span> Connected to live database</div>
   <div style="margin-bottom:32px"></div>
   <div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" type="text" id="addName" placeholder="e.g. Rami Khalil"></div>
   <div class="form-row"><div class="form-group"><label class="form-label">Graduation Year *</label><select class="form-select" id="addYear"><option value="2010">2010</option><option value="2011">2011</option></select></div><div class="form-group"><label class="form-label">Major *</label><input class="form-input" type="text" id="addMajor" placeholder="e.g. Economics"></div></div>
   <div class="form-row"><div class="form-group"><label class="form-label">City</label><input class="form-input" type="text" id="addCity" placeholder="e.g. Dubai"></div><div class="form-group"><label class="form-label">Country</label><input class="form-input" type="text" id="addCountry" placeholder="e.g. UAE"></div></div>
   <div class="form-row"><div class="form-group"><label class="form-label">Field / Role</label><input class="form-input" type="text" id="addRole" placeholder="e.g. Head of Marketing"></div><div class="form-group"><label class="form-label">Current Company</label><input class="form-input" type="text" id="addCompany" placeholder="e.g. Google"></div></div>
-  <button class="btn-submit" id="submitBtn" onclick="addMember()">Add to Tracker 🌲</button>
+  <div class="form-row"><div class="form-group"><label class="form-label">LinkedIn URL</label><input class="form-input" type="url" id="addLinkedIn" placeholder="https://linkedin.com/in/..."></div><div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" id="addEmail" placeholder="name@example.com"></div></div>
+  <button class="btn-submit" id="submitBtn" onclick="addMember()">Add to Tracker üå≤</button>
   <div class="success-msg" id="successMsg"></div>
   <div class="error-msg" id="errorMsg"></div>
 </div></div>
 
+<!-- Propose Edit Modal -->
+<div class="modal-overlay" id="editModal" onclick="if(event.target===this)closeEditModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Propose Edit</div>
+      <button class="modal-close" onclick="closeEditModal()">&times;</button>
+    </div>
+    <p class="modal-note">Suggest updates for this alumni. Only changed fields will be sent. Leave fields blank to keep current values.</p>
+    <input type="hidden" id="editOriginalName">
+    <div class="form-group"><label class="form-label">Full Name</label><input class="form-input" type="text" id="editName" placeholder="Full name"><div class="modal-current" id="editNameCurrent"></div></div>
+    <div class="form-row"><div class="form-group"><label class="form-label">Graduation Year</label><select class="form-select" id="editYear"><option value="2010">2010</option><option value="2011">2011</option></select><div class="modal-current" id="editYearCurrent"></div></div><div class="form-group"><label class="form-label">Major</label><input class="form-input" type="text" id="editMajor" placeholder="e.g. Economics"><div class="modal-current" id="editMajorCurrent"></div></div></div>
+    <div class="form-row"><div class="form-group"><label class="form-label">City</label><input class="form-input" type="text" id="editCity" placeholder="e.g. Dubai"><div class="modal-current" id="editCityCurrent"></div></div><div class="form-group"><label class="form-label">Country</label><input class="form-input" type="text" id="editCountry" placeholder="e.g. UAE"><div class="modal-current" id="editCountryCurrent"></div></div></div>
+    <div class="form-row"><div class="form-group"><label class="form-label">Field / Role</label><input class="form-input" type="text" id="editRole" placeholder="e.g. Head of Marketing"><div class="modal-current" id="editRoleCurrent"></div></div><div class="form-group"><label class="form-label">Current Company</label><input class="form-input" type="text" id="editCompany" placeholder="e.g. Google"><div class="modal-current" id="editCompanyCurrent"></div></div></div>
+    <div class="form-row"><div class="form-group"><label class="form-label">LinkedIn URL (new)</label><input class="form-input" type="url" id="editLinkedIn" placeholder="https://linkedin.com/in/..."></div><div class="form-group"><label class="form-label">Email (new)</label><input class="form-input" type="email" id="editEmail" placeholder="name@example.com"></div></div>
+    <div class="form-group"><label class="form-label">Your Name (who's proposing)</label><input class="form-input" type="text" id="editProposer" placeholder="Your name"></div>
+    <button class="btn-submit" id="editSubmitBtn" onclick="submitEdit()">Send Proposal</button>
+    <div class="success-msg" id="editSuccessMsg"></div>
+    <div class="error-msg" id="editErrorMsg"></div>
+  </div>
+</div>
+
 <script>
-const SHEET_URL='https://script.google.com/macros/s/AKfycbwoWQVjtS0iOblwyK8QXqjpH25ia4Ei_8EMsscfNe9o_IXEQJz-GOkgdwSjVAHMto8B/exec';
+const SHEET_URL='https://script.google.com/macros/s/AKfycbxh49y-2r7hWAgaWI9-fm32dBNrV-IeGrofjQ1-T3dlNRrUKmJas8_1x_017b5lrbqM/exec';
 const AC=['#840132','#a01545','#C8666D','#EB9F00','#5e0124','#808080','#4B1757','#2E7D32','#1565C0','#D84315','#6A1B9A','#00695C'];
 const CC={'beirut':[33.8938,35.5018],'lebanon':[33.8938,35.5018],'metn':[33.8833,35.55],'dubai':[25.2048,55.2708],'uae':[25.2048,55.2708],'abu dhabi':[24.4539,54.3773],'amman':[31.9454,35.9284],'jordan':[31.9454,35.9284],'riyadh':[24.7136,46.6753],'saudi arabia':[24.7136,46.6753],'london':[51.5074,-0.1278],'uk':[51.5074,-0.1278],'paris':[48.8566,2.3522],'france':[48.8566,2.3522],'toronto':[43.6532,-79.3832],'canada':[43.6532,-79.3832],'boston':[42.3601,-71.0589],'doha':[25.2854,51.531],'qatar':[25.2854,51.531],'kuwait':[29.3759,47.9774],'rome':[41.9028,12.4964],'italy':[41.9028,12.4964],'greece':[37.9838,23.7275],'germany':[52.52,13.405],'switzerland':[47.3769,8.5417],'geneva':[46.2044,6.1432],'marseille':[43.2965,5.3698],'oman':[23.588,58.3829],'san francisco':[37.7749,-122.4194],'washington d.c.':[38.9072,-77.0369],'washington':[38.9072,-77.0369],'chicago':[41.8781,-87.6298],'new york':[40.7128,-74.006],'los angeles':[34.0522,-118.2437],'houston':[29.7604,-95.3698],'jeddah':[21.4858,39.1925],'montreal':[45.5017,-73.5673],'bahrain':[26.0667,50.5577]};
 
 const REGIONS={
-  '🇱🇧 Lebanon':{countries:['Lebanon']},
-  '🇦🇪 UAE':{countries:['UAE']},
-  '🇸🇦 KSA':{countries:['Saudi Arabia']},
-  '🇨🇦 Canada':{countries:['Canada']},
-  '🇺🇸 USA':{countries:['USA']},
-  '🇬🇧 UK':{countries:['UK']},
-  '🇪🇺 Europe':{countries:['France','Germany','Italy','Switzerland','Greece']},
-  '🌍 Other':{countries:['Jordan','Kuwait','Oman','Qatar']}
+  'üá±üáß Lebanon':{countries:['Lebanon']},
+  'üá¶üá™ UAE':{countries:['UAE']},
+  'üá∏üá¶ KSA':{countries:['Saudi Arabia']},
+  'üá®üá¶ Canada':{countries:['Canada']},
+  'üá∫üá∏ USA':{countries:['USA']},
+  'üá¨üáß UK':{countries:['UK']},
+  'üá™üá∫ Europe':{countries:['France','Germany','Italy','Switzerland','Greece']},
+  'üåç Other':{countries:['Jordan','Kuwait','Oman','Qatar']}
 };
 
 let alumni=[];
@@ -262,7 +442,7 @@ function loadData(){
   script.onerror=function(){
     script.remove();
     delete window[cbName];
-    document.getElementById('pageLoading').innerHTML='<div class="pl-icon">⚠️</div><div class="pl-text">Could not load data. Please refresh.</div>';
+    document.getElementById('pageLoading').innerHTML='<div class="pl-icon">‚ö†Ô∏è</div><div class="pl-text">Could not load data. Please refresh.</div>';
   };
   document.head.appendChild(script);
 }
@@ -302,7 +482,7 @@ function animateCount(el,target){
 function renderFeed(){
   const feed=document.getElementById('feedScroll');
   const recent=alumni.slice(-8).reverse();
-  feed.innerHTML=recent.map(m=>`<div class="feed-item"><span class="feed-dot"></span><span class="feed-name">${m.name}</span> joined · ${m.city||m.country||'AUB'}</div>`).join('');
+  feed.innerHTML=recent.map(m=>`<div class="feed-item"><span class="feed-dot"></span><span class="feed-name">${m.name}</span> joined ¬∑ ${m.city||m.country||'AUB'}</div>`).join('');
 }
 
 // === REGION COUNTERS ===
@@ -326,7 +506,9 @@ function zoomToRegion(country){
 // === MAP ===
 function initMap(){
   map=L.map('map',{center:[30,35],zoom:3,zoomControl:true,attributionControl:false});
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:18}).addTo(map);
+  const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+  const tiles=isDark?'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png':'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+  L.tileLayer(tiles,{maxZoom:18}).addTo(map);
 }
 
 function getFilteredAlumni(){
@@ -339,8 +521,8 @@ function getFilteredAlumni(){
 
 function renderMarkers(){
   map.eachLayer(l=>{if(l instanceof L.Marker||l instanceof L.Polyline)map.removeLayer(l)});
-  const aubI=L.divIcon({className:'',html:'<div style="background:#EB9F00;border:3px solid #840132;border-radius:50%;width:24px;height:24px;box-shadow:0 0 12px rgba(132,1,50,0.4);display:flex;align-items:center;justify-content:center;font-size:12px">🌲</div>',iconSize:[24,24],iconAnchor:[12,12]});
-  L.marker([33.8938,35.5018],{icon:aubI}).addTo(map).bindPopup('<div class="popup-inner"><h3>🌲 AUB – Beirut</h3><div class="popup-detail">Where it all began · Est. 1866</div></div>');
+  const aubI=L.divIcon({className:'',html:'<div style="background:#EB9F00;border:3px solid #840132;border-radius:50%;width:24px;height:24px;box-shadow:0 0 12px rgba(132,1,50,0.4);display:flex;align-items:center;justify-content:center;font-size:12px">üå≤</div>',iconSize:[24,24],iconAnchor:[12,12]});
+  L.marker([33.8938,35.5018],{icon:aubI}).addTo(map).bindPopup('<div class="popup-inner"><h3>üå≤ AUB ‚Äì Beirut</h3><div class="popup-detail">Where it all began ¬∑ Est. 1866</div></div>');
   
   const filtered=getFilteredAlumni();
   const gr={};
@@ -351,12 +533,12 @@ function renderMarkers(){
     if(members.length>2){
       const sz=Math.min(52,28+members.length*1.5);
       const icon=L.divIcon({className:'',html:`<div class="cluster-marker" style="width:${sz}px;height:${sz}px">${members.length}</div>`,iconSize:[sz,sz],iconAnchor:[sz/2,sz/2]});
-      const pop=members.map(m=>`<div class="popup-person"><strong style="color:#840132">${m.name}</strong><br><span style="font-size:0.72rem;color:#555">${m.major} '${String(m.year).slice(-2)}${m.company?' · '+m.company:''}${m.role?' · '+m.role:''}</span></div>`).join('');
+      const pop=members.map(m=>`<div class="popup-person"><strong style="color:#840132">${m.name}</strong><br><span style="font-size:0.72rem;color:#555">${m.major} '${String(m.year).slice(-2)}${m.company?' ¬∑ '+m.company:''}${m.role?' ¬∑ '+m.role:''}</span></div>`).join('');
       L.marker(coords,{icon}).addTo(map).bindPopup(`<div class="popup-inner" style="max-height:300px;overflow-y:auto">${pop}</div>`,{maxWidth:300});
     }else{
       members.forEach((m,i)=>{
         const icon=L.divIcon({className:'',html:'<div class="alumni-marker"></div>',iconSize:[14,14],iconAnchor:[7,7]});
-        L.marker([coords[0]+i*0.004,coords[1]+i*0.004],{icon}).addTo(map).bindPopup(`<div class="popup-inner"><h3>${m.name}</h3><div class="popup-detail">${m.major} · ${m.year}<br>📍 ${m.city||m.country}${m.company?'<br>🏢 '+m.company:''}${m.role?'<br>💼 '+m.role:''}</div></div>`);
+        L.marker([coords[0]+i*0.004,coords[1]+i*0.004],{icon}).addTo(map).bindPopup(`<div class="popup-inner"><h3>${m.name}</h3><div class="popup-detail">${m.major} ¬∑ ${m.year}<br>üìç ${m.city||m.country}${m.company?'<br>üè¢ '+m.company:''}${m.role?'<br>üíº '+m.role:''}</div></div>`);
       });
     }
     if(coords[0]!==ac[0]||coords[1]!==ac[1])L.polyline([ac,coords],{color:'rgba(132,1,50,0.1)',weight:1,dashArray:'4 6'}).addTo(map);
@@ -407,7 +589,7 @@ function renderDirectory(){
   });
   grid.innerHTML=f.map((m,i)=>{
     const c=AC[i%AC.length],loc=[m.city,m.country].filter(Boolean),ls=loc.length?loc.join(', '):'Unknown';
-    return`<div class="alumni-card"><div class="card-top"><div class="avatar" style="background:${c}15;color:${c};border:2px solid ${c}30">${gi(m.name)}</div><div><div class="card-name">${m.name}</div><div class="card-year">Class of ${m.year}</div></div></div><div class="card-details"><div class="card-detail"><span class="icon">📚</span>${m.major}</div><div class="card-detail"><span class="icon">📍</span>${ls}</div>${m.company?`<div class="card-detail"><span class="icon">🏢</span>${m.company}</div>`:''}${m.role?`<div class="card-detail"><span class="icon">💼</span>${m.role}</div>`:''}</div></div>`;
+    return`<div class="alumni-card"><div class="card-top"><div class="avatar" style="background:${c}15;color:${c};border:2px solid ${c}30">${gi(m.name)}</div><div><div class="card-name">${m.name}</div><div class="card-year">Class of ${m.year}</div></div></div><div class="card-details"><div class="card-detail"><span class="icon">üìö</span>${m.major}</div><div class="card-detail"><span class="icon">üìç</span>${ls}</div>${m.company?`<div class="card-detail"><span class="icon">üè¢</span>${m.company}</div>`:''}${m.role?`<div class="card-detail"><span class="icon">üíº</span>${m.role}</div>`:''}</div><button class="btn-edit" onclick="openEditModal('${m.name.replace(/'/g,"\\'")}')">‚úèÔ∏è Propose Edit</button></div>`;
   }).join('');
 }
 function toggleFilter(f,btn){activeFilter=f;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderDirectory()}
@@ -431,7 +613,7 @@ function renderStats(){
   const topCities=Object.entries(cities).sort((a,b)=>b[1]-a[1]).slice(0,5);
   const captains=topCities.map(([city,count])=>{
     const inCity=alumni.filter(m=>m.city===city);
-    return{city,count,captain:inCity[0]?.name||'—'};
+    return{city,count,captain:inCity[0]?.name||'‚Äî'};
   });
 
   // Industry Clusters
@@ -453,7 +635,7 @@ function renderStats(){
     else if(r.includes('consult')||r.includes('kearney')||r.includes('deloitte'))sectors['Consulting']=(sectors['Consulting']||0)+1;
     else if(r.includes('product')||r.includes('tech')||r.includes('ai'))sectors['Tech & Product']=(sectors['Tech & Product']||0)+1;
     else if(r.includes('health')||r.includes('pharma')||r.includes('roche')||r.includes('cigna'))sectors['Healthcare & Pharma']=(sectors['Healthcare & Pharma']||0)+1;
-    else if(r.includes('luxury')||r.includes('ralph')||r.includes('oréal'))sectors['Luxury & Retail']=(sectors['Luxury & Retail']||0)+1;
+    else if(r.includes('luxury')||r.includes('ralph')||r.includes('or√©al'))sectors['Luxury & Retail']=(sectors['Luxury & Retail']||0)+1;
     else if(r.includes('founder')||r.includes('own'))sectors['Entrepreneurs']=(sectors['Entrepreneurs']||0)+1;
     else sectors['Other']=(sectors['Other']||0)+1;
   });
@@ -464,19 +646,19 @@ function renderStats(){
   const dub=alumni.filter(m=>m.city==='Dubai').length;
 
   grid.innerHTML=`
-    <div class="stats-card"><div class="stats-card-title">🌍 By Country</div>${sc.map(([c,n])=>`<div class="bar-chart-item"><div class="bar-label">${c}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/mc)*100}%;background:#840132">${n}</div></div></div>`).join('')}</div>
-    <div class="stats-card"><div class="stats-card-title">🏙️ Top Cities</div>${sci.map(([c,n])=>`<div class="bar-chart-item"><div class="bar-label">${c}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/mci)*100}%;background:#EB9F00">${n}</div></div></div>`).join('')}</div>
-    <div class="stats-card"><div class="stats-card-title">📚 Top Majors</div>${sm.map(([m,n])=>`<div class="bar-chart-item"><div class="bar-label">${m}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/mm)*100}%;background:#C8666D">${n}</div></div></div>`).join('')}</div>
-    <div class="stats-card"><div class="stats-card-title">🏢 Industry Sectors</div>${sortedSectors.map(([s,n])=>`<div class="bar-chart-item"><div class="bar-label">${s}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/maxSec)*100}%;background:#4B1757">${n}</div></div></div>`).join('')}</div>
+    <div class="stats-card"><div class="stats-card-title">üåç By Country</div>${sc.map(([c,n])=>`<div class="bar-chart-item"><div class="bar-label">${c}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/mc)*100}%;background:#840132">${n}</div></div></div>`).join('')}</div>
+    <div class="stats-card"><div class="stats-card-title">üèôÔ∏è Top Cities</div>${sci.map(([c,n])=>`<div class="bar-chart-item"><div class="bar-label">${c}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/mci)*100}%;background:#EB9F00">${n}</div></div></div>`).join('')}</div>
+    <div class="stats-card"><div class="stats-card-title">üìö Top Majors</div>${sm.map(([m,n])=>`<div class="bar-chart-item"><div class="bar-label">${m}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/mm)*100}%;background:#C8666D">${n}</div></div></div>`).join('')}</div>
+    <div class="stats-card"><div class="stats-card-title">üè¢ Industry Sectors</div>${sortedSectors.map(([s,n])=>`<div class="bar-chart-item"><div class="bar-label">${s}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/maxSec)*100}%;background:#4B1757">${n}</div></div></div>`).join('')}</div>
 
-    <div class="superlative-card"><div class="superlative-emoji">👑</div><div class="superlative-label">City Captains</div><div class="cluster-list">${captains.map(c=>`<div class="cluster-item"><span class="cluster-company">${c.city}</span><span class="cluster-count">${c.count} alumni</span></div>`).join('')}</div></div>
+    <div class="superlative-card"><div class="superlative-emoji">üëë</div><div class="superlative-label">City Captains</div><div class="cluster-list">${captains.map(c=>`<div class="cluster-item"><span class="cluster-company">${c.city}</span><span class="cluster-count">${c.count} alumni</span></div>`).join('')}</div></div>
 
-    <div class="superlative-card"><div class="superlative-emoji">🏢</div><div class="superlative-label">Company Clusters</div><div class="cluster-list">${clusters.length?clusters.map(([c,n])=>`<div class="cluster-item"><span class="cluster-company">${c}</span><span class="cluster-count">${n}</span></div>`).join(''):'<div style="color:var(--tm);font-size:0.85rem">Add your company to see clusters!</div>'}</div></div>
+    <div class="superlative-card"><div class="superlative-emoji">üè¢</div><div class="superlative-label">Company Clusters</div><div class="cluster-list">${clusters.length?clusters.map(([c,n])=>`<div class="cluster-item"><span class="cluster-company">${c}</span><span class="cluster-count">${n}</span></div>`).join(''):'<div style="color:var(--tm);font-size:0.85rem">Add your company to see clusters!</div>'}</div></div>
 
-    <div class="superlative-card"><div class="superlative-emoji">🎓</div><div class="superlative-label">Class Split</div><div class="superlative-name">${years[2010]||0} × 2010 · ${years[2011]||0} × 2011${years[2009]?' · '+years[2009]+' × 2009':''}</div><div class="superlative-detail">${(years[2010]||0)>(years[2011]||0)?'Class of 2010 dominates!':'Class of 2011 represents!'}</div></div>
-    <div class="superlative-card"><div class="superlative-emoji">🏠</div><div class="superlative-label">Lebanon Squad</div><div class="superlative-name">${leb} Alumni</div><div class="superlative-detail">Keeping the flame alive 🌲</div></div>
-    <div class="superlative-card"><div class="superlative-emoji">🏙️</div><div class="superlative-label">Dubai Takeover</div><div class="superlative-name">${dub} Alumni</div><div class="superlative-detail">The #1 city for AUB grads</div></div>
-    <div class="superlative-card"><div class="superlative-emoji">🇨🇦</div><div class="superlative-label">Canada Crew</div><div class="superlative-name">${alumni.filter(m=>m.country==='Canada').length} Alumni</div><div class="superlative-detail">${alumni.filter(m=>m.city==='Toronto').length} in Toronto</div></div>
+    <div class="superlative-card"><div class="superlative-emoji">üéì</div><div class="superlative-label">Class Split</div><div class="superlative-name">${years[2010]||0} √ó 2010 ¬∑ ${years[2011]||0} √ó 2011${years[2009]?' ¬∑ '+years[2009]+' √ó 2009':''}</div><div class="superlative-detail">${(years[2010]||0)>(years[2011]||0)?'Class of 2010 dominates!':'Class of 2011 represents!'}</div></div>
+    <div class="superlative-card"><div class="superlative-emoji">üè†</div><div class="superlative-label">Lebanon Squad</div><div class="superlative-name">${leb} Alumni</div><div class="superlative-detail">Keeping the flame alive üå≤</div></div>
+    <div class="superlative-card"><div class="superlative-emoji">üèôÔ∏è</div><div class="superlative-label">Dubai Takeover</div><div class="superlative-name">${dub} Alumni</div><div class="superlative-detail">The #1 city for AUB grads</div></div>
+    <div class="superlative-card"><div class="superlative-emoji">üá®üá¶</div><div class="superlative-label">Canada Crew</div><div class="superlative-name">${alumni.filter(m=>m.country==='Canada').length} Alumni</div><div class="superlative-detail">${alumni.filter(m=>m.city==='Toronto').length} in Toronto</div></div>
   `;
 }
 
@@ -490,9 +672,11 @@ async function addMember(){
   const co=document.getElementById('addCountry').value.trim();
   const r=document.getElementById('addRole').value.trim();
   const comp=document.getElementById('addCompany').value.trim();
+  const li=document.getElementById('addLinkedIn').value.trim();
+  const em=document.getElementById('addEmail').value.trim();
   if(!n||!m){alert('Please fill in at least name and major');return}
   if(alumni.some(a=>a.name.toLowerCase()===n.toLowerCase())){
-    const err=document.getElementById('errorMsg');err.textContent='⚠️ '+n+' is already in the tracker!';err.style.display='block';setTimeout(()=>err.style.display='none',4000);return;
+    const err=document.getElementById('errorMsg');err.textContent='‚ö†Ô∏è '+n+' is already in the tracker!';err.style.display='block';setTimeout(()=>err.style.display='none',4000);return;
   }
   btn.disabled=true;btn.innerHTML='<span class="loading-spinner"></span>Saving...';
   try{
@@ -500,7 +684,7 @@ async function addMember(){
     await new Promise((resolve,reject)=>{
       const cbName='_addCb_'+Date.now();
       window[cbName]=function(res){delete window[cbName];resolve(res)};
-      const params=new URLSearchParams({action:'add',Name:n,Year:y,Major:m,City:ci,Country:co,Role:r,Company:comp,callback:cbName});
+      const params=new URLSearchParams({action:'add',Name:n,Year:y,Major:m,City:ci,Country:co,Role:r,Company:comp,LinkedIn:li,Email:em,callback:cbName});
       const script=document.createElement('script');
       script.src=SHEET_URL+'?'+params.toString();
       script.onerror=function(){script.remove();delete window[cbName];reject(new Error('Failed'))};
@@ -509,12 +693,87 @@ async function addMember(){
     });
     alumni.push({name:n,year:parseInt(y),major:m,city:ci,country:co,role:r,company:comp});
     refreshAll();buildFilters();
-    const msg=document.getElementById('successMsg');msg.textContent='✅ '+n+' permanently added!';msg.style.display='block';setTimeout(()=>msg.style.display='none',5000);
-    ['addName','addMajor','addCity','addCountry','addRole','addCompany'].forEach(id=>document.getElementById(id).value='');
+    const msg=document.getElementById('successMsg');msg.textContent='‚úÖ '+n+' permanently added!';msg.style.display='block';setTimeout(()=>msg.style.display='none',5000);
+    ['addName','addMajor','addCity','addCountry','addRole','addCompany','addLinkedIn','addEmail'].forEach(id=>document.getElementById(id).value='');
   }catch(e){
-    const err=document.getElementById('errorMsg');err.textContent='❌ Could not save. Try again.';err.style.display='block';setTimeout(()=>err.style.display='none',4000);
+    const err=document.getElementById('errorMsg');err.textContent='‚ùå Could not save. Try again.';err.style.display='block';setTimeout(()=>err.style.display='none',4000);
   }
-  btn.disabled=false;btn.innerHTML='Add to Tracker 🌲';
+  btn.disabled=false;btn.innerHTML='Add to Tracker üå≤';
+}
+
+// === PROPOSE EDIT MODAL ===
+function openEditModal(name){
+  const m=alumni.find(a=>a.name===name);
+  if(!m)return;
+  document.getElementById('editOriginalName').value=m.name;
+  document.getElementById('editName').value=m.name;
+  document.getElementById('editYear').value=String(m.year);
+  document.getElementById('editMajor').value=m.major;
+  document.getElementById('editCity').value=m.city;
+  document.getElementById('editCountry').value=m.country;
+  document.getElementById('editRole').value=m.role;
+  document.getElementById('editCompany').value=m.company;
+  document.getElementById('editLinkedIn').value='';
+  document.getElementById('editEmail').value='';
+  document.getElementById('editProposer').value='';
+  // Show current values as hints
+  document.getElementById('editNameCurrent').textContent='Current: '+m.name;
+  document.getElementById('editYearCurrent').textContent='Current: '+m.year;
+  document.getElementById('editMajorCurrent').textContent='Current: '+(m.major||'‚Äî');
+  document.getElementById('editCityCurrent').textContent='Current: '+(m.city||'‚Äî');
+  document.getElementById('editCountryCurrent').textContent='Current: '+(m.country||'‚Äî');
+  document.getElementById('editRoleCurrent').textContent='Current: '+(m.role||'‚Äî');
+  document.getElementById('editCompanyCurrent').textContent='Current: '+(m.company||'‚Äî');
+  document.getElementById('editSuccessMsg').style.display='none';
+  document.getElementById('editErrorMsg').style.display='none';
+  document.getElementById('editModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeEditModal(){
+  document.getElementById('editModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+async function submitEdit(){
+  const btn=document.getElementById('editSubmitBtn');
+  const original=document.getElementById('editOriginalName').value;
+  const proposer=document.getElementById('editProposer').value.trim();
+  if(!proposer){alert('Please enter your name so we know who proposed this edit.');return;}
+  const fields={
+    Name:document.getElementById('editName').value.trim(),
+    Year:document.getElementById('editYear').value,
+    Major:document.getElementById('editMajor').value.trim(),
+    City:document.getElementById('editCity').value.trim(),
+    Country:document.getElementById('editCountry').value.trim(),
+    Role:document.getElementById('editRole').value.trim(),
+    Company:document.getElementById('editCompany').value.trim(),
+    LinkedIn:document.getElementById('editLinkedIn').value.trim(),
+    Email:document.getElementById('editEmail').value.trim()
+  };
+  btn.disabled=true;btn.innerHTML='<span class="loading-spinner"></span>Sending...';
+  try{
+    await new Promise((resolve,reject)=>{
+      const cbName='_editCb_'+Date.now();
+      window[cbName]=function(res){delete window[cbName];resolve(res)};
+      const params=new URLSearchParams({action:'propose_edit',OriginalName:original,Proposer:proposer,...fields,callback:cbName});
+      const script=document.createElement('script');
+      script.src=SHEET_URL+'?'+params.toString();
+      script.onerror=function(){script.remove();delete window[cbName];reject(new Error('Failed'))};
+      document.head.appendChild(script);
+      setTimeout(()=>{try{script.remove();delete window[cbName]}catch(e){}resolve()},6000);
+    });
+    const msg=document.getElementById('editSuccessMsg');
+    msg.textContent='‚úÖ Edit proposal sent! The admin will review it.';
+    msg.style.display='block';
+    setTimeout(()=>closeEditModal(),2500);
+  }catch(e){
+    const err=document.getElementById('editErrorMsg');
+    err.textContent='‚ùå Could not send. Please try again.';
+    err.style.display='block';
+    setTimeout(()=>err.style.display='none',4000);
+  }
+  btn.disabled=false;btn.innerHTML='Send Proposal';
 }
 
 // === REFRESH ===
@@ -523,7 +782,7 @@ function refreshAll(){
   animateCount(document.getElementById('countryCount'),new Set(alumni.filter(m=>m.country).map(m=>m.country)).size);
   animateCount(document.getElementById('cityCount'),new Set(alumni.filter(m=>m.city).map(m=>m.city)).size);
   animateCount(document.getElementById('majorCount'),new Set(alumni.map(m=>m.major)).size);
-  renderMarkers();renderDirectory();renderStats();renderFeed();renderRegionCounters();
+  renderMarkers();renderDirectory();renderStats();renderFeed();renderRegionCounters();renderSpotlight();
 }
 
 // === NAV ===
@@ -538,8 +797,63 @@ function showSection(id,btn){
   if(id==='directory')renderDirectory();
 }
 
+// === DARK MODE ===
+function toggleDark(){
+  const html=document.documentElement;
+  const isDark=html.getAttribute('data-theme')==='dark';
+  html.setAttribute('data-theme',isDark?'':'dark');
+  document.querySelector('.dark-toggle').textContent=isDark?'üåô':'‚òÄÔ∏è';
+  localStorage.setItem('aub-dark',isDark?'':'dark');
+  // Update map tiles
+  if(map){
+    map.eachLayer(l=>{if(l instanceof L.TileLayer)map.removeLayer(l)});
+    const tiles=isDark
+      ?'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+      :'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+    L.tileLayer(tiles,{maxZoom:18}).addTo(map);
+  }
+}
+function initDarkMode(){
+  const saved=localStorage.getItem('aub-dark');
+  if(saved==='dark'){
+    document.documentElement.setAttribute('data-theme','dark');
+    document.querySelector('.dark-toggle').textContent='‚òÄÔ∏è';
+  }
+}
+
+// === ALUMNI SPOTLIGHT ===
+let spotlightIndex=-1;
+function renderSpotlight(){
+  if(!alumni.length)return;
+  const withDetails=alumni.filter(m=>m.company||m.role);
+  const pool=withDetails.length>3?withDetails:alumni;
+  spotlightIndex=(spotlightIndex+1)%pool.length;
+  const m=pool[spotlightIndex];
+  const loc=[m.city,m.country].filter(Boolean).join(', ')||'Unknown';
+  const card=document.getElementById('spotlightCard');
+  card.innerHTML=`
+    <div class="spotlight-avatar">${gi(m.name)}</div>
+    <div class="spotlight-info">
+      <div class="spotlight-tag">Alumni Spotlight</div>
+      <div class="spotlight-name">${m.name}</div>
+      <div class="spotlight-detail">
+        üìö ${m.major} ¬∑ Class of ${m.year}<br>
+        üìç ${loc}${m.company?' ¬∑ üè¢ '+m.company:''}${m.role?' ¬∑ üíº '+m.role:''}
+      </div>
+    </div>
+    <button class="spotlight-refresh" onclick="renderSpotlight()">Next ‚Üí</button>
+  `;
+  document.getElementById('spotlightWrap').style.display='block';
+}
+
 // === INIT ===
-window.addEventListener('DOMContentLoaded',()=>{initMap();loadData()});
+window.addEventListener('DOMContentLoaded',()=>{
+  initDarkMode();
+  initMap();
+  loadData();
+  // Rotate spotlight every 8 seconds
+  setInterval(()=>{if(alumni.length)renderSpotlight()},8000);
+});
 </script>
 </body>
 </html>
