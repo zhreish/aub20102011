@@ -3,13 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AUB Alumni 2010–2011 | Where Are We Now?</title>
+<title>AUB Alumni 2010-2011 | Where Are We Now?</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,800;1,9..144,300&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <style>
 :root{--r:#840132;--rl:#a01545;--rd:#5e0124;--y:#EB9F00;--co:#C8666D;--w:#FFFFFF;--ow:#F7F5F2;--bg:#FAFAFA;--tp:#1a1a1a;--ts:#555;--tm:#888;--cb:rgba(255,255,255,0.03);--cd:#E8E4E0}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+.mi{font-family:'Material Symbols Rounded';font-weight:normal;font-style:normal;font-size:20px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-smoothing:antialiased;vertical-align:middle}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-height:100vh}
 .top-bar{position:sticky;top:0;z-index:1000;background:var(--r);box-shadow:0 2px 12px rgba(132,1,50,0.15)}
 .top-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px}
@@ -295,23 +297,23 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
 <body>
 
 <div class="page-loading" id="pageLoading">
-  <div class="pl-icon">&#x1F332;</div>
+  <div class="pl-icon"><span class="mi" style="font-size:48px">park</span></div>
   <div class="pl-text">Loading alumni data...</div>
 </div>
 
 <div class="top-bar"><div class="top-inner">
-  <div class="logo"><span class="logo-icon">&#x1F332;</span><div><div class="logo-text">AUB Alumni Tracker</div><div class="logo-sub">Class of 2010 – 2011</div></div><button class="dark-toggle" onclick="toggleDark()" title="Toggle dark mode">&#x1F319;</button></div>
+  <div class="logo"><span class="logo-icon"><span class="mi" style="font-size:22px;color:#EB9F00">park</span></span><div><div class="logo-text">AUB Alumni Tracker</div><div class="logo-sub">Class of 2010 - 2011</div></div><button class="dark-toggle" onclick="toggleDark()" title="Toggle dark mode"><span class="mi" style="font-size:18px" id="darkIcon">dark_mode</span></button></div>
   <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showSection('map',this)">&#x1F5FA;&#xFE0F; Map</button>
-    <button class="nav-tab" onclick="showSection('directory',this)">&#x1F465; Directory</button>
-    <button class="nav-tab" onclick="showSection('stats',this)">&#x1F4CA; Stats</button>
-    <button class="nav-tab" onclick="showSection('add',this)">&#x2795; Add</button>
+    <button class="nav-tab active" onclick="showSection('map',this)"><span class="mi" style="font-size:16px">map</span> Map</button>
+    <button class="nav-tab" onclick="showSection('directory',this)"><span class="mi" style="font-size:16px">group</span> Directory</button>
+    <button class="nav-tab" onclick="showSection('stats',this)"><span class="mi" style="font-size:16px">bar_chart</span> Stats</button>
+    <button class="nav-tab" onclick="showSection('add',this)"><span class="mi" style="font-size:16px">person_add</span> Add</button>
   </div>
 </div></div>
 
 <div class="hero">
   <h1>Where Are We Now?</h1>
-  <p>Tracking the AUB class of 2010–2011 across the world.</p>
+  <p>Tracking the AUB class of 2010-2011 across the world.</p>
   <div class="stat-strip">
     <div class="stat-item"><span class="stat-num" id="totalCount">0</span><span class="stat-label">Alumni</span></div>
     <div class="stat-item"><span class="stat-num" id="countryCount">0</span><span class="stat-label">Countries</span></div>
@@ -331,7 +333,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
 <!-- WhatsApp FAB -->
 <a class="wa-fab" href="https://chat.whatsapp.com/DxMZxmWdXxBGe93iK67tha" target="_blank" rel="noopener" id="waFab">
   <div class="wa-tooltip">Join the AUB 2010-2011 WhatsApp group</div>
-  <button class="wa-fab-btn">&#x1F4AC;</button>
+  <button class="wa-fab-btn"><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg></button>
 </a>
 
 <!-- MAP -->
@@ -349,7 +351,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
   </div>
   <div class="map-wrap"><div id="map"></div></div>
   <div class="near-me-bar">
-    <span class="map-filter-label">&#x1F4CD; Find alumni near:</span>
+    <span class="map-filter-label"><span class="mi" style="font-size:16px">location_on</span> Find alumni near:</span>
     <select class="near-me-select" id="nearMeSelect" onchange="findNearMe()">
       <option value="">Select a city...</option>
     </select>
@@ -374,7 +376,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
 <!-- ADD -->
 <div class="section" id="addSection"><div class="add-form">
   <h2 style="font-family:'Fraunces',serif;font-weight:600;font-size:1.5rem;margin-bottom:6px;color:var(--r)">Add an Alumni</h2>
-  <p style="color:var(--ts);font-size:0.9rem;margin-bottom:8px">Add yourself or a classmate — it saves permanently for everyone.</p>
+  <p style="color:var(--ts);font-size:0.9rem;margin-bottom:8px">Add yourself or a classmate - it saves permanently for everyone.</p>
   <div class="sheet-badge"><span class="dot"></span> Connected to live database</div>
   <div style="margin-bottom:32px"></div>
   <div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" type="text" id="addName" placeholder="e.g. Rami Khalil"></div>
@@ -382,7 +384,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
   <div class="form-row"><div class="form-group"><label class="form-label">City</label><input class="form-input" type="text" id="addCity" placeholder="e.g. Dubai"></div><div class="form-group"><label class="form-label">Country</label><input class="form-input" type="text" id="addCountry" placeholder="e.g. UAE"></div></div>
   <div class="form-row"><div class="form-group"><label class="form-label">Field / Role</label><input class="form-input" type="text" id="addRole" placeholder="e.g. Head of Marketing"></div><div class="form-group"><label class="form-label">Current Company</label><input class="form-input" type="text" id="addCompany" placeholder="e.g. Google"></div></div>
   <div class="form-row"><div class="form-group"><label class="form-label">LinkedIn URL</label><input class="form-input" type="url" id="addLinkedIn" placeholder="https://linkedin.com/in/..."></div><div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" id="addEmail" placeholder="name@example.com"></div></div>
-  <button class="btn-submit" id="submitBtn" onclick="addMember()">Add to Tracker &#x1F332;</button>
+  <button class="btn-submit" id="submitBtn" onclick="addMember()">Add to Tracker</button>
   <div class="success-msg" id="successMsg"></div>
   <div class="error-msg" id="errorMsg"></div>
 </div></div>
@@ -414,14 +416,14 @@ const AC=['#840132','#a01545','#C8666D','#EB9F00','#5e0124','#808080','#4B1757',
 const CC={'beirut':[33.8938,35.5018],'lebanon':[33.8938,35.5018],'metn':[33.8833,35.55],'dubai':[25.2048,55.2708],'uae':[25.2048,55.2708],'abu dhabi':[24.4539,54.3773],'amman':[31.9454,35.9284],'jordan':[31.9454,35.9284],'riyadh':[24.7136,46.6753],'saudi arabia':[24.7136,46.6753],'london':[51.5074,-0.1278],'uk':[51.5074,-0.1278],'paris':[48.8566,2.3522],'france':[48.8566,2.3522],'toronto':[43.6532,-79.3832],'canada':[43.6532,-79.3832],'boston':[42.3601,-71.0589],'doha':[25.2854,51.531],'qatar':[25.2854,51.531],'kuwait':[29.3759,47.9774],'rome':[41.9028,12.4964],'italy':[41.9028,12.4964],'greece':[37.9838,23.7275],'germany':[52.52,13.405],'switzerland':[47.3769,8.5417],'geneva':[46.2044,6.1432],'marseille':[43.2965,5.3698],'oman':[23.588,58.3829],'san francisco':[37.7749,-122.4194],'washington d.c.':[38.9072,-77.0369],'washington':[38.9072,-77.0369],'chicago':[41.8781,-87.6298],'new york':[40.7128,-74.006],'los angeles':[34.0522,-118.2437],'houston':[29.7604,-95.3698],'jeddah':[21.4858,39.1925],'montreal':[45.5017,-73.5673],'bahrain':[26.0667,50.5577]};
 
 const REGIONS={
-  '&#x1F1F1;&#x1F1E7; Lebanon':{countries:['Lebanon']},
-  '&#x1F1E6;&#x1F1EA; UAE':{countries:['UAE']},
-  '&#x1F1F8;&#x1F1E6; KSA':{countries:['Saudi Arabia']},
-  '&#x1F1E8;&#x1F1E6; Canada':{countries:['Canada']},
-  '&#x1F1FA;&#x1F1F8; USA':{countries:['USA']},
-  '&#x1F1EC;&#x1F1E7; UK':{countries:['UK']},
-  '&#x1F1EA;&#x1F1FA; Europe':{countries:['France','Germany','Italy','Switzerland','Greece']},
-  '&#x1F30D; Other':{countries:['Jordan','Kuwait','Oman','Qatar']}
+  'Lebanon':{countries:['Lebanon']},
+  'UAE':{countries:['UAE']},
+  'KSA':{countries:['Saudi Arabia']},
+  'Canada':{countries:['Canada']},
+  'USA':{countries:['USA']},
+  'UK':{countries:['UK']},
+  'Europe':{countries:['France','Germany','Italy','Switzerland','Greece']},
+  'Other':{countries:['Jordan','Kuwait','Oman','Qatar']}
 };
 
 let alumni=[];
@@ -442,7 +444,7 @@ function loadData(){
   script.onerror=function(){
     script.remove();
     delete window[cbName];
-    document.getElementById('pageLoading').innerHTML='<div class="pl-icon">&#x26A0;&#xFE0F;</div><div class="pl-text">Could not load data. Please refresh.</div>';
+    document.getElementById('pageLoading').innerHTML='<div class="pl-icon">!</div><div class="pl-text">Could not load data. Please refresh.</div>';
   };
   document.head.appendChild(script);
 }
@@ -482,7 +484,7 @@ function animateCount(el,target){
 function renderFeed(){
   const feed=document.getElementById('feedScroll');
   const recent=alumni.slice(-8).reverse();
-  feed.innerHTML=recent.map(m=>`<div class="feed-item"><span class="feed-dot"></span><span class="feed-name">${m.name}</span> joined · ${m.city||m.country||'AUB'}</div>`).join('');
+  feed.innerHTML=recent.map(m=>`<div class="feed-item"><span class="feed-dot"></span><span class="feed-name">${m.name}</span> joined - ${m.city||m.country||'AUB'}</div>`).join('');
 }
 
 // === REGION COUNTERS ===
@@ -521,8 +523,8 @@ function getFilteredAlumni(){
 
 function renderMarkers(){
   map.eachLayer(l=>{if(l instanceof L.Marker||l instanceof L.Polyline)map.removeLayer(l)});
-  const aubI=L.divIcon({className:'',html:'<div style="background:#EB9F00;border:3px solid #840132;border-radius:50%;width:24px;height:24px;box-shadow:0 0 12px rgba(132,1,50,0.4);display:flex;align-items:center;justify-content:center;font-size:12px">&#x1F332;</div>',iconSize:[24,24],iconAnchor:[12,12]});
-  L.marker([33.8938,35.5018],{icon:aubI}).addTo(map).bindPopup('<div class="popup-inner"><h3>&#x1F332; AUB – Beirut</h3><div class="popup-detail">Where it all began · Est. 1866</div></div>');
+  const aubI=L.divIcon({className:'',html:'<div style="background:#EB9F00;border:3px solid #840132;border-radius:50%;width:24px;height:24px;box-shadow:0 0 12px rgba(132,1,50,0.4);display:flex;align-items:center;justify-content:center;font-size:12px;color:#840132;font-weight:bold">A</div>',iconSize:[24,24],iconAnchor:[12,12]});
+  L.marker([33.8938,35.5018],{icon:aubI}).addTo(map).bindPopup('<div class="popup-inner"><h3>AUB - Beirut</h3><div class="popup-detail">Where it all began - Est. 1866</div></div>');
   
   const filtered=getFilteredAlumni();
   const gr={};
@@ -533,12 +535,12 @@ function renderMarkers(){
     if(members.length>2){
       const sz=Math.min(52,28+members.length*1.5);
       const icon=L.divIcon({className:'',html:`<div class="cluster-marker" style="width:${sz}px;height:${sz}px">${members.length}</div>`,iconSize:[sz,sz],iconAnchor:[sz/2,sz/2]});
-      const pop=members.map(m=>`<div class="popup-person"><strong style="color:#840132">${m.name}</strong><br><span style="font-size:0.72rem;color:#555">${m.major} '${String(m.year).slice(-2)}${m.company?' · '+m.company:''}${m.role?' · '+m.role:''}</span></div>`).join('');
+      const pop=members.map(m=>`<div class="popup-person"><strong style="color:#840132">${m.name}</strong><br><span style="font-size:0.72rem;color:#555">${m.major} '${String(m.year).slice(-2)}${m.company?' / '+m.company:''}${m.role?' / '+m.role:''}</span></div>`).join('');
       L.marker(coords,{icon}).addTo(map).bindPopup(`<div class="popup-inner" style="max-height:300px;overflow-y:auto">${pop}</div>`,{maxWidth:300});
     }else{
       members.forEach((m,i)=>{
         const icon=L.divIcon({className:'',html:'<div class="alumni-marker"></div>',iconSize:[14,14],iconAnchor:[7,7]});
-        L.marker([coords[0]+i*0.004,coords[1]+i*0.004],{icon}).addTo(map).bindPopup(`<div class="popup-inner"><h3>${m.name}</h3><div class="popup-detail">${m.major} · ${m.year}<br>&#x1F4CD; ${m.city||m.country}${m.company?'<br>&#x1F3E2; '+m.company:''}${m.role?'<br>&#x1F4BC; '+m.role:''}</div></div>`);
+        L.marker([coords[0]+i*0.004,coords[1]+i*0.004],{icon}).addTo(map).bindPopup(`<div class="popup-inner"><h3>${m.name}</h3><div class="popup-detail">${m.major} - ${m.year}<br>${m.city||m.country}${m.company?'<br>'+m.company:''}${m.role?'<br>'+m.role:''}</div></div>`);
       });
     }
     if(coords[0]!==ac[0]||coords[1]!==ac[1])L.polyline([ac,coords],{color:'rgba(132,1,50,0.1)',weight:1,dashArray:'4 6'}).addTo(map);
@@ -589,7 +591,7 @@ function renderDirectory(){
   });
   grid.innerHTML=f.map((m,i)=>{
     const c=AC[i%AC.length],loc=[m.city,m.country].filter(Boolean),ls=loc.length?loc.join(', '):'Unknown';
-    return`<div class="alumni-card"><div class="card-top"><div class="avatar" style="background:${c}15;color:${c};border:2px solid ${c}30">${gi(m.name)}</div><div><div class="card-name">${m.name}</div><div class="card-year">Class of ${m.year}</div></div></div><div class="card-details"><div class="card-detail"><span class="icon">&#x1F4DA;</span>${m.major}</div><div class="card-detail"><span class="icon">&#x1F4CD;</span>${ls}</div>${m.company?`<div class="card-detail"><span class="icon">&#x1F3E2;</span>${m.company}</div>`:''}${m.role?`<div class="card-detail"><span class="icon">&#x1F4BC;</span>${m.role}</div>`:''}</div><button class="btn-edit" onclick="openEditModal('${m.name.replace(/'/g,"\\'")}')">&#x270F;&#xFE0F; Propose Edit</button></div>`;
+    return`<div class="alumni-card"><div class="card-top"><div class="avatar" style="background:${c}15;color:${c};border:2px solid ${c}30">${gi(m.name)}</div><div><div class="card-name">${m.name}</div><div class="card-year">Class of ${m.year}</div></div></div><div class="card-details"><div class="card-detail"><span class="icon mi" style="font-size:16px">school</span>${m.major}</div><div class="card-detail"><span class="icon mi" style="font-size:16px">location_on</span>${ls}</div>${m.company?`<div class="card-detail"><span class="icon mi" style="font-size:16px">apartment</span>${m.company}</div>`:''}${m.role?`<div class="card-detail"><span class="icon mi" style="font-size:16px">work</span>${m.role}</div>`:''}</div><button class="btn-edit" onclick="openEditModal('${m.name.replace(/'/g,"\\'")}')"><span class="mi" style="font-size:14px">edit</span> Propose Edit</button></div>`;
   }).join('');
 }
 function toggleFilter(f,btn){activeFilter=f;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderDirectory()}
@@ -613,7 +615,7 @@ function renderStats(){
   const topCities=Object.entries(cities).sort((a,b)=>b[1]-a[1]).slice(0,5);
   const captains=topCities.map(([city,count])=>{
     const inCity=alumni.filter(m=>m.city===city);
-    return{city,count,captain:inCity[0]?.name||'—'};
+    return{city,count,captain:inCity[0]?.name||'-'};
   });
 
   // Industry Clusters
@@ -646,19 +648,19 @@ function renderStats(){
   const dub=alumni.filter(m=>m.city==='Dubai').length;
 
   grid.innerHTML=`
-    <div class="stats-card"><div class="stats-card-title">&#x1F30D; By Country</div>${sc.map(([c,n])=>`<div class="bar-chart-item"><div class="bar-label">${c}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/mc)*100}%;background:#840132">${n}</div></div></div>`).join('')}</div>
-    <div class="stats-card"><div class="stats-card-title">&#x1F3D9;&#xFE0F; Top Cities</div>${sci.map(([c,n])=>`<div class="bar-chart-item"><div class="bar-label">${c}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/mci)*100}%;background:#EB9F00">${n}</div></div></div>`).join('')}</div>
-    <div class="stats-card"><div class="stats-card-title">&#x1F4DA; Top Majors</div>${sm.map(([m,n])=>`<div class="bar-chart-item"><div class="bar-label">${m}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/mm)*100}%;background:#C8666D">${n}</div></div></div>`).join('')}</div>
-    <div class="stats-card"><div class="stats-card-title">&#x1F3E2; Industry Sectors</div>${sortedSectors.map(([s,n])=>`<div class="bar-chart-item"><div class="bar-label">${s}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/maxSec)*100}%;background:#4B1757">${n}</div></div></div>`).join('')}</div>
+    <div class="stats-card"><div class="stats-card-title"><span class="mi" style="font-size:16px">public</span> By Country</div>${sc.map(([c,n])=>`<div class="bar-chart-item"><div class="bar-label">${c}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/mc)*100}%;background:#840132">${n}</div></div></div>`).join('')}</div>
+    <div class="stats-card"><div class="stats-card-title"><span class="mi" style="font-size:16px">location_city</span> Top Cities</div>${sci.map(([c,n])=>`<div class="bar-chart-item"><div class="bar-label">${c}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/mci)*100}%;background:#EB9F00">${n}</div></div></div>`).join('')}</div>
+    <div class="stats-card"><div class="stats-card-title"><span class="mi" style="font-size:16px">school</span> Top Majors</div>${sm.map(([m,n])=>`<div class="bar-chart-item"><div class="bar-label">${m}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/mm)*100}%;background:#C8666D">${n}</div></div></div>`).join('')}</div>
+    <div class="stats-card"><div class="stats-card-title"><span class="mi" style="font-size:16px">apartment</span> Industry Sectors</div>${sortedSectors.map(([s,n])=>`<div class="bar-chart-item"><div class="bar-label">${s}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/maxSec)*100}%;background:#4B1757">${n}</div></div></div>`).join('')}</div>
 
-    <div class="superlative-card"><div class="superlative-emoji">&#x1F451;</div><div class="superlative-label">City Captains</div><div class="cluster-list">${captains.map(c=>`<div class="cluster-item"><span class="cluster-company">${c.city}</span><span class="cluster-count">${c.count} alumni</span></div>`).join('')}</div></div>
+    <div class="superlative-card"><div class="superlative-emoji"><span class="mi" style="font-size:2.5rem;color:var(--r)">trophy</span></div><div class="superlative-label">City Captains</div><div class="cluster-list">${captains.map(c=>`<div class="cluster-item"><span class="cluster-company">${c.city}</span><span class="cluster-count">${c.count} alumni</span></div>`).join('')}</div></div>
 
-    <div class="superlative-card"><div class="superlative-emoji">&#x1F3E2;</div><div class="superlative-label">Company Clusters</div><div class="cluster-list">${clusters.length?clusters.map(([c,n])=>`<div class="cluster-item"><span class="cluster-company">${c}</span><span class="cluster-count">${n}</span></div>`).join(''):'<div style="color:var(--tm);font-size:0.85rem">Add your company to see clusters!</div>'}</div></div>
+    <div class="superlative-card"><div class="superlative-emoji"><span class="mi" style="font-size:2.5rem;color:var(--r)">apartment</span></div><div class="superlative-label">Company Clusters</div><div class="cluster-list">${clusters.length?clusters.map(([c,n])=>`<div class="cluster-item"><span class="cluster-company">${c}</span><span class="cluster-count">${n}</span></div>`).join(''):'<div style="color:var(--tm);font-size:0.85rem">Add your company to see clusters!</div>'}</div></div>
 
-    <div class="superlative-card"><div class="superlative-emoji">&#x1F393;</div><div class="superlative-label">Class Split</div><div class="superlative-name">${years[2010]||0} × 2010 · ${years[2011]||0} × 2011${years[2009]?' · '+years[2009]+' × 2009':''}</div><div class="superlative-detail">${(years[2010]||0)>(years[2011]||0)?'Class of 2010 dominates!':'Class of 2011 represents!'}</div></div>
-    <div class="superlative-card"><div class="superlative-emoji">&#x1F3E0;</div><div class="superlative-label">Lebanon Squad</div><div class="superlative-name">${leb} Alumni</div><div class="superlative-detail">Keeping the flame alive &#x1F332;</div></div>
-    <div class="superlative-card"><div class="superlative-emoji">&#x1F3D9;&#xFE0F;</div><div class="superlative-label">Dubai Takeover</div><div class="superlative-name">${dub} Alumni</div><div class="superlative-detail">The #1 city for AUB grads</div></div>
-    <div class="superlative-card"><div class="superlative-emoji">&#x1F1E8;&#x1F1E6;</div><div class="superlative-label">Canada Crew</div><div class="superlative-name">${alumni.filter(m=>m.country==='Canada').length} Alumni</div><div class="superlative-detail">${alumni.filter(m=>m.city==='Toronto').length} in Toronto</div></div>
+    <div class="superlative-card"><div class="superlative-emoji"><span class="mi" style="font-size:2.5rem;color:var(--r)">school</span></div><div class="superlative-label">Class Split</div><div class="superlative-name">${years[2010]||0} x 2010 / ${years[2011]||0} x 2011${years[2009]?' / '+years[2009]+' x 2009':''}</div><div class="superlative-detail">${(years[2010]||0)>(years[2011]||0)?'Class of 2010 dominates!':'Class of 2011 represents!'}</div></div>
+    <div class="superlative-card"><div class="superlative-emoji"><span class="mi" style="font-size:2.5rem;color:var(--r)">home</span></div><div class="superlative-label">Lebanon Squad</div><div class="superlative-name">${leb} Alumni</div><div class="superlative-detail">Keeping the flame alive</div></div>
+    <div class="superlative-card"><div class="superlative-emoji"><span class="mi" style="font-size:2.5rem;color:var(--r)">location_city</span></div><div class="superlative-label">Dubai Takeover</div><div class="superlative-name">${dub} Alumni</div><div class="superlative-detail">The #1 city for AUB grads</div></div>
+    <div class="superlative-card"><div class="superlative-emoji"><span class="mi" style="font-size:2.5rem;color:var(--r)">flight</span></div><div class="superlative-label">Canada Crew</div><div class="superlative-name">${alumni.filter(m=>m.country==='Canada').length} Alumni</div><div class="superlative-detail">${alumni.filter(m=>m.city==='Toronto').length} in Toronto</div></div>
   `;
 }
 
@@ -676,7 +678,7 @@ async function addMember(){
   const em=document.getElementById('addEmail').value.trim();
   if(!n||!m){alert('Please fill in at least name and major');return}
   if(alumni.some(a=>a.name.toLowerCase()===n.toLowerCase())){
-    const err=document.getElementById('errorMsg');err.textContent='&#x26A0;&#xFE0F; '+n+' is already in the tracker!';err.style.display='block';setTimeout(()=>err.style.display='none',4000);return;
+    const err=document.getElementById('errorMsg');err.textContent=n+' is already in the tracker!';err.style.display='block';setTimeout(()=>err.style.display='none',4000);return;
   }
   btn.disabled=true;btn.innerHTML='<span class="loading-spinner"></span>Saving...';
   try{
@@ -693,12 +695,12 @@ async function addMember(){
     });
     alumni.push({name:n,year:parseInt(y),major:m,city:ci,country:co,role:r,company:comp});
     refreshAll();buildFilters();
-    const msg=document.getElementById('successMsg');msg.textContent='&#x2705; '+n+' permanently added!';msg.style.display='block';setTimeout(()=>msg.style.display='none',5000);
+    const msg=document.getElementById('successMsg');msg.textContent=n+' permanently added!';msg.style.display='block';setTimeout(()=>msg.style.display='none',5000);
     ['addName','addMajor','addCity','addCountry','addRole','addCompany','addLinkedIn','addEmail'].forEach(id=>document.getElementById(id).value='');
   }catch(e){
-    const err=document.getElementById('errorMsg');err.textContent='&#x274C; Could not save. Try again.';err.style.display='block';setTimeout(()=>err.style.display='none',4000);
+    const err=document.getElementById('errorMsg');err.textContent='Could not save. Try again.';err.style.display='block';setTimeout(()=>err.style.display='none',4000);
   }
-  btn.disabled=false;btn.innerHTML='Add to Tracker &#x1F332;';
+  btn.disabled=false;btn.innerHTML='Add to Tracker';
 }
 
 // === PROPOSE EDIT MODAL ===
@@ -719,11 +721,11 @@ function openEditModal(name){
   // Show current values as hints
   document.getElementById('editNameCurrent').textContent='Current: '+m.name;
   document.getElementById('editYearCurrent').textContent='Current: '+m.year;
-  document.getElementById('editMajorCurrent').textContent='Current: '+(m.major||'—');
-  document.getElementById('editCityCurrent').textContent='Current: '+(m.city||'—');
-  document.getElementById('editCountryCurrent').textContent='Current: '+(m.country||'—');
-  document.getElementById('editRoleCurrent').textContent='Current: '+(m.role||'—');
-  document.getElementById('editCompanyCurrent').textContent='Current: '+(m.company||'—');
+  document.getElementById('editMajorCurrent').textContent='Current: '+(m.major||'-');
+  document.getElementById('editCityCurrent').textContent='Current: '+(m.city||'-');
+  document.getElementById('editCountryCurrent').textContent='Current: '+(m.country||'-');
+  document.getElementById('editRoleCurrent').textContent='Current: '+(m.role||'-');
+  document.getElementById('editCompanyCurrent').textContent='Current: '+(m.company||'-');
   document.getElementById('editSuccessMsg').style.display='none';
   document.getElementById('editErrorMsg').style.display='none';
   document.getElementById('editModal').classList.add('open');
@@ -764,12 +766,12 @@ async function submitEdit(){
       setTimeout(()=>{try{script.remove();delete window[cbName]}catch(e){}resolve()},6000);
     });
     const msg=document.getElementById('editSuccessMsg');
-    msg.textContent='&#x2705; Edit proposal sent! The admin will review it.';
+    msg.textContent='Edit proposal sent! The admin will review it.';
     msg.style.display='block';
     setTimeout(()=>closeEditModal(),2500);
   }catch(e){
     const err=document.getElementById('editErrorMsg');
-    err.textContent='&#x274C; Could not send. Please try again.';
+    err.textContent='Could not send. Please try again.';
     err.style.display='block';
     setTimeout(()=>err.style.display='none',4000);
   }
@@ -802,7 +804,7 @@ function toggleDark(){
   const html=document.documentElement;
   const isDark=html.getAttribute('data-theme')==='dark';
   html.setAttribute('data-theme',isDark?'':'dark');
-  document.querySelector('.dark-toggle').textContent=isDark?'&#x1F319;':'&#x2600;&#xFE0F;';
+  document.getElementById('darkIcon').textContent=isDark?'dark_mode':'light_mode';
   localStorage.setItem('aub-dark',isDark?'':'dark');
   // Update map tiles
   if(map){
@@ -817,7 +819,7 @@ function initDarkMode(){
   const saved=localStorage.getItem('aub-dark');
   if(saved==='dark'){
     document.documentElement.setAttribute('data-theme','dark');
-    document.querySelector('.dark-toggle').textContent='&#x2600;&#xFE0F;';
+    document.getElementById('darkIcon').textContent='light_mode';
   }
 }
 
@@ -837,11 +839,11 @@ function renderSpotlight(){
       <div class="spotlight-tag">Alumni Spotlight</div>
       <div class="spotlight-name">${m.name}</div>
       <div class="spotlight-detail">
-        &#x1F4DA; ${m.major} · Class of ${m.year}<br>
-        &#x1F4CD; ${loc}${m.company?' · &#x1F3E2; '+m.company:''}${m.role?' · &#x1F4BC; '+m.role:''}
+        ${m.major} - Class of ${m.year}<br>
+        ${loc}${m.company?' - '+m.company:''}${m.role?' - '+m.role:''}
       </div>
     </div>
-    <button class="spotlight-refresh" onclick="renderSpotlight()">Next →</button>
+    <button class="spotlight-refresh" onclick="renderSpotlight()">Next ></button>
   `;
   document.getElementById('spotlightWrap').style.display='block';
 }
