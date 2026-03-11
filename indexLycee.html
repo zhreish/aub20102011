@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AUB Alumni 2010-2011 | Where Are We Now?</title>
+<title>Lycée Alumni | Where Are We Now?</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,800;1,9..144,300&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<!-- No map in this version -->
 <style>
 :root{--r:#840132;--rl:#a01545;--rd:#5e0124;--y:#EB9F00;--co:#C8666D;--w:#FFFFFF;--ow:#F7F5F2;--bg:#FAFAFA;--tp:#1a1a1a;--ts:#555;--tm:#888;--cb:rgba(255,255,255,0.03);--cd:#E8E4E0}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -486,15 +485,14 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
 <body>
 
 <div class="page-loading" id="pageLoading">
-  <div class="pl-icon"><span class="mi" style="font-size:48px">park</span></div>
-  <div class="pl-text">Loading alumni data...</div>
+  <div class="pl-icon"><span class="mi" style="font-size:48px">school</span></div>
+  <div class="pl-text">Loading Lycée alumni data...</div>
 </div>
 
 <div class="top-bar"><div class="top-inner">
-  <div class="logo"><span class="logo-icon"><span class="mi" style="font-size:22px;color:#EB9F00">park</span></span><div><div class="logo-text">AUB Alumni Tracker</div><div class="logo-sub">Class of 2010 - 2011</div></div><button class="dark-toggle" onclick="toggleDark()" title="Toggle dark mode"><span class="mi" style="font-size:18px" id="darkIcon">dark_mode</span></button></div>
+  <div class="logo"><span class="logo-icon"><span class="mi" style="font-size:22px;color:#EB9F00">school</span></span><div><div class="logo-text">Lycée Alumni Tracker</div><div class="logo-sub">Where Are Our Alumni Now?</div></div><button class="dark-toggle" onclick="toggleDark()" title="Toggle dark mode"><span class="mi" style="font-size:18px" id="darkIcon">dark_mode</span></button></div>
   <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showSection('map',this)"><span class="mi" style="font-size:16px">map</span><span class="nav-label">Map</span></button>
-    <button class="nav-tab" onclick="showSection('directory',this)"><span class="mi" style="font-size:16px">group</span><span class="nav-label">Directory</span></button>
+    <button class="nav-tab active" onclick="showSection('directory',this)"><span class="mi" style="font-size:16px">group</span><span class="nav-label">Directory</span></button>
     <button class="nav-tab" onclick="showSection('stats',this)"><span class="mi" style="font-size:16px">bar_chart</span><span class="nav-label">Stats</span></button>
     <button class="nav-tab" onclick="showSection('trivia',this)"><span class="mi" style="font-size:16px">quiz</span><span class="nav-label">Trivia</span></button>
     <button class="nav-tab" onclick="showSection('memories',this)"><span class="mi" style="font-size:16px">auto_stories</span><span class="nav-label">Memories</span></button>
@@ -504,11 +502,10 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
 
 <div class="hero">
   <h1>Where Are We Now?</h1>
-  <p>Tracking the AUB class of 2010-2011 across the world.</p>
+  <p>Tracking Lycée alumni across the world.</p>
   <div class="stat-strip">
     <div class="stat-item"><span class="stat-num" id="totalCount">0</span><span class="stat-label">Alumni</span></div>
-    <div class="stat-item"><span class="stat-num" id="countryCount">0</span><span class="stat-label">Countries</span></div>
-    <div class="stat-item"><span class="stat-num" id="cityCount">0</span><span class="stat-label">Cities</span></div>
+    <div class="stat-item"><span class="stat-num" id="yearCount">0</span><span class="stat-label">Graduating Classes</span></div>
     <div class="stat-item"><span class="stat-num" id="majorCount">0</span><span class="stat-label">Majors</span></div>
   </div>
 </div>
@@ -527,41 +524,17 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
 <div class="feed-bar"><div class="feed-scroll" id="feedScroll"></div></div>
 
 <!-- WhatsApp FAB -->
-<a class="wa-fab" href="https://chat.whatsapp.com/DxMZxmWdXxBGe93iK67tha" target="_blank" rel="noopener" id="waFab">
-  <div class="wa-tooltip">Join the AUB 2010-2011 WhatsApp group</div>
+<a class="wa-fab" href="https://chat.whatsapp.com/LVAGImWoyvvC91S1tHXVS1?mode=gi_t" target="_blank" rel="noopener" id="waFab">
+  <div class="wa-tooltip">Join the Lycée Alumni WhatsApp group</div>
   <button class="wa-fab-btn"><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg></button>
 </a>
 
-<!-- MAP -->
-<div class="section active" id="mapSection">
-  <div class="region-counters" id="regionCounters"></div>
-  <div class="map-controls">
-    <span class="map-filter-label">Filter:</span>
-    <button class="map-filter active" onclick="setMapFilter('all',this)">All</button>
-    <button class="map-filter" onclick="setMapFilter('2010',this)">2010</button>
-    <button class="map-filter" onclick="setMapFilter('2011',this)">2011</button>
-    <span class="map-filter-label" style="margin-left:12px">Major:</span>
-    <select class="near-me-select" id="mapMajorFilter" onchange="renderMarkers()" style="min-width:160px;padding:7px 12px;font-size:0.8rem;border-radius:8px">
-      <option value="all">All Majors</option>
-    </select>
-  </div>
-  <div class="map-wrap"><div id="map"></div></div>
-  <div class="near-me-bar">
-    <span class="map-filter-label"><span class="mi" style="font-size:16px">location_on</span> Find alumni near:</span>
-    <select class="near-me-select" id="nearMeSelect" onchange="findNearMe()">
-      <option value="">Select a city...</option>
-    </select>
-    <span class="near-me-results" id="nearMeResults"></span>
-  </div>
-</div>
-
 <!-- DIRECTORY -->
-<div class="section" id="directorySection">
+<div class="section active" id="directorySection">
   <div class="search-bar">
-    <input class="search-input" type="text" id="searchInput" placeholder="Search by name, major, location, or company..." oninput="renderDirectory()">
+    <input class="search-input" type="text" id="searchInput" placeholder="Search by name, year, or major..." oninput="renderDirectory()">
     <button class="filter-btn active" onclick="toggleFilter('all',this)">All</button>
-    <button class="filter-btn" onclick="toggleFilter('2010',this)">2010</button>
-    <button class="filter-btn" onclick="toggleFilter('2011',this)">2011</button>
+    <span id="dirYearFilters"></span>
     <button class="btn-add-inline" onclick="showSection('add',this)"><span class="mi" style="font-size:16px">person_add</span> Add Alumni</button>
   </div>
   <div class="alumni-grid" id="alumniGrid"></div>
@@ -573,14 +546,11 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
 <!-- ADD -->
 <div class="section" id="addSection"><div class="add-form">
   <h2 style="font-family:'Fraunces',serif;font-weight:600;font-size:1.5rem;margin-bottom:6px;color:var(--r)">Add an Alumni</h2>
-  <p style="color:var(--ts);font-size:0.9rem;margin-bottom:8px">Add yourself or a classmate - it saves permanently for everyone.</p>
+  <p style="color:var(--ts);font-size:0.9rem;margin-bottom:8px">Add yourself or a fellow Lycéen - it saves permanently for everyone.</p>
   <div class="sheet-badge"><span class="dot"></span> Connected to live database</div>
   <div style="margin-bottom:32px"></div>
-  <div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" type="text" id="addName" placeholder="e.g. Rami Khalil"></div>
-  <div class="form-row"><div class="form-group"><label class="form-label">Graduation Year *</label><select class="form-select" id="addYear"><option value="2010">2010</option><option value="2011">2011</option></select></div><div class="form-group"><label class="form-label">Major *</label><input class="form-input" type="text" id="addMajor" placeholder="e.g. Economics"></div></div>
-  <div class="form-row"><div class="form-group"><label class="form-label">City</label><input class="form-input" type="text" id="addCity" placeholder="e.g. Dubai"></div><div class="form-group"><label class="form-label">Country</label><select class="form-select" id="addCountry"><option value="">Select country...</option></select></div></div>
-  <div class="form-row"><div class="form-group"><label class="form-label">Field / Role</label><input class="form-input" type="text" id="addRole" placeholder="e.g. Head of Marketing"></div><div class="form-group"><label class="form-label">Current Company</label><input class="form-input" type="text" id="addCompany" placeholder="e.g. Google"></div></div>
-  <div class="form-row"><div class="form-group"><label class="form-label">LinkedIn URL</label><input class="form-input" type="url" id="addLinkedIn" placeholder="https://linkedin.com/in/..."></div><div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" id="addEmail" placeholder="name@example.com"></div></div>
+  <div class="form-row"><div class="form-group"><label class="form-label">First Name *</label><input class="form-input" type="text" id="addFirstName" placeholder="e.g. Rami"></div><div class="form-group"><label class="form-label">Last Name *</label><input class="form-input" type="text" id="addLastName" placeholder="e.g. Khalil"></div></div>
+  <div class="form-row"><div class="form-group"><label class="form-label">Graduation Year *</label><input class="form-input" type="number" id="addYear" placeholder="e.g. 2005" min="1950" max="2030"></div><div class="form-group"><label class="form-label">Major *</label><input class="form-input" type="text" id="addMajor" placeholder="e.g. Sciences"></div></div>
   <button class="btn-submit" id="submitBtn" onclick="addMember()">Add to Tracker</button>
   <div class="success-msg" id="successMsg"></div>
   <div class="error-msg" id="errorMsg"></div>
@@ -591,8 +561,8 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
   <div class="trivia-container" id="triviaContainer">
     <div class="trivia-start" id="triviaStart">
       <span class="mi" style="font-size:48px;color:var(--y);margin-bottom:8px;display:block">school</span>
-      <h3>AUB Nostalgia Trivia</h3>
-      <p>10 questions about AUB, Hamra, and Bliss Street. How well do you remember your campus days?</p>
+      <h3>Lycée Nostalgia Trivia</h3>
+      <p>10 questions about our school and the French system. How well do you remember your school days?</p>
       <button class="btn-trivia" onclick="startTrivia()"><span class="mi" style="font-size:18px;vertical-align:middle">play_arrow</span> Start Trivia</button>
       <div class="trivia-lb" id="triviaLeaderboard"></div>
     </div>
@@ -604,10 +574,10 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
 <!-- Memories Section -->
 <div class="section" id="memoriesSection"><div class="section-inner">
   <h2 style="font-family:'Fraunces',serif;font-weight:600;font-size:1.5rem;margin-bottom:6px;color:var(--r)">Memory Wall</h2>
-  <p style="color:var(--ts);font-size:0.9rem;margin-bottom:20px">Share your favorite AUB memory. What moment defined your time on campus?</p>
+  <p style="color:var(--ts);font-size:0.9rem;margin-bottom:20px">Share your favorite school memory. What moment defined your time at the Lycée?</p>
   <div class="memory-form" id="memoryForm">
     <h4><span class="mi" style="font-size:18px">edit_note</span> Share a Memory</h4>
-    <textarea id="memoryText" placeholder="That time we stayed up all night at Jafet Library before finals..." maxlength="280" oninput="document.getElementById('memCharCount').textContent=this.value.length+'/280'"></textarea>
+    <textarea id="memoryText" placeholder="That time before the Bac exams when we all stayed at school studying..." maxlength="280" oninput="document.getElementById('memCharCount').textContent=this.value.length+'/280'"></textarea>
     <div class="memory-char-count" id="memCharCount">0/280</div>
     <div class="memory-form-row">
       <input type="text" id="memoryAuthor" placeholder="Your name">
@@ -644,11 +614,8 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
     </div>
     <p class="modal-note">Suggest updates for this alumni. Only changed fields will be sent. Leave fields blank to keep current values.</p>
     <input type="hidden" id="editOriginalName">
-    <div class="form-group"><label class="form-label">Full Name</label><input class="form-input" type="text" id="editName" placeholder="Full name"><div class="modal-current" id="editNameCurrent"></div></div>
-    <div class="form-row"><div class="form-group"><label class="form-label">Graduation Year</label><select class="form-select" id="editYear"><option value="2010">2010</option><option value="2011">2011</option></select><div class="modal-current" id="editYearCurrent"></div></div><div class="form-group"><label class="form-label">Major</label><input class="form-input" type="text" id="editMajor" placeholder="e.g. Economics"><div class="modal-current" id="editMajorCurrent"></div></div></div>
-    <div class="form-row"><div class="form-group"><label class="form-label">City</label><input class="form-input" type="text" id="editCity" placeholder="e.g. Dubai"><div class="modal-current" id="editCityCurrent"></div></div><div class="form-group"><label class="form-label">Country</label><select class="form-select" id="editCountry"><option value="">Select country...</option></select><div class="modal-current" id="editCountryCurrent"></div></div></div>
-    <div class="form-row"><div class="form-group"><label class="form-label">Field / Role</label><input class="form-input" type="text" id="editRole" placeholder="e.g. Head of Marketing"><div class="modal-current" id="editRoleCurrent"></div></div><div class="form-group"><label class="form-label">Current Company</label><input class="form-input" type="text" id="editCompany" placeholder="e.g. Google"><div class="modal-current" id="editCompanyCurrent"></div></div></div>
-    <div class="form-row"><div class="form-group"><label class="form-label">LinkedIn URL (new)</label><input class="form-input" type="url" id="editLinkedIn" placeholder="https://linkedin.com/in/..."></div><div class="form-group"><label class="form-label">Email (new)</label><input class="form-input" type="email" id="editEmail" placeholder="name@example.com"></div></div>
+    <div class="form-row"><div class="form-group"><label class="form-label">First Name</label><input class="form-input" type="text" id="editFirstName" placeholder="First name"><div class="modal-current" id="editFirstNameCurrent"></div></div><div class="form-group"><label class="form-label">Last Name</label><input class="form-input" type="text" id="editLastName" placeholder="Last name"><div class="modal-current" id="editLastNameCurrent"></div></div></div>
+    <div class="form-row"><div class="form-group"><label class="form-label">Graduation Year</label><input class="form-input" type="number" id="editYear" placeholder="e.g. 2005" min="1950" max="2030"><div class="modal-current" id="editYearCurrent"></div></div><div class="form-group"><label class="form-label">Major</label><input class="form-input" type="text" id="editMajor" placeholder="e.g. Sciences"><div class="modal-current" id="editMajorCurrent"></div></div></div>
     <div class="form-group"><label class="form-label">Your Name (who's proposing)</label><input class="form-input" type="text" id="editProposer" placeholder="Your name"></div>
     <button class="btn-submit" id="editSubmitBtn" onclick="submitEdit()">Send Proposal</button>
     <div class="success-msg" id="editSuccessMsg"></div>
@@ -657,27 +624,11 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
 </div>
 
 <script>
-const SHEET_URL='https://script.google.com/macros/s/AKfycbwEVnJ3YWsi-IpxfA6wZt-686AJCVuyzn-_tG8Uyz9TzWCkcwjNiyRzQ--eDV_I5TcI/exec';
-const COUNTRIES=["Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Central African Republic","Chad","Chile","China","Colombia","Comoros","Congo","Costa Rica","Croatia","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Eswatini","Ethiopia","Fiji","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Grenada","Guatemala","Guinea","Guinea-Bissau","Guyana","Haiti","Honduras","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Ivory Coast","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North Korea","North Macedonia","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Saint Kitts and Nevis","Saint Lucia","Saint Vincent and the Grenadines","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","Sudan","Suriname","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Tuvalu","UAE","Uganda","Ukraine","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"];
-(function(){const opts=COUNTRIES.map(c=>'<option value="'+c+'">'+c+'</option>').join('');document.getElementById('addCountry').innerHTML='<option value="">Select country...</option>'+opts;document.getElementById('editCountry').innerHTML='<option value="">Select country...</option>'+opts})();
+const SHEET_URL='https://script.google.com/macros/s/AKfycbzHCyvYMZhHxr6wbuALiTc60a5DcmiVS6jQ6A0-V2QZGnsL3Vr7FqCyzWDxd5O2BvsNxA/exec';
+// No location data in this version - only First Name, Last Name, Year, Major
 const AC=['#840132','#a01545','#C8666D','#EB9F00','#5e0124','#808080','#4B1757','#2E7D32','#1565C0','#D84315','#6A1B9A','#00695C'];
-const CC={'beirut':[33.8938,35.5018],'lebanon':[33.8938,35.5018],'metn':[33.8833,35.55],'dubai':[25.2048,55.2708],'uae':[25.2048,55.2708],'abu dhabi':[24.4539,54.3773],'amman':[31.9454,35.9284],'jordan':[31.9454,35.9284],'riyadh':[24.7136,46.6753],'saudi arabia':[24.7136,46.6753],'london':[51.5074,-0.1278],'uk':[51.5074,-0.1278],'paris':[48.8566,2.3522],'france':[48.8566,2.3522],'toronto':[43.6532,-79.3832],'canada':[43.6532,-79.3832],'boston':[42.3601,-71.0589],'doha':[25.2854,51.531],'qatar':[25.2854,51.531],'kuwait':[29.3759,47.9774],'rome':[41.9028,12.4964],'italy':[41.9028,12.4964],'greece':[37.9838,23.7275],'germany':[52.52,13.405],'switzerland':[47.3769,8.5417],'geneva':[46.2044,6.1432],'marseille':[43.2965,5.3698],'oman':[23.588,58.3829],'san francisco':[37.7749,-122.4194],'washington d.c.':[38.9072,-77.0369],'washington':[38.9072,-77.0369],'chicago':[41.8781,-87.6298],'new york':[40.7128,-74.006],'los angeles':[34.0522,-118.2437],'houston':[29.7604,-95.3698],'jeddah':[21.4858,39.1925],'montreal':[45.5017,-73.5673],'bahrain':[26.0667,50.5577]};
-
-const REGIONS={
-  'Lebanon':{countries:['Lebanon']},
-  'UAE':{countries:['UAE']},
-  'KSA':{countries:['Saudi Arabia']},
-  'Canada':{countries:['Canada']},
-  'USA':{countries:['USA']},
-  'UK':{countries:['UK']},
-  'Europe':{countries:['France','Germany','Italy','Switzerland','Greece']},
-  'Other':{countries:['Jordan','Kuwait','Oman','Qatar']}
-};
-
 let alumni=[];
-let mapYearFilter='all';
 let activeFilter='all';
-let map;
 
 // === DATA ===
 function loadData(){
@@ -698,27 +649,27 @@ function loadData(){
 }
 
 function processData(data){
-  alumni=data.filter(r=>r.Name).map(r=>({
-    name:String(r.Name||'').trim(),
-    year:parseInt(r.Year)||2010,
-    major:String(r.Major||'').trim(),
-    city:String(r.City||'').trim(),
-    country:String(r.Country||'').trim(),
-    role:String(r.Role||'').trim(),
-    company:String(r['Current Company']||r.Company||'').trim(),
-    linkedin:String(r.LinkedIn||'').trim(),
-    email:String(r.Email||'').trim()
-  }));
+  alumni=data.filter(r=>r['First Name']||r.Name).map(r=>{
+    const fn=String(r['First Name']||'').trim();
+    const ln=String(r['Last Name']||'').trim();
+    const fullName=fn&&ln?fn+' '+ln:String(r.Name||fn||ln||'').trim();
+    return{
+      name:fullName,
+      firstName:fn,
+      lastName:ln,
+      year:parseInt(r.Year)||2000,
+      major:String(r.Major||'').trim()
+    };
+  });
   const seen=new Set();
-  alumni=alumni.filter(a=>{const k=a.name.toLowerCase();if(seen.has(k))return false;seen.add(k);return true});
+  alumni=alumni.filter(a=>{if(!a.name)return false;const k=a.name.toLowerCase();if(seen.has(k))return false;seen.add(k);return true});
   refreshAll();
   buildFilters();
   document.getElementById('pageLoading').classList.add('hidden');
 }
 
 // === UTILS ===
-function gc(m){const t=[m.city.toLowerCase().trim(),m.country.toLowerCase().trim()];for(const k of t)if(CC[k])return CC[k];return null}
-function gd(a,b,c,d){const R=6371,dL=(c-a)*Math.PI/180,dN=(d-b)*Math.PI/180,x=Math.sin(dL/2)**2+Math.cos(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.sin(dN/2)**2;return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x))}
+function gc(m){return null} // No location data in this version
 function gi(n){return n.split(' ').filter(Boolean).map(w=>w[0]).join('').toUpperCase().slice(0,2)}
 
 // === ANIMATED COUNTER ===
@@ -734,100 +685,25 @@ function animateCount(el,target){
 function renderFeed(){
   const feed=document.getElementById('feedScroll');
   const recent=alumni.slice(-8).reverse();
-  feed.innerHTML=recent.map(m=>`<div class="feed-item"><span class="feed-dot"></span><span class="feed-name">${m.name}</span> joined - ${m.city||m.country||'AUB'}</div>`).join('');
+  feed.innerHTML=recent.map(m=>`<div class="feed-item"><span class="feed-dot"></span><span class="feed-name">${m.name}</span> &middot; ${m.major} '${String(m.year).slice(-2)}</div>`).join('');
 }
 
-// === REGION COUNTERS ===
-function renderRegionCounters(){
-  const el=document.getElementById('regionCounters');
-  el.innerHTML=Object.entries(REGIONS).map(([label,{countries}])=>{
-    const count=alumni.filter(m=>countries.includes(m.country)).length;
-    return`<div class="region-card" onclick="zoomToRegion('${countries[0]}')""><div class="region-num" data-target="${count}">0</div><div class="region-label">${label}</div></div>`;
-  }).join('');
-  // Animate
-  setTimeout(()=>{
-    el.querySelectorAll('.region-num').forEach(n=>animateCount(n,parseInt(n.dataset.target)));
-  },200);
-}
+// === REGION COUNTERS (disabled - no location data) ===
+function renderRegionCounters(){}
+function zoomToRegion(){}
 
-function zoomToRegion(country){
-  const members=alumni.filter(m=>m.country===country);
-  if(members.length){const c=gc(members[0]);if(c)map.setView(c,6);}
-}
+// === MAP (disabled - no location data in this version) ===
+function initMap(){}
+function getFilteredAlumni(){return alumni}
+function renderMarkers(){}
+function setMapFilter(){}
 
-// === MAP ===
-function initMap(){
-  map=L.map('map',{center:[30,35],zoom:3,zoomControl:true,attributionControl:false});
-  const isDark=document.documentElement.getAttribute('data-theme')==='dark';
-  const tiles=isDark?'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png':'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
-  L.tileLayer(tiles,{maxZoom:18}).addTo(map);
-}
-
-function getFilteredAlumni(){
-  let f=alumni;
-  if(mapYearFilter!=='all')f=f.filter(m=>String(m.year)===mapYearFilter);
-  const mf=document.getElementById('mapMajorFilter')?.value;
-  if(mf&&mf!=='all')f=f.filter(m=>m.major===mf);
-  return f;
-}
-
-function renderMarkers(){
-  map.eachLayer(l=>{if(l instanceof L.Marker||l instanceof L.Polyline)map.removeLayer(l)});
-  const aubI=L.divIcon({className:'',html:'<div style="background:#EB9F00;border:3px solid #840132;border-radius:50%;width:24px;height:24px;box-shadow:0 0 12px rgba(132,1,50,0.4);display:flex;align-items:center;justify-content:center;font-size:12px;color:#840132;font-weight:bold">A</div>',iconSize:[24,24],iconAnchor:[12,12]});
-  L.marker([33.8938,35.5018],{icon:aubI}).addTo(map).bindPopup('<div class="popup-inner"><h3>AUB - Beirut</h3><div class="popup-detail">Where it all began - Est. 1866</div></div>');
-  
-  const filtered=getFilteredAlumni();
-  const gr={};
-  filtered.forEach(m=>{const c=gc(m);if(!c)return;const k=c.join(',');if(!gr[k])gr[k]={coords:c,members:[]};gr[k].members.push(m)});
-  const ac=[33.8938,35.5018];
-  Object.values(gr).forEach(g=>{
-    const{coords,members}=g;
-    if(members.length>2){
-      const sz=Math.min(52,28+members.length*1.5);
-      const icon=L.divIcon({className:'',html:`<div class="cluster-marker" style="width:${sz}px;height:${sz}px">${members.length}</div>`,iconSize:[sz,sz],iconAnchor:[sz/2,sz/2]});
-      const pop=members.map(m=>`<div class="popup-person"><strong style="color:#840132">${m.name}</strong><br><span style="font-size:0.72rem;color:#555">${m.major} '${String(m.year).slice(-2)}${m.company?' / '+m.company:''}${m.role?' / '+m.role:''}</span></div>`).join('');
-      L.marker(coords,{icon}).addTo(map).bindPopup(`<div class="popup-inner" style="max-height:300px;overflow-y:auto">${pop}</div>`,{maxWidth:300});
-    }else{
-      members.forEach((m,i)=>{
-        const icon=L.divIcon({className:'',html:'<div class="alumni-marker"></div>',iconSize:[14,14],iconAnchor:[7,7]});
-        L.marker([coords[0]+i*0.004,coords[1]+i*0.004],{icon}).addTo(map).bindPopup(`<div class="popup-inner"><h3>${m.name}</h3><div class="popup-detail">${m.major} - ${m.year}<br>${m.city||m.country}${m.company?'<br>'+m.company:''}${m.role?'<br>'+m.role:''}</div></div>`);
-      });
-    }
-    if(coords[0]!==ac[0]||coords[1]!==ac[1])L.polyline([ac,coords],{color:'rgba(132,1,50,0.1)',weight:1,dashArray:'4 6'}).addTo(map);
-  });
-}
-
-function setMapFilter(v,btn){
-  mapYearFilter=v;
-  document.querySelectorAll('.map-filter').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderMarkers();
-}
-
-// === NEAR ME ===
+// === FILTERS ===
 function buildFilters(){
-  // Cities for near me
-  const cities=[...new Set(alumni.map(m=>m.city).filter(Boolean))].sort();
-  const sel=document.getElementById('nearMeSelect');
-  sel.innerHTML='<option value="">Select a city...</option>'+cities.map(c=>`<option value="${c}">${c}</option>`).join('');
-  // Majors for map filter
-  const majors=[...new Set(alumni.map(m=>m.major).filter(Boolean))].sort();
-  const mf=document.getElementById('mapMajorFilter');
-  mf.innerHTML='<option value="all">All Majors</option>'+majors.map(m=>`<option value="${m}">${m}</option>`).join('');
-}
-
-function findNearMe(){
-  const city=document.getElementById('nearMeSelect').value;
-  const res=document.getElementById('nearMeResults');
-  if(!city){res.textContent='';return;}
-  const nearby=alumni.filter(m=>m.city===city);
-  if(nearby.length){
-    res.innerHTML=`<strong>${nearby.length}</strong> alumni in ${city}: ${nearby.map(m=>`<strong>${m.name}</strong>`).join(', ')}`;
-    const c=gc(nearby[0]);
-    if(c)map.setView(c,10);
-  }else{
-    res.textContent='No alumni found in '+city;
-  }
+  // Dynamic year filters for directory
+  const years=[...new Set(alumni.map(m=>String(m.year)))].sort();
+  const dirYF=document.getElementById('dirYearFilters');
+  if(dirYF)dirYF.innerHTML=years.map(y=>`<button class="filter-btn" onclick="toggleFilter('${y}',this)">${y}</button>`).join('');
 }
 
 // === DIRECTORY ===
@@ -836,13 +712,12 @@ function renderDirectory(){
   const grid=document.getElementById('alumniGrid');
   let f=alumni.filter(m=>{
     if(activeFilter!=='all'&&String(m.year)!==activeFilter)return false;
-    if(q)return`${m.name} ${m.major} ${m.city} ${m.country} ${m.role} ${m.company}`.toLowerCase().includes(q);
+    if(q)return`${m.name} ${m.major} ${m.year}`.toLowerCase().includes(q);
     return true;
   });
   grid.innerHTML=f.map((m,i)=>{
-    const c=AC[i%AC.length],loc=[m.city,m.country].filter(Boolean),ls=loc.length?loc.join(', '):'Unknown';
-    const connectBtns=(m.linkedin||m.email)?`<div class="card-connect">${m.linkedin?`<a class="connect-btn connect-li" href="${m.linkedin}" target="_blank" rel="noopener"><span class="mi" style="font-size:14px">link</span> LinkedIn</a>`:``}${m.email?`<a class="connect-btn connect-em" href="mailto:${m.email}"><span class="mi" style="font-size:14px">mail</span> Email</a>`:``}</div>`:'';
-    return`<div class="alumni-card"><div class="card-top"><div class="avatar" style="background:${c}15;color:${c};border:2px solid ${c}30">${gi(m.name)}</div><div><div class="card-name">${m.name}</div><div class="card-year">Class of ${m.year}</div></div></div><div class="card-details"><div class="card-detail"><span class="icon mi" style="font-size:16px">school</span>${m.major}</div><div class="card-detail"><span class="icon mi" style="font-size:16px">location_on</span>${ls}</div>${m.company?`<div class="card-detail"><span class="icon mi" style="font-size:16px">apartment</span>${m.company}</div>`:''}${m.role?`<div class="card-detail"><span class="icon mi" style="font-size:16px">work</span>${m.role}</div>`:''}</div>${connectBtns}<button class="btn-edit" onclick="openEditModal('${m.name.replace(/'/g,"\\'")}')"><span class="mi" style="font-size:14px">edit</span> Propose Edit</button></div>`;
+    const c=AC[i%AC.length];
+    return`<div class="alumni-card"><div class="card-top"><div class="avatar" style="background:${c}15;color:${c};border:2px solid ${c}30">${gi(m.name)}</div><div><div class="card-name">${m.name}</div><div class="card-year">Class of ${m.year}</div></div></div><div class="card-details"><div class="card-detail"><span class="icon mi" style="font-size:16px">school</span>${m.major}</div></div><button class="btn-edit" onclick="openEditModal('${m.name.replace(/'/g,"\\'")}')"><span class="mi" style="font-size:14px">edit</span> Propose Edit</button></div>`;
   }).join('');
 }
 function toggleFilter(f,btn){activeFilter=f;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderDirectory()}
@@ -850,104 +725,71 @@ function toggleFilter(f,btn){activeFilter=f;document.querySelectorAll('.filter-b
 // === STATS ===
 function renderStats(){
   const grid=document.getElementById('statsGrid');
-  const countries={},majors={},years={},cities={};
+  const majors={},years={};
   alumni.forEach(m=>{
-    if(m.country)countries[m.country]=(countries[m.country]||0)+1;
-    majors[m.major]=(majors[m.major]||0)+1;
+    if(m.major)majors[m.major]=(majors[m.major]||0)+1;
     years[m.year]=(years[m.year]||0)+1;
-    if(m.city)cities[m.city]=(cities[m.city]||0)+1;
   });
-  const sc=Object.entries(countries).sort((a,b)=>b[1]-a[1]);
-  const sm=Object.entries(majors).sort((a,b)=>b[1]-a[1]).slice(0,10);
-  const sci=Object.entries(cities).sort((a,b)=>b[1]-a[1]).slice(0,8);
-  const mc=sc[0]?.[1]||1,mm=sm[0]?.[1]||1,mci=sci[0]?.[1]||1;
+  const sm=Object.entries(majors).sort((a,b)=>b[1]-a[1]).slice(0,12);
+  const sy=Object.entries(years).sort((a,b)=>a[0]-b[0]);
+  const mm=sm[0]?.[1]||1;
+  const my=sy.reduce((max,[,n])=>Math.max(max,n),1);
 
-  // City Captains
-  const topCities=Object.entries(cities).sort((a,b)=>b[1]-a[1]).slice(0,5);
-  const captains=topCities.map(([city,count])=>{
-    const inCity=alumni.filter(m=>m.city===city);
-    return{city,count,captain:inCity[0]?.name||'-'};
-  });
+  // Top major highlight
+  const topMajor=sm[0]?sm[0][0]:'N/A';
+  const topMajorCount=sm[0]?sm[0][1]:0;
 
-  // Industry Clusters
-  const roles={};
+  // Biggest class
+  const biggestClass=sy.reduce((max,curr)=>curr[1]>max[1]?curr:max,['',0]);
+
+  // Name initial stats (fun)
+  const initials={};
   alumni.forEach(m=>{
-    if(!m.role)return;
-    const company=m.role.split(',')[0].trim();
-    if(company)roles[company]=(roles[company]||0)+1;
+    const first=m.name.charAt(0).toUpperCase();
+    if(first)initials[first]=(initials[first]||0)+1;
   });
-  const clusters=Object.entries(roles).filter(([,n])=>n>=1).sort((a,b)=>b[1]-a[1]).slice(0,8);
-
-  // Sector analysis
-  const sectors={};
-  alumni.forEach(m=>{
-    if(!m.role)return;
-    const r=m.role.toLowerCase();
-    if(r.includes('marketing')||r.includes('comms')||r.includes('content'))sectors['Marketing & Comms']=(sectors['Marketing & Comms']||0)+1;
-    else if(r.includes('finance')||r.includes('treasury')||r.includes('banking'))sectors['Finance & Banking']=(sectors['Finance & Banking']||0)+1;
-    else if(r.includes('consult')||r.includes('kearney')||r.includes('deloitte'))sectors['Consulting']=(sectors['Consulting']||0)+1;
-    else if(r.includes('product')||r.includes('tech')||r.includes('ai'))sectors['Tech & Product']=(sectors['Tech & Product']||0)+1;
-    else if(r.includes('health')||r.includes('pharma')||r.includes('roche')||r.includes('cigna'))sectors['Healthcare & Pharma']=(sectors['Healthcare & Pharma']||0)+1;
-    else if(r.includes('luxury')||r.includes('ralph')||r.includes('oréal'))sectors['Luxury & Retail']=(sectors['Luxury & Retail']||0)+1;
-    else if(r.includes('founder')||r.includes('own'))sectors['Entrepreneurs']=(sectors['Entrepreneurs']||0)+1;
-    else sectors['Other']=(sectors['Other']||0)+1;
-  });
-  const sortedSectors=Object.entries(sectors).sort((a,b)=>b[1]-a[1]);
-  const maxSec=sortedSectors[0]?.[1]||1;
-
-  const leb=alumni.filter(m=>m.country==='Lebanon').length;
-  const dub=alumni.filter(m=>m.city==='Dubai').length;
+  const topInitials=Object.entries(initials).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const maxInit=topInitials[0]?.[1]||1;
 
   grid.innerHTML=`
-    <div class="stats-card"><div class="stats-card-title"><span class="mi" style="font-size:16px">public</span> By Country</div>${sc.map(([c,n])=>`<div class="bar-chart-item"><div class="bar-label">${c}</div><div class="bar-track"><div class="bar-fill bar-country" style="width:${(n/mc)*100}%">${n}</div></div></div>`).join('')}</div>
-    <div class="stats-card"><div class="stats-card-title"><span class="mi" style="font-size:16px">location_city</span> Top Cities</div>${sci.map(([c,n])=>`<div class="bar-chart-item"><div class="bar-label">${c}</div><div class="bar-track"><div class="bar-fill bar-city" style="width:${(n/mci)*100}%">${n}</div></div></div>`).join('')}</div>
-    <div class="stats-card"><div class="stats-card-title"><span class="mi" style="font-size:16px">school</span> Top Majors</div>${sm.map(([m,n])=>`<div class="bar-chart-item"><div class="bar-label">${m}</div><div class="bar-track"><div class="bar-fill bar-major" style="width:${(n/mm)*100}%">${n}</div></div></div>`).join('')}</div>
-    <div class="stats-card"><div class="stats-card-title"><span class="mi" style="font-size:16px">apartment</span> Industry Sectors</div>${sortedSectors.map(([s,n])=>`<div class="bar-chart-item"><div class="bar-label">${s}</div><div class="bar-track"><div class="bar-fill bar-sector" style="width:${(n/maxSec)*100}%">${n}</div></div></div>`).join('')}</div>
+    <div class="stats-card"><div class="stats-card-title"><span class="mi" style="font-size:16px">school</span> By Major</div>${sm.map(([m,n])=>`<div class="bar-chart-item"><div class="bar-label">${m}</div><div class="bar-track"><div class="bar-fill bar-major" style="width:${(n/mm)*100}%">${n}</div></div></div>`).join('')}</div>
+    <div class="stats-card"><div class="stats-card-title"><span class="mi" style="font-size:16px">calendar_month</span> By Graduation Year</div>${sy.map(([y,n])=>`<div class="bar-chart-item"><div class="bar-label">${y}</div><div class="bar-track"><div class="bar-fill bar-country" style="width:${(n/my)*100}%">${n}</div></div></div>`).join('')}</div>
+    <div class="stats-card"><div class="stats-card-title"><span class="mi" style="font-size:16px">sort_by_alpha</span> First Name Initials</div>${topInitials.map(([l,n])=>`<div class="bar-chart-item"><div class="bar-label">${l}</div><div class="bar-track"><div class="bar-fill bar-city" style="width:${(n/maxInit)*100}%">${n}</div></div></div>`).join('')}</div>
 
-    <div class="superlative-card"><div class="superlative-emoji"><span class="mi" style="font-size:2.5rem;color:var(--r)">trophy</span></div><div class="superlative-label">City Captains</div><div class="cluster-list">${captains.map(c=>`<div class="cluster-item"><span class="cluster-company">${c.city}</span><span class="cluster-count">${c.count} alumni</span></div>`).join('')}</div></div>
-
-    <div class="superlative-card"><div class="superlative-emoji"><span class="mi" style="font-size:2.5rem;color:var(--r)">apartment</span></div><div class="superlative-label">Company Clusters</div><div class="cluster-list">${clusters.length?clusters.map(([c,n])=>`<div class="cluster-item"><span class="cluster-company">${c}</span><span class="cluster-count">${n}</span></div>`).join(''):'<div style="color:var(--tm);font-size:0.85rem">Add your company to see clusters!</div>'}</div></div>
-
-    <div class="superlative-card"><div class="superlative-emoji"><span class="mi" style="font-size:2.5rem;color:var(--r)">school</span></div><div class="superlative-label">Class Split</div><div class="superlative-name">${years[2010]||0} x 2010 / ${years[2011]||0} x 2011${years[2009]?' / '+years[2009]+' x 2009':''}</div><div class="superlative-detail">${(years[2010]||0)>(years[2011]||0)?'Class of 2010 dominates!':'Class of 2011 represents!'}</div></div>
-    <div class="superlative-card"><div class="superlative-emoji"><span class="mi" style="font-size:2.5rem;color:var(--r)">home</span></div><div class="superlative-label">Lebanon Squad</div><div class="superlative-name">${leb} Alumni</div><div class="superlative-detail">Keeping the flame alive</div></div>
-    <div class="superlative-card"><div class="superlative-emoji"><span class="mi" style="font-size:2.5rem;color:var(--r)">location_city</span></div><div class="superlative-label">Dubai Takeover</div><div class="superlative-name">${dub} Alumni</div><div class="superlative-detail">The #1 city for AUB grads</div></div>
-    <div class="superlative-card"><div class="superlative-emoji"><span class="mi" style="font-size:2.5rem;color:var(--r)">flight</span></div><div class="superlative-label">Canada Crew</div><div class="superlative-name">${alumni.filter(m=>m.country==='Canada').length} Alumni</div><div class="superlative-detail">${alumni.filter(m=>m.city==='Toronto').length} in Toronto</div></div>
+    <div class="superlative-card"><div class="superlative-emoji"><span class="mi" style="font-size:2.5rem;color:var(--r)">school</span></div><div class="superlative-label">Most Popular Major</div><div class="superlative-name">${topMajor}</div><div class="superlative-detail">${topMajorCount} alumni chose this path</div></div>
+    <div class="superlative-card"><div class="superlative-emoji"><span class="mi" style="font-size:2.5rem;color:var(--r)">groups</span></div><div class="superlative-label">Biggest Class</div><div class="superlative-name">Class of ${biggestClass[0]}</div><div class="superlative-detail">${biggestClass[1]} alumni strong</div></div>
+    <div class="superlative-card"><div class="superlative-emoji"><span class="mi" style="font-size:2.5rem;color:var(--r)">tag</span></div><div class="superlative-label">Total Majors</div><div class="superlative-name">${Object.keys(majors).length}</div><div class="superlative-detail">Diverse fields of study</div></div>
   `;
 }
 
 // === ADD ===
 async function addMember(){
   const btn=document.getElementById('submitBtn');
-  const n=document.getElementById('addName').value.trim();
+  const fn=document.getElementById('addFirstName').value.trim();
+  const ln=document.getElementById('addLastName').value.trim();
   const y=document.getElementById('addYear').value;
   const m=document.getElementById('addMajor').value.trim();
-  const ci=document.getElementById('addCity').value.trim();
-  const co=document.getElementById('addCountry').value.trim();
-  const r=document.getElementById('addRole').value.trim();
-  const comp=document.getElementById('addCompany').value.trim();
-  const li=document.getElementById('addLinkedIn').value.trim();
-  const em=document.getElementById('addEmail').value.trim();
-  if(!n||!m){alert('Please fill in at least name and major');return}
-  if(alumni.some(a=>a.name.toLowerCase()===n.toLowerCase())){
-    const err=document.getElementById('errorMsg');err.textContent=n+' is already in the tracker!';err.style.display='block';setTimeout(()=>err.style.display='none',4000);return;
+  if(!fn||!ln||!m||!y){alert('Please fill in all fields');return}
+  const fullName=fn+' '+ln;
+  if(alumni.some(a=>a.name.toLowerCase()===fullName.toLowerCase())){
+    const err=document.getElementById('errorMsg');err.textContent=fullName+' is already in the tracker!';err.style.display='block';setTimeout(()=>err.style.display='none',4000);return;
   }
   btn.disabled=true;btn.innerHTML='<span class="loading-spinner"></span>Saving...';
   try{
-    // Use GET with JSONP to bypass CORS (same as data loading)
     await new Promise((resolve,reject)=>{
       const cbName='_addCb_'+Date.now();
       window[cbName]=function(res){delete window[cbName];resolve(res)};
-      const params=new URLSearchParams({action:'add',Name:n,Year:y,Major:m,City:ci,Country:co,Role:r,Company:comp,LinkedIn:li,Email:em,callback:cbName});
+      const params=new URLSearchParams({action:'add','First Name':fn,'Last Name':ln,Year:y,Major:m,callback:cbName});
       const script=document.createElement('script');
       script.src=SHEET_URL+'?'+params.toString();
       script.onerror=function(){script.remove();delete window[cbName];reject(new Error('Failed'))};
       document.head.appendChild(script);
       setTimeout(()=>{try{script.remove();delete window[cbName]}catch(e){}resolve()},5000);
     });
-    alumni.push({name:n,year:parseInt(y),major:m,city:ci,country:co,role:r,company:comp});
+    alumni.push({name:fullName,firstName:fn,lastName:ln,year:parseInt(y),major:m});
     refreshAll();buildFilters();
-    const msg=document.getElementById('successMsg');msg.textContent=n+' permanently added!';msg.style.display='block';setTimeout(()=>msg.style.display='none',5000);
-    ['addName','addMajor','addCity','addCountry','addRole','addCompany','addLinkedIn','addEmail'].forEach(id=>document.getElementById(id).value='');
+    const msg=document.getElementById('successMsg');msg.textContent=fullName+' permanently added!';msg.style.display='block';setTimeout(()=>msg.style.display='none',5000);
+    ['addFirstName','addLastName','addYear','addMajor'].forEach(id=>document.getElementById(id).value='');
   }catch(e){
     const err=document.getElementById('errorMsg');err.textContent='Could not save. Try again.';err.style.display='block';setTimeout(()=>err.style.display='none',4000);
   }
@@ -959,24 +801,15 @@ function openEditModal(name){
   const m=alumni.find(a=>a.name===name);
   if(!m)return;
   document.getElementById('editOriginalName').value=m.name;
-  document.getElementById('editName').value=m.name;
+  document.getElementById('editFirstName').value=m.firstName||m.name.split(' ')[0]||'';
+  document.getElementById('editLastName').value=m.lastName||m.name.split(' ').slice(1).join(' ')||'';
   document.getElementById('editYear').value=String(m.year);
   document.getElementById('editMajor').value=m.major;
-  document.getElementById('editCity').value=m.city;
-  document.getElementById('editCountry').value=m.country;
-  document.getElementById('editRole').value=m.role;
-  document.getElementById('editCompany').value=m.company;
-  document.getElementById('editLinkedIn').value='';
-  document.getElementById('editEmail').value='';
   document.getElementById('editProposer').value='';
-  // Show current values as hints
-  document.getElementById('editNameCurrent').textContent='Current: '+m.name;
+  document.getElementById('editFirstNameCurrent').textContent='Current: '+(m.firstName||m.name.split(' ')[0]||'-');
+  document.getElementById('editLastNameCurrent').textContent='Current: '+(m.lastName||m.name.split(' ').slice(1).join(' ')||'-');
   document.getElementById('editYearCurrent').textContent='Current: '+m.year;
   document.getElementById('editMajorCurrent').textContent='Current: '+(m.major||'-');
-  document.getElementById('editCityCurrent').textContent='Current: '+(m.city||'-');
-  document.getElementById('editCountryCurrent').textContent='Current: '+(m.country||'-');
-  document.getElementById('editRoleCurrent').textContent='Current: '+(m.role||'-');
-  document.getElementById('editCompanyCurrent').textContent='Current: '+(m.company||'-');
   document.getElementById('editSuccessMsg').style.display='none';
   document.getElementById('editErrorMsg').style.display='none';
   document.getElementById('editModal').classList.add('open');
@@ -994,15 +827,10 @@ async function submitEdit(){
   const proposer=document.getElementById('editProposer').value.trim();
   if(!proposer){alert('Please enter your name so we know who proposed this edit.');return;}
   const fields={
-    Name:document.getElementById('editName').value.trim(),
+    'First Name':document.getElementById('editFirstName').value.trim(),
+    'Last Name':document.getElementById('editLastName').value.trim(),
     Year:document.getElementById('editYear').value,
-    Major:document.getElementById('editMajor').value.trim(),
-    City:document.getElementById('editCity').value.trim(),
-    Country:document.getElementById('editCountry').value.trim(),
-    Role:document.getElementById('editRole').value.trim(),
-    Company:document.getElementById('editCompany').value.trim(),
-    LinkedIn:document.getElementById('editLinkedIn').value.trim(),
-    Email:document.getElementById('editEmail').value.trim()
+    Major:document.getElementById('editMajor').value.trim()
   };
   btn.disabled=true;btn.innerHTML='<span class="loading-spinner"></span>Sending...';
   try{
@@ -1033,20 +861,18 @@ async function submitEdit(){
 // === REFRESH ===
 function refreshAll(){
   animateCount(document.getElementById('totalCount'),alumni.length);
-  animateCount(document.getElementById('countryCount'),new Set(alumni.filter(m=>m.country).map(m=>m.country)).size);
-  animateCount(document.getElementById('cityCount'),new Set(alumni.filter(m=>m.city).map(m=>m.city)).size);
-  animateCount(document.getElementById('majorCount'),new Set(alumni.map(m=>m.major)).size);
-  renderMarkers();renderDirectory();renderStats();renderFeed();renderRegionCounters();renderSpotlight();
+  animateCount(document.getElementById('yearCount'),new Set(alumni.map(m=>m.year)).size);
+  animateCount(document.getElementById('majorCount'),new Set(alumni.filter(m=>m.major).map(m=>m.major)).size);
+  renderDirectory();renderStats();renderFeed();renderSpotlight();
 }
 
 // === NAV ===
 function showSection(id,btn){
-  const mp={map:'mapSection',directory:'directorySection',stats:'statsSection',add:'addSection',trivia:'triviaSection',memories:'memoriesSection',admin:'adminSection'};
+  const mp={directory:'directorySection',stats:'statsSection',add:'addSection',trivia:'triviaSection',memories:'memoriesSection',admin:'adminSection'};
   Object.values(mp).forEach(s=>{const el=document.getElementById(s);if(el)el.classList.remove('active')});
   document.getElementById(mp[id]).classList.add('active');
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
   if(btn&&btn.classList.contains('nav-tab'))btn.classList.add('active');
-  if(id==='map')setTimeout(()=>map.invalidateSize(),100);
   if(id==='stats')renderStats();
   if(id==='directory')renderDirectory();
   if(id==='admin'){loadPendingEdits();loadAdminBulletins()}
@@ -1060,18 +886,10 @@ function toggleDark(){
   const isDark=html.getAttribute('data-theme')==='dark';
   html.setAttribute('data-theme',isDark?'':'dark');
   document.getElementById('darkIcon').textContent=isDark?'dark_mode':'light_mode';
-  localStorage.setItem('aub-dark',isDark?'':'dark');
-  // Update map tiles
-  if(map){
-    map.eachLayer(l=>{if(l instanceof L.TileLayer)map.removeLayer(l)});
-    const tiles=isDark
-      ?'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
-      :'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
-    L.tileLayer(tiles,{maxZoom:18}).addTo(map);
-  }
+  localStorage.setItem('lycee-dark',isDark?'':'dark');
 }
 function initDarkMode(){
-  const saved=localStorage.getItem('aub-dark');
+  const saved=localStorage.getItem('lycee-dark');
   if(saved==='dark'){
     document.documentElement.setAttribute('data-theme','dark');
     document.getElementById('darkIcon').textContent='light_mode';
@@ -1082,21 +900,15 @@ function initDarkMode(){
 let spotlightIndex=-1;
 function renderSpotlight(){
   if(!alumni.length)return;
-  const withDetails=alumni.filter(m=>m.company||m.role);
-  const pool=withDetails.length>3?withDetails:alumni;
-  spotlightIndex=(spotlightIndex+1)%pool.length;
-  const m=pool[spotlightIndex];
-  const loc=[m.city,m.country].filter(Boolean).join(', ')||'Unknown';
+  spotlightIndex=(spotlightIndex+1)%alumni.length;
+  const m=alumni[spotlightIndex];
   const card=document.getElementById('spotlightCard');
   card.innerHTML=`
     <div class="spotlight-avatar">${gi(m.name)}</div>
     <div class="spotlight-info">
       <div class="spotlight-tag">Alumni Spotlight</div>
       <div class="spotlight-name">${m.name}</div>
-      <div class="spotlight-detail">
-        ${m.major} - Class of ${m.year}<br>
-        ${loc}${m.company?' - '+m.company:''}${m.role?' - '+m.role:''}
-      </div>
+      <div class="spotlight-detail">${m.major} &middot; Class of ${m.year}</div>
     </div>
     <button class="spotlight-refresh" onclick="renderSpotlight()">Next ></button>
   `;
@@ -1104,7 +916,7 @@ function renderSpotlight(){
 }
 
 // === ADMIN PANEL ===
-const ADMIN_KEY='aub2011admin';
+const ADMIN_KEY='lyceeadmin';
 let isAdmin=false;
 let pendingEdits=[];
 
@@ -1154,10 +966,10 @@ function renderPendingEdits(){
     document.getElementById('adminBadge').style.display='none';
     return;
   }
-  const fields=['Name','Year','Major','City','Country','Role','Company','LinkedIn','Email'];
+  const fields=['First Name','Last Name','Year','Major'];
   container.innerHTML=pendingEdits.map((edit,i)=>{
     const original=alumni.find(a=>a.name===edit.OriginalName);
-    const fieldMap={Name:'name',Year:'year',Major:'major',City:'city',Country:'country',Role:'role',Company:'company',LinkedIn:'linkedin',Email:'email'};
+    const fieldMap={'First Name':'firstName','Last Name':'lastName',Year:'year',Major:'major'};
     let diffHtml='';
     fields.forEach(f=>{
       const proposed=edit[f]||'';
@@ -1199,16 +1011,16 @@ async function rejectEdit(row){
 
 // === TRIVIA GAME ===
 const TRIVIA_QS=[
-  {q:"What street is AUB's main gate on?",opts:["Hamra Street","Bliss Street","Sadat Street","Jeanne d'Arc Street"],ans:1},
-  {q:"What is the name of AUB's iconic clock tower building?",opts:["Nicely Hall","West Hall","College Hall","Assembly Hall"],ans:2},
-  {q:"What is the green open area in the middle of campus called?",opts:["The Quad","Green Field","The Oval","Central Park"],ans:2},
-  {q:"Which library is the main research library at AUB?",opts:["Saab Medical Library","Engineering Library","Jafet Memorial Library","Science Library"],ans:2},
-  {q:"What year was AUB founded?",opts:["1846","1866","1886","1906"],ans:1},
-  {q:"What is the name of the seaside area below campus?",opts:["AUB Beach","The Corniche","The Bay","The Waterfront"],ans:0},
-  {q:"Which Hamra Street cafe was famous for its manouche and student crowds?",opts:["Cafe Younes","Barbar","Bliss House","Casper & Gambini's"],ans:1},
-  {q:"What color is College Hall's exterior?",opts:["White","Gray","Red/Sand stone","Blue"],ans:2},
-  {q:"What is the student yearbook traditionally called at AUB?",opts:["The Torch","Campus Life","Outlook","The Cedar"],ans:2},
-  {q:"Which famous boulevard runs along AUB's north side toward the sea?",opts:["Verdun Street","Clemenceau Street","Corniche al-Manara","Makdisi Street"],ans:2}
+  {q:"What language was the Lycée's primary language of instruction?",opts:["English","Arabic","French","Spanish"],ans:2},
+  {q:"What is the traditional French grading scale out of?",opts:["10","20","100","50"],ans:1},
+  {q:"Which exam do French Lycée students take at the end of Terminale?",opts:["SAT","Baccalauréat","A-Levels","Tawjihi"],ans:1},
+  {q:"What is the equivalent of 10th grade in the French system?",opts:["Troisième","Seconde","Première","Terminale"],ans:1},
+  {q:"What is the traditional Lebanese breakfast students would grab before school?",opts:["Croissant","Manouche","Falafel","Shawarma"],ans:1},
+  {q:"What does 'récréation' mean in the school context?",opts:["Library time","Study hall","Recess / Break","Assembly"],ans:2},
+  {q:"Which subject is uniquely emphasized in French curriculum schools?",opts:["Robotics","Philosophy","Business Studies","Computer Science"],ans:1},
+  {q:"What is the French word for the school principal?",opts:["Directeur/Directrice","Professeur","Surveillant","Conseiller"],ans:0},
+  {q:"In the French system, what grade is 'Terminale'?",opts:["9th grade","10th grade","11th grade","12th grade"],ans:3},
+  {q:"What is the passing grade in the French Baccalauréat?",opts:["8/20","10/20","12/20","14/20"],ans:1}
 ];
 let triviaState={current:0,score:0,timeBonus:0,answers:[],timer:null,timeLeft:15};
 
@@ -1279,11 +1091,11 @@ function showTriviaResults(){
   const total=triviaState.score*100+triviaState.timeBonus;
   const pct=triviaState.score/TRIVIA_QS.length;
   let rank,sub;
-  if(pct===1){rank='Hamra Legend';sub='Perfect score! You bleed AUB maroon.'}
-  else if(pct>=0.8){rank='True AUBite';sub='Campus memories are still fresh!'}
-  else if(pct>=0.6){rank='Bliss Walker';sub='You remember the good times.'}
+  if(pct===1){rank='Lycée Legend';sub='Perfect score! True Lycéen spirit.'}
+  else if(pct>=0.8){rank='Star Student';sub='School memories are still fresh!'}
+  else if(pct>=0.6){rank='Faithful Alumni';sub='You remember the good times.'}
   else if(pct>=0.4){rank='Part-Time Nostalgic';sub='Some memories are a bit fuzzy...'}
-  else{rank='Fresh Off the Plane';sub='Time to revisit Hamra!'}
+  else{rank='New Transfer';sub='Time to revisit the old campus!'}
   const res=document.getElementById('triviaResult');
   res.style.display='block';
   res.innerHTML=`<div class="trivia-result">
@@ -1342,7 +1154,7 @@ async function loadBulletins(){
 }
 
 function renderBulletins(){
-  const dismissed=JSON.parse(sessionStorage.getItem('aub-dismissed-bulletins')||'[]');
+  const dismissed=JSON.parse(sessionStorage.getItem('lycee-dismissed-bulletins')||'[]');
   const visible=bulletins.filter((_,i)=>!dismissed.includes(i));
   if(!visible.length){document.getElementById('bulletinArea').style.display='none';return}
   document.getElementById('bulletinArea').style.display='';
@@ -1359,9 +1171,9 @@ function renderBulletins(){
 }
 
 function dismissBulletin(idx){
-  const dismissed=JSON.parse(sessionStorage.getItem('aub-dismissed-bulletins')||'[]');
+  const dismissed=JSON.parse(sessionStorage.getItem('lycee-dismissed-bulletins')||'[]');
   dismissed.push(idx);
-  sessionStorage.setItem('aub-dismissed-bulletins',JSON.stringify(dismissed));
+  sessionStorage.setItem('lycee-dismissed-bulletins',JSON.stringify(dismissed));
   renderBulletins();
 }
 
@@ -1442,7 +1254,6 @@ async function submitMemory(){
 // === INIT ===
 window.addEventListener('DOMContentLoaded',()=>{
   initDarkMode();
-  initMap();
   loadData();
   checkAdmin();
   loadBulletins();
