@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AUB Alumni 2010‚Äì2011 | Where Are We Now?</title>
+<title>AUB Alumni 2010–2011 | Where Are We Now?</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,800;1,9..144,300&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
@@ -295,23 +295,23 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
 <body>
 
 <div class="page-loading" id="pageLoading">
-  <div class="pl-icon">üå≤</div>
+  <div class="pl-icon">&#x1F332;</div>
   <div class="pl-text">Loading alumni data...</div>
 </div>
 
 <div class="top-bar"><div class="top-inner">
-  <div class="logo"><span class="logo-icon">üå≤</span><div><div class="logo-text">AUB Alumni Tracker</div><div class="logo-sub">Class of 2010 ‚Äì 2011</div></div><button class="dark-toggle" onclick="toggleDark()" title="Toggle dark mode">üåô</button></div>
+  <div class="logo"><span class="logo-icon">&#x1F332;</span><div><div class="logo-text">AUB Alumni Tracker</div><div class="logo-sub">Class of 2010 – 2011</div></div><button class="dark-toggle" onclick="toggleDark()" title="Toggle dark mode">&#x1F319;</button></div>
   <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showSection('map',this)">üó∫Ô∏è Map</button>
-    <button class="nav-tab" onclick="showSection('directory',this)">üë• Directory</button>
-    <button class="nav-tab" onclick="showSection('stats',this)">üìä Stats</button>
-    <button class="nav-tab" onclick="showSection('add',this)">‚ûï Add</button>
+    <button class="nav-tab active" onclick="showSection('map',this)">&#x1F5FA;&#xFE0F; Map</button>
+    <button class="nav-tab" onclick="showSection('directory',this)">&#x1F465; Directory</button>
+    <button class="nav-tab" onclick="showSection('stats',this)">&#x1F4CA; Stats</button>
+    <button class="nav-tab" onclick="showSection('add',this)">&#x2795; Add</button>
   </div>
 </div></div>
 
 <div class="hero">
   <h1>Where Are We Now?</h1>
-  <p>Tracking the AUB class of 2010‚Äì2011 across the world.</p>
+  <p>Tracking the AUB class of 2010–2011 across the world.</p>
   <div class="stat-strip">
     <div class="stat-item"><span class="stat-num" id="totalCount">0</span><span class="stat-label">Alumni</span></div>
     <div class="stat-item"><span class="stat-num" id="countryCount">0</span><span class="stat-label">Countries</span></div>
@@ -331,7 +331,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
 <!-- WhatsApp FAB -->
 <a class="wa-fab" href="https://chat.whatsapp.com/DxMZxmWdXxBGe93iK67tha" target="_blank" rel="noopener" id="waFab">
   <div class="wa-tooltip">Join the AUB 2010-2011 WhatsApp group</div>
-  <button class="wa-fab-btn">üí¨</button>
+  <button class="wa-fab-btn">&#x1F4AC;</button>
 </a>
 
 <!-- MAP -->
@@ -349,7 +349,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
   </div>
   <div class="map-wrap"><div id="map"></div></div>
   <div class="near-me-bar">
-    <span class="map-filter-label">üìç Find alumni near:</span>
+    <span class="map-filter-label">&#x1F4CD; Find alumni near:</span>
     <select class="near-me-select" id="nearMeSelect" onchange="findNearMe()">
       <option value="">Select a city...</option>
     </select>
@@ -374,7 +374,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
 <!-- ADD -->
 <div class="section" id="addSection"><div class="add-form">
   <h2 style="font-family:'Fraunces',serif;font-weight:600;font-size:1.5rem;margin-bottom:6px;color:var(--r)">Add an Alumni</h2>
-  <p style="color:var(--ts);font-size:0.9rem;margin-bottom:8px">Add yourself or a classmate ‚Äî it saves permanently for everyone.</p>
+  <p style="color:var(--ts);font-size:0.9rem;margin-bottom:8px">Add yourself or a classmate — it saves permanently for everyone.</p>
   <div class="sheet-badge"><span class="dot"></span> Connected to live database</div>
   <div style="margin-bottom:32px"></div>
   <div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" type="text" id="addName" placeholder="e.g. Rami Khalil"></div>
@@ -382,7 +382,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
   <div class="form-row"><div class="form-group"><label class="form-label">City</label><input class="form-input" type="text" id="addCity" placeholder="e.g. Dubai"></div><div class="form-group"><label class="form-label">Country</label><input class="form-input" type="text" id="addCountry" placeholder="e.g. UAE"></div></div>
   <div class="form-row"><div class="form-group"><label class="form-label">Field / Role</label><input class="form-input" type="text" id="addRole" placeholder="e.g. Head of Marketing"></div><div class="form-group"><label class="form-label">Current Company</label><input class="form-input" type="text" id="addCompany" placeholder="e.g. Google"></div></div>
   <div class="form-row"><div class="form-group"><label class="form-label">LinkedIn URL</label><input class="form-input" type="url" id="addLinkedIn" placeholder="https://linkedin.com/in/..."></div><div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" id="addEmail" placeholder="name@example.com"></div></div>
-  <button class="btn-submit" id="submitBtn" onclick="addMember()">Add to Tracker üå≤</button>
+  <button class="btn-submit" id="submitBtn" onclick="addMember()">Add to Tracker &#x1F332;</button>
   <div class="success-msg" id="successMsg"></div>
   <div class="error-msg" id="errorMsg"></div>
 </div></div>
@@ -414,14 +414,14 @@ const AC=['#840132','#a01545','#C8666D','#EB9F00','#5e0124','#808080','#4B1757',
 const CC={'beirut':[33.8938,35.5018],'lebanon':[33.8938,35.5018],'metn':[33.8833,35.55],'dubai':[25.2048,55.2708],'uae':[25.2048,55.2708],'abu dhabi':[24.4539,54.3773],'amman':[31.9454,35.9284],'jordan':[31.9454,35.9284],'riyadh':[24.7136,46.6753],'saudi arabia':[24.7136,46.6753],'london':[51.5074,-0.1278],'uk':[51.5074,-0.1278],'paris':[48.8566,2.3522],'france':[48.8566,2.3522],'toronto':[43.6532,-79.3832],'canada':[43.6532,-79.3832],'boston':[42.3601,-71.0589],'doha':[25.2854,51.531],'qatar':[25.2854,51.531],'kuwait':[29.3759,47.9774],'rome':[41.9028,12.4964],'italy':[41.9028,12.4964],'greece':[37.9838,23.7275],'germany':[52.52,13.405],'switzerland':[47.3769,8.5417],'geneva':[46.2044,6.1432],'marseille':[43.2965,5.3698],'oman':[23.588,58.3829],'san francisco':[37.7749,-122.4194],'washington d.c.':[38.9072,-77.0369],'washington':[38.9072,-77.0369],'chicago':[41.8781,-87.6298],'new york':[40.7128,-74.006],'los angeles':[34.0522,-118.2437],'houston':[29.7604,-95.3698],'jeddah':[21.4858,39.1925],'montreal':[45.5017,-73.5673],'bahrain':[26.0667,50.5577]};
 
 const REGIONS={
-  'üá±üáß Lebanon':{countries:['Lebanon']},
-  'üá¶üá™ UAE':{countries:['UAE']},
-  'üá∏üá¶ KSA':{countries:['Saudi Arabia']},
-  'üá®üá¶ Canada':{countries:['Canada']},
-  'üá∫üá∏ USA':{countries:['USA']},
-  'üá¨üáß UK':{countries:['UK']},
-  'üá™üá∫ Europe':{countries:['France','Germany','Italy','Switzerland','Greece']},
-  'üåç Other':{countries:['Jordan','Kuwait','Oman','Qatar']}
+  '&#x1F1F1;&#x1F1E7; Lebanon':{countries:['Lebanon']},
+  '&#x1F1E6;&#x1F1EA; UAE':{countries:['UAE']},
+  '&#x1F1F8;&#x1F1E6; KSA':{countries:['Saudi Arabia']},
+  '&#x1F1E8;&#x1F1E6; Canada':{countries:['Canada']},
+  '&#x1F1FA;&#x1F1F8; USA':{countries:['USA']},
+  '&#x1F1EC;&#x1F1E7; UK':{countries:['UK']},
+  '&#x1F1EA;&#x1F1FA; Europe':{countries:['France','Germany','Italy','Switzerland','Greece']},
+  '&#x1F30D; Other':{countries:['Jordan','Kuwait','Oman','Qatar']}
 };
 
 let alumni=[];
@@ -442,7 +442,7 @@ function loadData(){
   script.onerror=function(){
     script.remove();
     delete window[cbName];
-    document.getElementById('pageLoading').innerHTML='<div class="pl-icon">‚ö†Ô∏è</div><div class="pl-text">Could not load data. Please refresh.</div>';
+    document.getElementById('pageLoading').innerHTML='<div class="pl-icon">&#x26A0;&#xFE0F;</div><div class="pl-text">Could not load data. Please refresh.</div>';
   };
   document.head.appendChild(script);
 }
@@ -482,7 +482,7 @@ function animateCount(el,target){
 function renderFeed(){
   const feed=document.getElementById('feedScroll');
   const recent=alumni.slice(-8).reverse();
-  feed.innerHTML=recent.map(m=>`<div class="feed-item"><span class="feed-dot"></span><span class="feed-name">${m.name}</span> joined ¬∑ ${m.city||m.country||'AUB'}</div>`).join('');
+  feed.innerHTML=recent.map(m=>`<div class="feed-item"><span class="feed-dot"></span><span class="feed-name">${m.name}</span> joined · ${m.city||m.country||'AUB'}</div>`).join('');
 }
 
 // === REGION COUNTERS ===
@@ -521,8 +521,8 @@ function getFilteredAlumni(){
 
 function renderMarkers(){
   map.eachLayer(l=>{if(l instanceof L.Marker||l instanceof L.Polyline)map.removeLayer(l)});
-  const aubI=L.divIcon({className:'',html:'<div style="background:#EB9F00;border:3px solid #840132;border-radius:50%;width:24px;height:24px;box-shadow:0 0 12px rgba(132,1,50,0.4);display:flex;align-items:center;justify-content:center;font-size:12px">üå≤</div>',iconSize:[24,24],iconAnchor:[12,12]});
-  L.marker([33.8938,35.5018],{icon:aubI}).addTo(map).bindPopup('<div class="popup-inner"><h3>üå≤ AUB ‚Äì Beirut</h3><div class="popup-detail">Where it all began ¬∑ Est. 1866</div></div>');
+  const aubI=L.divIcon({className:'',html:'<div style="background:#EB9F00;border:3px solid #840132;border-radius:50%;width:24px;height:24px;box-shadow:0 0 12px rgba(132,1,50,0.4);display:flex;align-items:center;justify-content:center;font-size:12px">&#x1F332;</div>',iconSize:[24,24],iconAnchor:[12,12]});
+  L.marker([33.8938,35.5018],{icon:aubI}).addTo(map).bindPopup('<div class="popup-inner"><h3>&#x1F332; AUB – Beirut</h3><div class="popup-detail">Where it all began · Est. 1866</div></div>');
   
   const filtered=getFilteredAlumni();
   const gr={};
@@ -533,12 +533,12 @@ function renderMarkers(){
     if(members.length>2){
       const sz=Math.min(52,28+members.length*1.5);
       const icon=L.divIcon({className:'',html:`<div class="cluster-marker" style="width:${sz}px;height:${sz}px">${members.length}</div>`,iconSize:[sz,sz],iconAnchor:[sz/2,sz/2]});
-      const pop=members.map(m=>`<div class="popup-person"><strong style="color:#840132">${m.name}</strong><br><span style="font-size:0.72rem;color:#555">${m.major} '${String(m.year).slice(-2)}${m.company?' ¬∑ '+m.company:''}${m.role?' ¬∑ '+m.role:''}</span></div>`).join('');
+      const pop=members.map(m=>`<div class="popup-person"><strong style="color:#840132">${m.name}</strong><br><span style="font-size:0.72rem;color:#555">${m.major} '${String(m.year).slice(-2)}${m.company?' · '+m.company:''}${m.role?' · '+m.role:''}</span></div>`).join('');
       L.marker(coords,{icon}).addTo(map).bindPopup(`<div class="popup-inner" style="max-height:300px;overflow-y:auto">${pop}</div>`,{maxWidth:300});
     }else{
       members.forEach((m,i)=>{
         const icon=L.divIcon({className:'',html:'<div class="alumni-marker"></div>',iconSize:[14,14],iconAnchor:[7,7]});
-        L.marker([coords[0]+i*0.004,coords[1]+i*0.004],{icon}).addTo(map).bindPopup(`<div class="popup-inner"><h3>${m.name}</h3><div class="popup-detail">${m.major} ¬∑ ${m.year}<br>üìç ${m.city||m.country}${m.company?'<br>üè¢ '+m.company:''}${m.role?'<br>üíº '+m.role:''}</div></div>`);
+        L.marker([coords[0]+i*0.004,coords[1]+i*0.004],{icon}).addTo(map).bindPopup(`<div class="popup-inner"><h3>${m.name}</h3><div class="popup-detail">${m.major} · ${m.year}<br>&#x1F4CD; ${m.city||m.country}${m.company?'<br>&#x1F3E2; '+m.company:''}${m.role?'<br>&#x1F4BC; '+m.role:''}</div></div>`);
       });
     }
     if(coords[0]!==ac[0]||coords[1]!==ac[1])L.polyline([ac,coords],{color:'rgba(132,1,50,0.1)',weight:1,dashArray:'4 6'}).addTo(map);
@@ -589,7 +589,7 @@ function renderDirectory(){
   });
   grid.innerHTML=f.map((m,i)=>{
     const c=AC[i%AC.length],loc=[m.city,m.country].filter(Boolean),ls=loc.length?loc.join(', '):'Unknown';
-    return`<div class="alumni-card"><div class="card-top"><div class="avatar" style="background:${c}15;color:${c};border:2px solid ${c}30">${gi(m.name)}</div><div><div class="card-name">${m.name}</div><div class="card-year">Class of ${m.year}</div></div></div><div class="card-details"><div class="card-detail"><span class="icon">üìö</span>${m.major}</div><div class="card-detail"><span class="icon">üìç</span>${ls}</div>${m.company?`<div class="card-detail"><span class="icon">üè¢</span>${m.company}</div>`:''}${m.role?`<div class="card-detail"><span class="icon">üíº</span>${m.role}</div>`:''}</div><button class="btn-edit" onclick="openEditModal('${m.name.replace(/'/g,"\\'")}')">‚úèÔ∏è Propose Edit</button></div>`;
+    return`<div class="alumni-card"><div class="card-top"><div class="avatar" style="background:${c}15;color:${c};border:2px solid ${c}30">${gi(m.name)}</div><div><div class="card-name">${m.name}</div><div class="card-year">Class of ${m.year}</div></div></div><div class="card-details"><div class="card-detail"><span class="icon">&#x1F4DA;</span>${m.major}</div><div class="card-detail"><span class="icon">&#x1F4CD;</span>${ls}</div>${m.company?`<div class="card-detail"><span class="icon">&#x1F3E2;</span>${m.company}</div>`:''}${m.role?`<div class="card-detail"><span class="icon">&#x1F4BC;</span>${m.role}</div>`:''}</div><button class="btn-edit" onclick="openEditModal('${m.name.replace(/'/g,"\\'")}')">&#x270F;&#xFE0F; Propose Edit</button></div>`;
   }).join('');
 }
 function toggleFilter(f,btn){activeFilter=f;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderDirectory()}
@@ -613,7 +613,7 @@ function renderStats(){
   const topCities=Object.entries(cities).sort((a,b)=>b[1]-a[1]).slice(0,5);
   const captains=topCities.map(([city,count])=>{
     const inCity=alumni.filter(m=>m.city===city);
-    return{city,count,captain:inCity[0]?.name||'‚Äî'};
+    return{city,count,captain:inCity[0]?.name||'—'};
   });
 
   // Industry Clusters
@@ -635,7 +635,7 @@ function renderStats(){
     else if(r.includes('consult')||r.includes('kearney')||r.includes('deloitte'))sectors['Consulting']=(sectors['Consulting']||0)+1;
     else if(r.includes('product')||r.includes('tech')||r.includes('ai'))sectors['Tech & Product']=(sectors['Tech & Product']||0)+1;
     else if(r.includes('health')||r.includes('pharma')||r.includes('roche')||r.includes('cigna'))sectors['Healthcare & Pharma']=(sectors['Healthcare & Pharma']||0)+1;
-    else if(r.includes('luxury')||r.includes('ralph')||r.includes('or√©al'))sectors['Luxury & Retail']=(sectors['Luxury & Retail']||0)+1;
+    else if(r.includes('luxury')||r.includes('ralph')||r.includes('oréal'))sectors['Luxury & Retail']=(sectors['Luxury & Retail']||0)+1;
     else if(r.includes('founder')||r.includes('own'))sectors['Entrepreneurs']=(sectors['Entrepreneurs']||0)+1;
     else sectors['Other']=(sectors['Other']||0)+1;
   });
@@ -646,19 +646,19 @@ function renderStats(){
   const dub=alumni.filter(m=>m.city==='Dubai').length;
 
   grid.innerHTML=`
-    <div class="stats-card"><div class="stats-card-title">üåç By Country</div>${sc.map(([c,n])=>`<div class="bar-chart-item"><div class="bar-label">${c}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/mc)*100}%;background:#840132">${n}</div></div></div>`).join('')}</div>
-    <div class="stats-card"><div class="stats-card-title">üèôÔ∏è Top Cities</div>${sci.map(([c,n])=>`<div class="bar-chart-item"><div class="bar-label">${c}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/mci)*100}%;background:#EB9F00">${n}</div></div></div>`).join('')}</div>
-    <div class="stats-card"><div class="stats-card-title">üìö Top Majors</div>${sm.map(([m,n])=>`<div class="bar-chart-item"><div class="bar-label">${m}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/mm)*100}%;background:#C8666D">${n}</div></div></div>`).join('')}</div>
-    <div class="stats-card"><div class="stats-card-title">üè¢ Industry Sectors</div>${sortedSectors.map(([s,n])=>`<div class="bar-chart-item"><div class="bar-label">${s}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/maxSec)*100}%;background:#4B1757">${n}</div></div></div>`).join('')}</div>
+    <div class="stats-card"><div class="stats-card-title">&#x1F30D; By Country</div>${sc.map(([c,n])=>`<div class="bar-chart-item"><div class="bar-label">${c}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/mc)*100}%;background:#840132">${n}</div></div></div>`).join('')}</div>
+    <div class="stats-card"><div class="stats-card-title">&#x1F3D9;&#xFE0F; Top Cities</div>${sci.map(([c,n])=>`<div class="bar-chart-item"><div class="bar-label">${c}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/mci)*100}%;background:#EB9F00">${n}</div></div></div>`).join('')}</div>
+    <div class="stats-card"><div class="stats-card-title">&#x1F4DA; Top Majors</div>${sm.map(([m,n])=>`<div class="bar-chart-item"><div class="bar-label">${m}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/mm)*100}%;background:#C8666D">${n}</div></div></div>`).join('')}</div>
+    <div class="stats-card"><div class="stats-card-title">&#x1F3E2; Industry Sectors</div>${sortedSectors.map(([s,n])=>`<div class="bar-chart-item"><div class="bar-label">${s}</div><div class="bar-track"><div class="bar-fill" style="width:${(n/maxSec)*100}%;background:#4B1757">${n}</div></div></div>`).join('')}</div>
 
-    <div class="superlative-card"><div class="superlative-emoji">üëë</div><div class="superlative-label">City Captains</div><div class="cluster-list">${captains.map(c=>`<div class="cluster-item"><span class="cluster-company">${c.city}</span><span class="cluster-count">${c.count} alumni</span></div>`).join('')}</div></div>
+    <div class="superlative-card"><div class="superlative-emoji">&#x1F451;</div><div class="superlative-label">City Captains</div><div class="cluster-list">${captains.map(c=>`<div class="cluster-item"><span class="cluster-company">${c.city}</span><span class="cluster-count">${c.count} alumni</span></div>`).join('')}</div></div>
 
-    <div class="superlative-card"><div class="superlative-emoji">üè¢</div><div class="superlative-label">Company Clusters</div><div class="cluster-list">${clusters.length?clusters.map(([c,n])=>`<div class="cluster-item"><span class="cluster-company">${c}</span><span class="cluster-count">${n}</span></div>`).join(''):'<div style="color:var(--tm);font-size:0.85rem">Add your company to see clusters!</div>'}</div></div>
+    <div class="superlative-card"><div class="superlative-emoji">&#x1F3E2;</div><div class="superlative-label">Company Clusters</div><div class="cluster-list">${clusters.length?clusters.map(([c,n])=>`<div class="cluster-item"><span class="cluster-company">${c}</span><span class="cluster-count">${n}</span></div>`).join(''):'<div style="color:var(--tm);font-size:0.85rem">Add your company to see clusters!</div>'}</div></div>
 
-    <div class="superlative-card"><div class="superlative-emoji">üéì</div><div class="superlative-label">Class Split</div><div class="superlative-name">${years[2010]||0} √ó 2010 ¬∑ ${years[2011]||0} √ó 2011${years[2009]?' ¬∑ '+years[2009]+' √ó 2009':''}</div><div class="superlative-detail">${(years[2010]||0)>(years[2011]||0)?'Class of 2010 dominates!':'Class of 2011 represents!'}</div></div>
-    <div class="superlative-card"><div class="superlative-emoji">üè†</div><div class="superlative-label">Lebanon Squad</div><div class="superlative-name">${leb} Alumni</div><div class="superlative-detail">Keeping the flame alive üå≤</div></div>
-    <div class="superlative-card"><div class="superlative-emoji">üèôÔ∏è</div><div class="superlative-label">Dubai Takeover</div><div class="superlative-name">${dub} Alumni</div><div class="superlative-detail">The #1 city for AUB grads</div></div>
-    <div class="superlative-card"><div class="superlative-emoji">üá®üá¶</div><div class="superlative-label">Canada Crew</div><div class="superlative-name">${alumni.filter(m=>m.country==='Canada').length} Alumni</div><div class="superlative-detail">${alumni.filter(m=>m.city==='Toronto').length} in Toronto</div></div>
+    <div class="superlative-card"><div class="superlative-emoji">&#x1F393;</div><div class="superlative-label">Class Split</div><div class="superlative-name">${years[2010]||0} × 2010 · ${years[2011]||0} × 2011${years[2009]?' · '+years[2009]+' × 2009':''}</div><div class="superlative-detail">${(years[2010]||0)>(years[2011]||0)?'Class of 2010 dominates!':'Class of 2011 represents!'}</div></div>
+    <div class="superlative-card"><div class="superlative-emoji">&#x1F3E0;</div><div class="superlative-label">Lebanon Squad</div><div class="superlative-name">${leb} Alumni</div><div class="superlative-detail">Keeping the flame alive &#x1F332;</div></div>
+    <div class="superlative-card"><div class="superlative-emoji">&#x1F3D9;&#xFE0F;</div><div class="superlative-label">Dubai Takeover</div><div class="superlative-name">${dub} Alumni</div><div class="superlative-detail">The #1 city for AUB grads</div></div>
+    <div class="superlative-card"><div class="superlative-emoji">&#x1F1E8;&#x1F1E6;</div><div class="superlative-label">Canada Crew</div><div class="superlative-name">${alumni.filter(m=>m.country==='Canada').length} Alumni</div><div class="superlative-detail">${alumni.filter(m=>m.city==='Toronto').length} in Toronto</div></div>
   `;
 }
 
@@ -676,7 +676,7 @@ async function addMember(){
   const em=document.getElementById('addEmail').value.trim();
   if(!n||!m){alert('Please fill in at least name and major');return}
   if(alumni.some(a=>a.name.toLowerCase()===n.toLowerCase())){
-    const err=document.getElementById('errorMsg');err.textContent='‚ö†Ô∏è '+n+' is already in the tracker!';err.style.display='block';setTimeout(()=>err.style.display='none',4000);return;
+    const err=document.getElementById('errorMsg');err.textContent='&#x26A0;&#xFE0F; '+n+' is already in the tracker!';err.style.display='block';setTimeout(()=>err.style.display='none',4000);return;
   }
   btn.disabled=true;btn.innerHTML='<span class="loading-spinner"></span>Saving...';
   try{
@@ -693,12 +693,12 @@ async function addMember(){
     });
     alumni.push({name:n,year:parseInt(y),major:m,city:ci,country:co,role:r,company:comp});
     refreshAll();buildFilters();
-    const msg=document.getElementById('successMsg');msg.textContent='‚úÖ '+n+' permanently added!';msg.style.display='block';setTimeout(()=>msg.style.display='none',5000);
+    const msg=document.getElementById('successMsg');msg.textContent='&#x2705; '+n+' permanently added!';msg.style.display='block';setTimeout(()=>msg.style.display='none',5000);
     ['addName','addMajor','addCity','addCountry','addRole','addCompany','addLinkedIn','addEmail'].forEach(id=>document.getElementById(id).value='');
   }catch(e){
-    const err=document.getElementById('errorMsg');err.textContent='‚ùå Could not save. Try again.';err.style.display='block';setTimeout(()=>err.style.display='none',4000);
+    const err=document.getElementById('errorMsg');err.textContent='&#x274C; Could not save. Try again.';err.style.display='block';setTimeout(()=>err.style.display='none',4000);
   }
-  btn.disabled=false;btn.innerHTML='Add to Tracker üå≤';
+  btn.disabled=false;btn.innerHTML='Add to Tracker &#x1F332;';
 }
 
 // === PROPOSE EDIT MODAL ===
@@ -719,11 +719,11 @@ function openEditModal(name){
   // Show current values as hints
   document.getElementById('editNameCurrent').textContent='Current: '+m.name;
   document.getElementById('editYearCurrent').textContent='Current: '+m.year;
-  document.getElementById('editMajorCurrent').textContent='Current: '+(m.major||'‚Äî');
-  document.getElementById('editCityCurrent').textContent='Current: '+(m.city||'‚Äî');
-  document.getElementById('editCountryCurrent').textContent='Current: '+(m.country||'‚Äî');
-  document.getElementById('editRoleCurrent').textContent='Current: '+(m.role||'‚Äî');
-  document.getElementById('editCompanyCurrent').textContent='Current: '+(m.company||'‚Äî');
+  document.getElementById('editMajorCurrent').textContent='Current: '+(m.major||'—');
+  document.getElementById('editCityCurrent').textContent='Current: '+(m.city||'—');
+  document.getElementById('editCountryCurrent').textContent='Current: '+(m.country||'—');
+  document.getElementById('editRoleCurrent').textContent='Current: '+(m.role||'—');
+  document.getElementById('editCompanyCurrent').textContent='Current: '+(m.company||'—');
   document.getElementById('editSuccessMsg').style.display='none';
   document.getElementById('editErrorMsg').style.display='none';
   document.getElementById('editModal').classList.add('open');
@@ -764,12 +764,12 @@ async function submitEdit(){
       setTimeout(()=>{try{script.remove();delete window[cbName]}catch(e){}resolve()},6000);
     });
     const msg=document.getElementById('editSuccessMsg');
-    msg.textContent='‚úÖ Edit proposal sent! The admin will review it.';
+    msg.textContent='&#x2705; Edit proposal sent! The admin will review it.';
     msg.style.display='block';
     setTimeout(()=>closeEditModal(),2500);
   }catch(e){
     const err=document.getElementById('editErrorMsg');
-    err.textContent='‚ùå Could not send. Please try again.';
+    err.textContent='&#x274C; Could not send. Please try again.';
     err.style.display='block';
     setTimeout(()=>err.style.display='none',4000);
   }
@@ -802,7 +802,7 @@ function toggleDark(){
   const html=document.documentElement;
   const isDark=html.getAttribute('data-theme')==='dark';
   html.setAttribute('data-theme',isDark?'':'dark');
-  document.querySelector('.dark-toggle').textContent=isDark?'üåô':'‚òÄÔ∏è';
+  document.querySelector('.dark-toggle').textContent=isDark?'&#x1F319;':'&#x2600;&#xFE0F;';
   localStorage.setItem('aub-dark',isDark?'':'dark');
   // Update map tiles
   if(map){
@@ -817,7 +817,7 @@ function initDarkMode(){
   const saved=localStorage.getItem('aub-dark');
   if(saved==='dark'){
     document.documentElement.setAttribute('data-theme','dark');
-    document.querySelector('.dark-toggle').textContent='‚òÄÔ∏è';
+    document.querySelector('.dark-toggle').textContent='&#x2600;&#xFE0F;';
   }
 }
 
@@ -837,11 +837,11 @@ function renderSpotlight(){
       <div class="spotlight-tag">Alumni Spotlight</div>
       <div class="spotlight-name">${m.name}</div>
       <div class="spotlight-detail">
-        üìö ${m.major} ¬∑ Class of ${m.year}<br>
-        üìç ${loc}${m.company?' ¬∑ üè¢ '+m.company:''}${m.role?' ¬∑ üíº '+m.role:''}
+        &#x1F4DA; ${m.major} · Class of ${m.year}<br>
+        &#x1F4CD; ${loc}${m.company?' · &#x1F3E2; '+m.company:''}${m.role?' · &#x1F4BC; '+m.role:''}
       </div>
     </div>
-    <button class="spotlight-refresh" onclick="renderSpotlight()">Next ‚Üí</button>
+    <button class="spotlight-refresh" onclick="renderSpotlight()">Next →</button>
   `;
   document.getElementById('spotlightWrap').style.display='block';
 }
