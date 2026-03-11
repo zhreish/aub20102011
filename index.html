@@ -68,7 +68,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
 .region-counters{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:20px}
 .region-card{background:var(--w);border:1px solid var(--cd);border-radius:12px;padding:16px;text-align:center;cursor:pointer;transition:all 0.25s}
 .region-card:hover{border-color:var(--r);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.06)}
-.region-card.active{border-color:var(--r);background:rgba(132,1,50,0.04)}
+.region-card.active{border-color:var(--r);background:var(--cb)}
 .region-num{font-family:'Fraunces',serif;font-weight:800;font-size:1.8rem;color:var(--r)}
 .region-label{font-size:0.72rem;color:var(--tm);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
 
@@ -166,11 +166,12 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
 /* Dark Mode */
-[data-theme="dark"]{--w:#1e1e1e;--ow:#2a2a2a;--bg:#121212;--tp:#e8e8e8;--ts:#aaa;--tm:#777;--cd:#333;--cb:rgba(255,255,255,0.05)}
-[data-theme="dark"] .top-bar{background:#2a0a16;box-shadow:0 2px 12px rgba(0,0,0,0.4)}
+[data-theme="dark"]{--r:#e8587a;--rl:#f06888;--rd:#d04868;--co:#e8969d;--w:#1e1e1e;--ow:#2a2a2a;--bg:#121212;--tp:#e8e8e8;--ts:#aaa;--tm:#777;--cd:#333;--cb:rgba(255,255,255,0.05)}
+[data-theme="dark"] .top-bar{background:#3a1525;box-shadow:0 2px 12px rgba(0,0,0,0.4)}
 [data-theme="dark"] .alumni-card::before{background:var(--y)}
 [data-theme="dark"] .leaflet-popup-content-wrapper{background:#1e1e1e!important;border-color:#333!important;color:#e8e8e8!important}
 [data-theme="dark"] .leaflet-popup-tip{background:#1e1e1e!important}
+[data-theme="dark"] .spotlight-card{background:linear-gradient(135deg,var(--r),#7a2040)}
 [data-theme="dark"] .modal{background:#1e1e1e}
 [data-theme="dark"] .success-msg{background:#1a2e1a;border-color:#2E7D32;color:#66BB6A}
 [data-theme="dark"] .error-msg{background:#2e1a1a;border-color:#c62828;color:#ef5350}
@@ -755,15 +756,16 @@ async function submitEdit(){
   };
   btn.disabled=true;btn.innerHTML='<span class="loading-spinner"></span>Sending...';
   try{
-    await new Promise((resolve,reject)=>{
+    let callbackFired=false;
+    await new Promise((resolve)=>{
       const cbName='_editCb_'+Date.now();
-      window[cbName]=function(res){delete window[cbName];resolve(res)};
+      window[cbName]=function(res){delete window[cbName];callbackFired=true;resolve(res)};
       const params=new URLSearchParams({action:'propose_edit',OriginalName:original,Proposer:proposer,...fields,callback:cbName});
       const script=document.createElement('script');
       script.src=SHEET_URL+'?'+params.toString();
-      script.onerror=function(){script.remove();delete window[cbName];reject(new Error('Failed'))};
+      script.onerror=function(){script.remove();delete window[cbName];resolve()};
       document.head.appendChild(script);
-      setTimeout(()=>{try{script.remove();delete window[cbName]}catch(e){}resolve()},6000);
+      setTimeout(()=>{try{script.remove();delete window[cbName]}catch(e){}resolve()},8000);
     });
     const msg=document.getElementById('editSuccessMsg');
     msg.textContent='Edit proposal sent! The admin will review it.';
@@ -810,8 +812,8 @@ function toggleDark(){
   if(map){
     map.eachLayer(l=>{if(l instanceof L.TileLayer)map.removeLayer(l)});
     const tiles=isDark
-      ?'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-      :'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+      ?'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
+      :'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
     L.tileLayer(tiles,{maxZoom:18}).addTo(map);
   }
 }
