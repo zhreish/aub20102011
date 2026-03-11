@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat \"/Users/zeidhreish/Desktop/AUB Tracker 2010 2011/index \\(5\\).html\")",
+      "Bash(pbcopy)",
+      "Bash(python3:*)",
+      "Bash(open \"https://github.com/zhreish/aub20102011/upload/main\")",
+      "Bash(open \"/Users/zeidhreish/Desktop/AUB Tracker 2010 2011/\")"
+    ]
+  }
+}
