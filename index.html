@@ -176,6 +176,25 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
 [data-theme="dark"] .success-msg{background:#1a2e1a;border-color:#2E7D32;color:#66BB6A}
 [data-theme="dark"] .error-msg{background:#2e1a1a;border-color:#c62828;color:#ef5350}
 [data-theme="dark"] .sheet-badge{background:#1a2e1a;border-color:#2E7D32;color:#66BB6A}
+/* Admin Panel */
+.admin-empty{text-align:center;padding:48px 24px;color:var(--tm)}.admin-empty .mi{font-size:48px;margin-bottom:12px;display:block;opacity:0.4}
+.edit-card{background:var(--w);border:1px solid var(--cd);border-radius:16px;padding:20px;margin-bottom:16px;transition:all 0.3s}
+.edit-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;flex-wrap:wrap;gap:8px}
+.edit-card-title{font-family:'Fraunces',serif;font-weight:600;font-size:1.1rem;color:var(--r)}
+.edit-card-meta{font-size:0.75rem;color:var(--tm)}
+.edit-card-proposer{font-size:0.82rem;color:var(--ts);margin-bottom:12px}
+.edit-diff{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.edit-diff-item{padding:8px 12px;border-radius:8px;font-size:0.82rem}
+.edit-diff-label{font-weight:600;font-size:0.7rem;text-transform:uppercase;letter-spacing:1px;color:var(--tm);margin-bottom:2px}
+.edit-diff-old{background:rgba(200,50,50,0.06);border:1px solid rgba(200,50,50,0.15)}
+.edit-diff-new{background:rgba(50,150,50,0.06);border:1px solid rgba(50,150,50,0.15)}
+.edit-actions{display:flex;gap:8px}
+.btn-approve{padding:8px 20px;border:none;border-radius:8px;background:#2E7D32;color:#fff;font-family:'Outfit',sans-serif;font-weight:600;font-size:0.85rem;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:6px}
+.btn-approve:hover{background:#1B5E20}
+.btn-reject{padding:8px 20px;border:none;border-radius:8px;background:var(--w);border:1px solid var(--cd);color:var(--ts);font-family:'Outfit',sans-serif;font-weight:600;font-size:0.85rem;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:6px}
+.btn-reject:hover{background:rgba(200,50,50,0.08);border-color:rgba(200,50,50,0.3);color:#c62828}
+.admin-badge{background:#c62828;color:#fff;font-size:0.65rem;font-weight:700;border-radius:50%;min-width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;margin-left:4px;padding:0 5px}
+@media(max-width:640px){.edit-diff{grid-template-columns:1fr}}
 .dark-toggle{width:36px;height:36px;border:none;background:rgba(255,255,255,0.15);border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all 0.3s;flex-shrink:0;margin-left:auto}
 .dark-toggle:hover{background:rgba(255,255,255,0.25);transform:scale(1.1)}
 
@@ -197,6 +216,77 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
 .wa-fab-btn:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,0.5)}
 .wa-tooltip{background:var(--w);border:1px solid var(--cd);border-radius:12px;padding:10px 16px;font-size:0.8rem;color:var(--ts);box-shadow:0 4px 16px rgba(0,0,0,0.1);white-space:nowrap;opacity:0;transform:translateY(8px);transition:all 0.3s;pointer-events:none}
 .wa-fab:hover .wa-tooltip{opacity:1;transform:translateY(0)}
+
+/* Trivia Game */
+.trivia-container{max-width:640px;margin:0 auto}
+.trivia-start{text-align:center;padding:40px 20px}
+.trivia-start h3{font-family:'Fraunces',serif;font-size:1.8rem;color:var(--r);margin-bottom:8px}
+.trivia-start p{color:var(--ts);margin-bottom:24px;font-size:0.95rem}
+.btn-trivia{padding:16px 48px;background:var(--r);color:#fff;border:none;border-radius:60px;font-family:'Outfit',sans-serif;font-weight:700;font-size:1.1rem;cursor:pointer;transition:all 0.3s;box-shadow:0 4px 20px rgba(132,1,50,0.3)}
+.btn-trivia:hover{background:var(--rl);transform:translateY(-2px)}
+.trivia-progress{display:flex;gap:6px;justify-content:center;margin-bottom:20px}
+.trivia-dot{width:10px;height:10px;border-radius:50%;background:var(--cd);transition:all 0.3s}
+.trivia-dot.done{background:#2E7D32}.trivia-dot.active{background:var(--r);transform:scale(1.3)}
+.trivia-dot.wrong{background:#c62828}
+.trivia-qcard{background:var(--w);border:1px solid var(--cd);border-radius:20px;padding:32px;box-shadow:0 4px 20px rgba(0,0,0,0.06);animation:fadeUp 0.4s ease}
+.trivia-qnum{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--tm);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.trivia-question{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:600;color:var(--tp);margin-bottom:24px;line-height:1.4}
+.trivia-timer{height:4px;background:var(--cd);border-radius:4px;margin-bottom:20px;overflow:hidden}
+.trivia-timer-bar{height:100%;background:#2E7D32;border-radius:4px;transition:width 1s linear,background 0.5s}
+.trivia-options{display:grid;gap:10px}
+.trivia-opt{padding:14px 20px;background:var(--w);border:2px solid var(--cd);border-radius:12px;font-family:'Outfit',sans-serif;font-size:0.95rem;color:var(--tp);cursor:pointer;transition:all 0.2s;text-align:left;display:flex;align-items:center;gap:12px}
+.trivia-opt:hover{border-color:var(--r);background:rgba(132,1,50,0.03)}
+.trivia-opt.correct{border-color:#2E7D32;background:rgba(46,125,50,0.08);color:#2E7D32}
+.trivia-opt.wrong{border-color:#c62828;background:rgba(198,40,40,0.08);color:#c62828}
+.trivia-opt.disabled{pointer-events:none;opacity:0.6}
+.trivia-opt-letter{width:28px;height:28px;border-radius:50%;background:var(--ow);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;flex-shrink:0}
+.trivia-result{text-align:center;padding:40px 20px;animation:fadeUp 0.5s ease}
+.trivia-score-circle{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--r),var(--rd));display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 20px;color:#fff}
+.trivia-score-num{font-family:'Fraunces',serif;font-size:2.4rem;font-weight:800;line-height:1}
+.trivia-score-label{font-size:0.7rem;opacity:0.8}
+.trivia-rank{font-family:'Fraunces',serif;font-size:1.4rem;color:var(--y);margin-bottom:8px}
+.trivia-rank-sub{color:var(--ts);font-size:0.9rem;margin-bottom:24px}
+.trivia-submit-row{display:flex;gap:10px;max-width:400px;margin:0 auto}
+.trivia-submit-row input{flex:1;padding:12px 16px;border:1px solid var(--cd);border-radius:12px;font-family:'Outfit',sans-serif;font-size:0.95rem;outline:none}
+.trivia-submit-row input:focus{border-color:var(--r)}
+.trivia-submit-row button{padding:12px 24px;background:var(--r);color:#fff;border:none;border-radius:12px;font-weight:600;cursor:pointer}
+.trivia-lb{margin-top:32px}
+.trivia-lb-title{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--r);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px}
+.trivia-lb-row{display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--w);border:1px solid var(--cd);border-radius:10px;margin-bottom:6px;font-size:0.85rem}
+.trivia-lb-rank{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;flex-shrink:0}
+.trivia-lb-rank.gold{background:#FFF3CD;color:#856404}.trivia-lb-rank.silver{background:#E8E8E8;color:#555}.trivia-lb-rank.bronze{background:#FFE0CC;color:#8B4513}
+.trivia-lb-name{flex:1;font-weight:500;color:var(--tp)}.trivia-lb-score{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--r)}
+
+/* Bulletin Board */
+.bulletin-area{max-width:1200px;margin:0 auto;padding:0 24px}
+.bulletin-cards{display:flex;gap:12px;overflow-x:auto;padding:8px 0 16px;scrollbar-width:none}
+.bulletin-cards::-webkit-scrollbar{display:none}
+.bulletin-card{flex-shrink:0;background:var(--w);border:1px solid var(--cd);border-left:4px solid var(--y);border-radius:12px;padding:14px 18px;min-width:280px;max-width:360px;position:relative;animation:slideIn 0.5s ease}
+.bulletin-card-title{font-weight:600;font-size:0.9rem;color:var(--tp);margin-bottom:4px}
+.bulletin-card-msg{font-size:0.82rem;color:var(--ts);line-height:1.5}
+.bulletin-card-date{font-size:0.68rem;color:var(--tm);margin-top:6px}
+.bulletin-dismiss{position:absolute;top:8px;right:8px;background:none;border:none;color:var(--tm);cursor:pointer;font-size:16px;padding:2px;line-height:1}
+.bulletin-dismiss:hover{color:var(--tp)}
+.admin-bulletin-form{background:var(--w);border:1px solid var(--cd);border-radius:16px;padding:20px;margin-top:24px}
+.admin-bulletin-form h4{font-family:'Fraunces',serif;font-size:1.1rem;color:var(--r);margin-bottom:12px}
+
+/* Memory Wall */
+.memory-grid{columns:3;column-gap:14px}
+.memory-card{break-inside:avoid;background:var(--w);border:1px solid var(--cd);border-radius:16px;padding:20px;margin-bottom:14px;position:relative;transition:all 0.3s}
+.memory-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.08)}
+.memory-quote{font-size:2rem;font-family:'Fraunces',serif;color:var(--co);line-height:1;margin-bottom:4px;opacity:0.5}
+.memory-text{font-size:0.9rem;color:var(--tp);line-height:1.6;margin-bottom:12px}
+.memory-author{font-size:0.78rem;color:var(--tm);font-weight:500}
+.memory-form{background:var(--w);border:1px solid var(--cd);border-radius:16px;padding:24px;margin-bottom:24px}
+.memory-form h4{font-family:'Fraunces',serif;font-size:1.1rem;color:var(--r);margin-bottom:12px}
+.memory-form textarea{width:100%;padding:12px 16px;border:1px solid var(--cd);border-radius:12px;font-family:'Outfit',sans-serif;font-size:0.95rem;resize:vertical;min-height:80px;outline:none;color:var(--tp);background:var(--w)}
+.memory-form textarea:focus{border-color:var(--r)}
+.memory-char-count{font-size:0.72rem;color:var(--tm);text-align:right;margin-top:4px}
+.memory-form-row{display:flex;gap:10px;margin-top:10px}
+.memory-form-row input{flex:1;padding:12px 16px;border:1px solid var(--cd);border-radius:12px;font-family:'Outfit',sans-serif;font-size:0.95rem;outline:none;color:var(--tp);background:var(--w)}
+.memory-form-row input:focus{border-color:var(--r)}
+@media(max-width:900px){.memory-grid{columns:2}}
+@media(max-width:640px){.memory-grid{columns:1}.trivia-submit-row{flex-direction:column}}
 
 /* ===== TABLET ===== */
 @media(max-width:900px){
@@ -309,6 +399,9 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
     <button class="nav-tab" onclick="showSection('directory',this)"><span class="mi" style="font-size:16px">group</span> Directory</button>
     <button class="nav-tab" onclick="showSection('stats',this)"><span class="mi" style="font-size:16px">bar_chart</span> Stats</button>
     <button class="nav-tab" onclick="showSection('add',this)"><span class="mi" style="font-size:16px">person_add</span> Add</button>
+    <button class="nav-tab" onclick="showSection('trivia',this)"><span class="mi" style="font-size:16px">quiz</span> Trivia</button>
+    <button class="nav-tab" onclick="showSection('memories',this)"><span class="mi" style="font-size:16px">auto_stories</span> Memories</button>
+    <button class="nav-tab" id="adminTab" style="display:none" onclick="showSection('admin',this)"><span class="mi" style="font-size:16px">admin_panel_settings</span> Admin<span class="admin-badge" id="adminBadge" style="display:none">0</span></button>
   </div>
 </div></div>
 
@@ -326,6 +419,11 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
 <!-- Alumni Spotlight -->
 <div class="spotlight" id="spotlightWrap" style="display:none">
   <div class="spotlight-card" id="spotlightCard"></div>
+</div>
+
+<!-- Bulletin Board -->
+<div class="bulletin-area" id="bulletinArea" style="display:none">
+  <div class="bulletin-cards" id="bulletinCards"></div>
 </div>
 
 <!-- Live Feed -->
@@ -382,12 +480,61 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
   <div style="margin-bottom:32px"></div>
   <div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" type="text" id="addName" placeholder="e.g. Rami Khalil"></div>
   <div class="form-row"><div class="form-group"><label class="form-label">Graduation Year *</label><select class="form-select" id="addYear"><option value="2010">2010</option><option value="2011">2011</option></select></div><div class="form-group"><label class="form-label">Major *</label><input class="form-input" type="text" id="addMajor" placeholder="e.g. Economics"></div></div>
-  <div class="form-row"><div class="form-group"><label class="form-label">City</label><input class="form-input" type="text" id="addCity" placeholder="e.g. Dubai"></div><div class="form-group"><label class="form-label">Country</label><input class="form-input" type="text" id="addCountry" placeholder="e.g. UAE"></div></div>
+  <div class="form-row"><div class="form-group"><label class="form-label">City</label><input class="form-input" type="text" id="addCity" placeholder="e.g. Dubai"></div><div class="form-group"><label class="form-label">Country</label><select class="form-select" id="addCountry"><option value="">Select country...</option></select></div></div>
   <div class="form-row"><div class="form-group"><label class="form-label">Field / Role</label><input class="form-input" type="text" id="addRole" placeholder="e.g. Head of Marketing"></div><div class="form-group"><label class="form-label">Current Company</label><input class="form-input" type="text" id="addCompany" placeholder="e.g. Google"></div></div>
   <div class="form-row"><div class="form-group"><label class="form-label">LinkedIn URL</label><input class="form-input" type="url" id="addLinkedIn" placeholder="https://linkedin.com/in/..."></div><div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" id="addEmail" placeholder="name@example.com"></div></div>
   <button class="btn-submit" id="submitBtn" onclick="addMember()">Add to Tracker</button>
   <div class="success-msg" id="successMsg"></div>
   <div class="error-msg" id="errorMsg"></div>
+</div></div>
+
+<!-- Trivia Section -->
+<div class="section" id="triviaSection"><div class="section-inner">
+  <div class="trivia-container" id="triviaContainer">
+    <div class="trivia-start" id="triviaStart">
+      <span class="mi" style="font-size:48px;color:var(--y);margin-bottom:8px;display:block">school</span>
+      <h3>AUB Nostalgia Trivia</h3>
+      <p>10 questions about AUB, Hamra, and Bliss Street. How well do you remember your campus days?</p>
+      <button class="btn-trivia" onclick="startTrivia()"><span class="mi" style="font-size:18px;vertical-align:middle">play_arrow</span> Start Trivia</button>
+      <div class="trivia-lb" id="triviaLeaderboard"></div>
+    </div>
+    <div id="triviaGame" style="display:none"></div>
+    <div id="triviaResult" style="display:none"></div>
+  </div>
+</div></div>
+
+<!-- Memories Section -->
+<div class="section" id="memoriesSection"><div class="section-inner">
+  <h2 style="font-family:'Fraunces',serif;font-weight:600;font-size:1.5rem;margin-bottom:6px;color:var(--r)">Memory Wall</h2>
+  <p style="color:var(--ts);font-size:0.9rem;margin-bottom:20px">Share your favorite AUB memory. What moment defined your time on campus?</p>
+  <div class="memory-form" id="memoryForm">
+    <h4><span class="mi" style="font-size:18px">edit_note</span> Share a Memory</h4>
+    <textarea id="memoryText" placeholder="That time we stayed up all night at Jafet Library before finals..." maxlength="280" oninput="document.getElementById('memCharCount').textContent=this.value.length+'/280'"></textarea>
+    <div class="memory-char-count" id="memCharCount">0/280</div>
+    <div class="memory-form-row">
+      <input type="text" id="memoryAuthor" placeholder="Your name">
+      <button class="btn-submit" style="padding:12px 24px;font-size:0.9rem" onclick="submitMemory()">Post</button>
+    </div>
+    <div class="success-msg" id="memorySuccess" style="margin-top:10px"></div>
+  </div>
+  <div id="memoryWall"><div class="admin-empty"><span class="mi">auto_stories</span>Loading memories...</div></div>
+</div></div>
+
+<!-- Admin Section -->
+<div class="section" id="adminSection"><div class="section-inner">
+  <h2 style="font-family:'Fraunces',serif;font-weight:600;font-size:1.5rem;margin-bottom:6px;color:var(--r)">Pending Edit Proposals</h2>
+  <p style="color:var(--ts);font-size:0.9rem;margin-bottom:24px">Review proposed changes from alumni. Approve to update the tracker, or reject to discard.</p>
+  <div id="pendingEditsContainer">
+    <div class="admin-empty"><span class="mi">hourglass_empty</span>Loading proposals...</div>
+  </div>
+  <div class="admin-bulletin-form" id="adminBulletinForm">
+    <h4><span class="mi" style="font-size:18px">campaign</span> Post Bulletin</h4>
+    <div class="form-group" style="margin-top:12px"><label class="form-label">Title</label><input class="form-input" type="text" id="bulletinTitle" placeholder="e.g. Reunion Dinner - Save the Date!"></div>
+    <div class="form-group"><label class="form-label">Message</label><textarea class="form-input" id="bulletinMsg" placeholder="Share details with all alumni..." style="min-height:80px;resize:vertical"></textarea></div>
+    <button class="btn-submit" style="padding:12px 24px;font-size:0.9rem" onclick="postBulletin()">Post Bulletin</button>
+    <div class="success-msg" id="bulletinSuccess" style="margin-top:10px"></div>
+    <div style="margin-top:20px"><div class="trivia-lb-title">Active Bulletins</div><div id="adminBulletinList"></div></div>
+  </div>
 </div></div>
 
 <!-- Propose Edit Modal -->
@@ -401,7 +548,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
     <input type="hidden" id="editOriginalName">
     <div class="form-group"><label class="form-label">Full Name</label><input class="form-input" type="text" id="editName" placeholder="Full name"><div class="modal-current" id="editNameCurrent"></div></div>
     <div class="form-row"><div class="form-group"><label class="form-label">Graduation Year</label><select class="form-select" id="editYear"><option value="2010">2010</option><option value="2011">2011</option></select><div class="modal-current" id="editYearCurrent"></div></div><div class="form-group"><label class="form-label">Major</label><input class="form-input" type="text" id="editMajor" placeholder="e.g. Economics"><div class="modal-current" id="editMajorCurrent"></div></div></div>
-    <div class="form-row"><div class="form-group"><label class="form-label">City</label><input class="form-input" type="text" id="editCity" placeholder="e.g. Dubai"><div class="modal-current" id="editCityCurrent"></div></div><div class="form-group"><label class="form-label">Country</label><input class="form-input" type="text" id="editCountry" placeholder="e.g. UAE"><div class="modal-current" id="editCountryCurrent"></div></div></div>
+    <div class="form-row"><div class="form-group"><label class="form-label">City</label><input class="form-input" type="text" id="editCity" placeholder="e.g. Dubai"><div class="modal-current" id="editCityCurrent"></div></div><div class="form-group"><label class="form-label">Country</label><select class="form-select" id="editCountry"><option value="">Select country...</option></select><div class="modal-current" id="editCountryCurrent"></div></div></div>
     <div class="form-row"><div class="form-group"><label class="form-label">Field / Role</label><input class="form-input" type="text" id="editRole" placeholder="e.g. Head of Marketing"><div class="modal-current" id="editRoleCurrent"></div></div><div class="form-group"><label class="form-label">Current Company</label><input class="form-input" type="text" id="editCompany" placeholder="e.g. Google"><div class="modal-current" id="editCompanyCurrent"></div></div></div>
     <div class="form-row"><div class="form-group"><label class="form-label">LinkedIn URL (new)</label><input class="form-input" type="url" id="editLinkedIn" placeholder="https://linkedin.com/in/..."></div><div class="form-group"><label class="form-label">Email (new)</label><input class="form-input" type="email" id="editEmail" placeholder="name@example.com"></div></div>
     <div class="form-group"><label class="form-label">Your Name (who's proposing)</label><input class="form-input" type="text" id="editProposer" placeholder="Your name"></div>
@@ -412,7 +559,9 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tp);min-he
 </div>
 
 <script>
-const SHEET_URL='https://script.google.com/macros/s/AKfycbwii8YamWny34asIh4dXgZrKF03M3BCxKx167r72Fn6nSAf1IbJXHOyhX_PDE-COw6G/exec';
+const SHEET_URL='https://script.google.com/macros/s/AKfycbwEVnJ3YWsi-IpxfA6wZt-686AJCVuyzn-_tG8Uyz9TzWCkcwjNiyRzQ--eDV_I5TcI/exec';
+const COUNTRIES=["Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Central African Republic","Chad","Chile","China","Colombia","Comoros","Congo","Costa Rica","Croatia","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Eswatini","Ethiopia","Fiji","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Grenada","Guatemala","Guinea","Guinea-Bissau","Guyana","Haiti","Honduras","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Ivory Coast","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North Korea","North Macedonia","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Saint Kitts and Nevis","Saint Lucia","Saint Vincent and the Grenadines","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","Sudan","Suriname","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Tuvalu","UAE","Uganda","Ukraine","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"];
+(function(){const opts=COUNTRIES.map(c=>'<option value="'+c+'">'+c+'</option>').join('');document.getElementById('addCountry').innerHTML='<option value="">Select country...</option>'+opts;document.getElementById('editCountry').innerHTML='<option value="">Select country...</option>'+opts})();
 const AC=['#840132','#a01545','#C8666D','#EB9F00','#5e0124','#808080','#4B1757','#2E7D32','#1565C0','#D84315','#6A1B9A','#00695C'];
 const CC={'beirut':[33.8938,35.5018],'lebanon':[33.8938,35.5018],'metn':[33.8833,35.55],'dubai':[25.2048,55.2708],'uae':[25.2048,55.2708],'abu dhabi':[24.4539,54.3773],'amman':[31.9454,35.9284],'jordan':[31.9454,35.9284],'riyadh':[24.7136,46.6753],'saudi arabia':[24.7136,46.6753],'london':[51.5074,-0.1278],'uk':[51.5074,-0.1278],'paris':[48.8566,2.3522],'france':[48.8566,2.3522],'toronto':[43.6532,-79.3832],'canada':[43.6532,-79.3832],'boston':[42.3601,-71.0589],'doha':[25.2854,51.531],'qatar':[25.2854,51.531],'kuwait':[29.3759,47.9774],'rome':[41.9028,12.4964],'italy':[41.9028,12.4964],'greece':[37.9838,23.7275],'germany':[52.52,13.405],'switzerland':[47.3769,8.5417],'geneva':[46.2044,6.1432],'marseille':[43.2965,5.3698],'oman':[23.588,58.3829],'san francisco':[37.7749,-122.4194],'washington d.c.':[38.9072,-77.0369],'washington':[38.9072,-77.0369],'chicago':[41.8781,-87.6298],'new york':[40.7128,-74.006],'los angeles':[34.0522,-118.2437],'houston':[29.7604,-95.3698],'jeddah':[21.4858,39.1925],'montreal':[45.5017,-73.5673],'bahrain':[26.0667,50.5577]};
 
@@ -791,14 +940,17 @@ function refreshAll(){
 
 // === NAV ===
 function showSection(id,btn){
-  const mp={map:'mapSection',directory:'directorySection',stats:'statsSection',add:'addSection'};
-  Object.values(mp).forEach(s=>document.getElementById(s).classList.remove('active'));
+  const mp={map:'mapSection',directory:'directorySection',stats:'statsSection',add:'addSection',trivia:'triviaSection',memories:'memoriesSection',admin:'adminSection'};
+  Object.values(mp).forEach(s=>{const el=document.getElementById(s);if(el)el.classList.remove('active')});
   document.getElementById(mp[id]).classList.add('active');
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
   if(id==='map')setTimeout(()=>map.invalidateSize(),100);
   if(id==='stats')renderStats();
   if(id==='directory')renderDirectory();
+  if(id==='admin'){loadPendingEdits();loadAdminBulletins()}
+  if(id==='trivia')loadLeaderboard();
+  if(id==='memories')loadMemories();
 }
 
 // === DARK MODE ===
@@ -850,12 +1002,346 @@ function renderSpotlight(){
   document.getElementById('spotlightWrap').style.display='block';
 }
 
+// === ADMIN PANEL ===
+const ADMIN_KEY='aub2011admin';
+let isAdmin=false;
+let pendingEdits=[];
+
+function checkAdmin(){
+  const params=new URLSearchParams(window.location.search);
+  if(params.get('admin')===ADMIN_KEY){
+    isAdmin=true;
+    document.getElementById('adminTab').style.display='';
+    loadPendingEdits();
+  }
+}
+
+function jsonpCall(params){
+  return new Promise((resolve)=>{
+    const cbName='_cb_'+Date.now()+'_'+Math.random().toString(36).substr(2,5);
+    window[cbName]=function(res){delete window[cbName];resolve(res)};
+    params.set('callback',cbName);
+    const script=document.createElement('script');
+    script.src=SHEET_URL+'?'+params.toString();
+    script.onerror=function(){script.remove();delete window[cbName];resolve(null)};
+    document.head.appendChild(script);
+    setTimeout(()=>{try{script.remove();delete window[cbName]}catch(e){}resolve(null)},10000);
+  });
+}
+
+async function loadPendingEdits(){
+  if(!isAdmin)return;
+  const container=document.getElementById('pendingEditsContainer');
+  container.innerHTML='<div class="admin-empty"><span class="mi">hourglass_empty</span>Loading proposals...</div>';
+  const data=await jsonpCall(new URLSearchParams({action:'get_edits'}));
+  if(!data||!data.length){
+    container.innerHTML='<div class="admin-empty"><span class="mi">check_circle</span>No pending proposals</div>';
+    document.getElementById('adminBadge').style.display='none';
+    return;
+  }
+  pendingEdits=data;
+  const badge=document.getElementById('adminBadge');
+  badge.textContent=data.length;
+  badge.style.display='inline-flex';
+  renderPendingEdits();
+}
+
+function renderPendingEdits(){
+  const container=document.getElementById('pendingEditsContainer');
+  if(!pendingEdits.length){
+    container.innerHTML='<div class="admin-empty"><span class="mi">check_circle</span>No pending proposals</div>';
+    document.getElementById('adminBadge').style.display='none';
+    return;
+  }
+  const fields=['Name','Year','Major','City','Country','Role','Company','LinkedIn','Email'];
+  container.innerHTML=pendingEdits.map((edit,i)=>{
+    const original=alumni.find(a=>a.name===edit.OriginalName);
+    const fieldMap={Name:'name',Year:'year',Major:'major',City:'city',Country:'country',Role:'role',Company:'company',LinkedIn:'linkedin',Email:'email'};
+    let diffHtml='';
+    fields.forEach(f=>{
+      const proposed=edit[f]||'';
+      const current=original?String(original[fieldMap[f]]||''):'';
+      if(proposed&&proposed!==current){
+        diffHtml+=`<div class="edit-diff-item edit-diff-old"><div class="edit-diff-label">${f} (current)</div>${current||'<em>empty</em>'}</div>`;
+        diffHtml+=`<div class="edit-diff-item edit-diff-new"><div class="edit-diff-label">${f} (proposed)</div>${proposed}</div>`;
+      }
+    });
+    if(!diffHtml)diffHtml='<div style="color:var(--tm);font-size:0.85rem;grid-column:1/-1">No changes detected (values may match current data)</div>';
+    const ts=edit.Timestamp?new Date(edit.Timestamp).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'';
+    return `<div class="edit-card">
+      <div class="edit-card-header">
+        <div class="edit-card-title">${edit.OriginalName||'Unknown'}</div>
+        <div class="edit-card-meta">${ts}</div>
+      </div>
+      <div class="edit-card-proposer">Proposed by: <strong>${edit.Proposer||'Unknown'}</strong></div>
+      <div class="edit-diff">${diffHtml}</div>
+      <div class="edit-actions">
+        <button class="btn-approve" onclick="approveEdit(${edit.Row})"><span class="mi" style="font-size:16px">check</span> Approve</button>
+        <button class="btn-reject" onclick="rejectEdit(${edit.Row})"><span class="mi" style="font-size:16px">close</span> Reject</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function approveEdit(row){
+  if(!confirm('Approve this edit? The alumni record will be updated.'))return;
+  const res=await jsonpCall(new URLSearchParams({action:'approve_edit',row:row}));
+  await loadData();
+  await loadPendingEdits();
+}
+
+async function rejectEdit(row){
+  if(!confirm('Reject this proposal? It will be permanently removed.'))return;
+  const res=await jsonpCall(new URLSearchParams({action:'reject_edit',row:row}));
+  await loadPendingEdits();
+}
+
+// === TRIVIA GAME ===
+const TRIVIA_QS=[
+  {q:"What street is AUB's main gate on?",opts:["Hamra Street","Bliss Street","Sadat Street","Jeanne d'Arc Street"],ans:1},
+  {q:"What is the name of AUB's iconic clock tower building?",opts:["Nicely Hall","West Hall","College Hall","Assembly Hall"],ans:2},
+  {q:"What is the green open area in the middle of campus called?",opts:["The Quad","Green Field","The Oval","Central Park"],ans:2},
+  {q:"Which library is the main research library at AUB?",opts:["Saab Medical Library","Engineering Library","Jafet Memorial Library","Science Library"],ans:2},
+  {q:"What year was AUB founded?",opts:["1846","1866","1886","1906"],ans:1},
+  {q:"What is the name of the seaside area below campus?",opts:["AUB Beach","The Corniche","The Bay","The Waterfront"],ans:0},
+  {q:"Which Hamra Street cafe was famous for its manouche and student crowds?",opts:["Cafe Younes","Barbar","Bliss House","Casper & Gambini's"],ans:1},
+  {q:"What color is College Hall's exterior?",opts:["White","Gray","Red/Sand stone","Blue"],ans:2},
+  {q:"What is the student yearbook traditionally called at AUB?",opts:["The Torch","Campus Life","Outlook","The Cedar"],ans:2},
+  {q:"Which famous boulevard runs along AUB's north side toward the sea?",opts:["Verdun Street","Clemenceau Street","Corniche al-Manara","Makdisi Street"],ans:2}
+];
+let triviaState={current:0,score:0,timeBonus:0,answers:[],timer:null,timeLeft:15};
+
+function startTrivia(){
+  triviaState={current:0,score:0,timeBonus:0,answers:[],timer:null,timeLeft:15};
+  document.getElementById('triviaStart').style.display='none';
+  document.getElementById('triviaResult').style.display='none';
+  const game=document.getElementById('triviaGame');
+  game.style.display='block';
+  showQuestion(0);
+}
+
+function showQuestion(idx){
+  if(idx>=TRIVIA_QS.length){showTriviaResults();return}
+  triviaState.current=idx;triviaState.timeLeft=15;
+  const q=TRIVIA_QS[idx];
+  const letters=['A','B','C','D'];
+  const game=document.getElementById('triviaGame');
+  game.innerHTML=`
+    <div class="trivia-progress">${TRIVIA_QS.map((_,i)=>{
+      let cls='trivia-dot';
+      if(i<idx)cls+=' '+(triviaState.answers[i]?'done':'wrong');
+      if(i===idx)cls+=' active';
+      return '<div class="'+cls+'"></div>';
+    }).join('')}</div>
+    <div class="trivia-qcard">
+      <div class="trivia-qnum">Question ${idx+1} of ${TRIVIA_QS.length}</div>
+      <div class="trivia-question">${q.q}</div>
+      <div class="trivia-timer"><div class="trivia-timer-bar" id="timerBar" style="width:100%"></div></div>
+      <div class="trivia-options">
+        ${q.opts.map((o,i)=>`<button class="trivia-opt" onclick="selectAnswer(${i})"><span class="trivia-opt-letter">${letters[i]}</span>${o}</button>`).join('')}
+      </div>
+    </div>`;
+  startTimer();
+}
+
+function startTimer(){
+  clearInterval(triviaState.timer);
+  triviaState.timeLeft=15;
+  const bar=document.getElementById('timerBar');
+  triviaState.timer=setInterval(()=>{
+    triviaState.timeLeft-=0.1;
+    if(triviaState.timeLeft<=0){triviaState.timeLeft=0;clearInterval(triviaState.timer);selectAnswer(-1);return}
+    const pct=(triviaState.timeLeft/15)*100;
+    bar.style.width=pct+'%';
+    if(pct<30)bar.style.background='#c62828';
+    else if(pct<60)bar.style.background='#F9A825';
+  },100);
+}
+
+function selectAnswer(chosen){
+  clearInterval(triviaState.timer);
+  const q=TRIVIA_QS[triviaState.current];
+  const correct=chosen===q.ans;
+  triviaState.answers.push(correct);
+  if(correct){triviaState.score++;triviaState.timeBonus+=Math.round(triviaState.timeLeft)}
+  const btns=document.querySelectorAll('.trivia-opt');
+  btns.forEach((b,i)=>{
+    b.classList.add('disabled');
+    if(i===q.ans)b.classList.add('correct');
+    if(i===chosen&&!correct)b.classList.add('wrong');
+  });
+  setTimeout(()=>showQuestion(triviaState.current+1),1200);
+}
+
+function showTriviaResults(){
+  document.getElementById('triviaGame').style.display='none';
+  const total=triviaState.score*100+triviaState.timeBonus;
+  const pct=triviaState.score/TRIVIA_QS.length;
+  let rank,sub;
+  if(pct===1){rank='Hamra Legend';sub='Perfect score! You bleed AUB maroon.'}
+  else if(pct>=0.8){rank='True AUBite';sub='Campus memories are still fresh!'}
+  else if(pct>=0.6){rank='Bliss Walker';sub='You remember the good times.'}
+  else if(pct>=0.4){rank='Part-Time Nostalgic';sub='Some memories are a bit fuzzy...'}
+  else{rank='Fresh Off the Plane';sub='Time to revisit Hamra!'}
+  const res=document.getElementById('triviaResult');
+  res.style.display='block';
+  res.innerHTML=`<div class="trivia-result">
+    <div class="trivia-score-circle"><div class="trivia-score-num">${triviaState.score}</div><div class="trivia-score-label">out of ${TRIVIA_QS.length}</div></div>
+    <div class="trivia-rank">${rank}</div>
+    <div class="trivia-rank-sub">${sub}</div>
+    <p style="font-size:0.85rem;color:var(--tm);margin-bottom:16px">Total score: ${total} points (${triviaState.timeBonus} speed bonus)</p>
+    <div class="trivia-submit-row">
+      <input type="text" id="triviaName" placeholder="Your name for the leaderboard">
+      <button onclick="submitTriviaScore()">Submit</button>
+    </div>
+    <div class="success-msg" id="triviaSuccess" style="margin-top:10px"></div>
+    <div class="trivia-lb" id="triviaResultLb"></div>
+    <button class="btn-trivia" style="margin-top:20px;font-size:0.95rem;padding:12px 32px" onclick="backToTriviaStart()"><span class="mi" style="font-size:16px;vertical-align:middle">replay</span> Play Again</button>
+  </div>`;
+  loadLeaderboard('triviaResultLb');
+}
+
+function backToTriviaStart(){
+  document.getElementById('triviaResult').style.display='none';
+  document.getElementById('triviaStart').style.display='';
+  loadLeaderboard();
+}
+
+async function submitTriviaScore(){
+  const name=document.getElementById('triviaName').value.trim();
+  if(!name){alert('Enter your name!');return}
+  const total=triviaState.score*100+triviaState.timeBonus;
+  await jsonpCall(new URLSearchParams({action:'submit_score',Name:name,Score:total,Correct:triviaState.score,Time:triviaState.timeBonus}));
+  const msg=document.getElementById('triviaSuccess');
+  msg.textContent='Score submitted!';msg.style.display='block';
+  setTimeout(()=>msg.style.display='none',3000);
+  loadLeaderboard('triviaResultLb');
+}
+
+async function loadLeaderboard(targetId){
+  const id=targetId||'triviaLeaderboard';
+  const el=document.getElementById(id);
+  if(!el)return;
+  const data=await jsonpCall(new URLSearchParams({action:'get_leaderboard'}));
+  if(!data||!data.length){el.innerHTML='<div class="trivia-lb-title">Leaderboard</div><p style="color:var(--tm);font-size:0.85rem">No scores yet. Be the first!</p>';return}
+  const rankCls=['gold','silver','bronze'];
+  el.innerHTML='<div class="trivia-lb-title">Leaderboard</div>'+data.slice(0,10).map((r,i)=>
+    `<div class="trivia-lb-row"><span class="trivia-lb-rank ${rankCls[i]||''}">${i+1}</span><span class="trivia-lb-name">${r.Name}</span><span class="trivia-lb-score">${r.Score} pts</span></div>`
+  ).join('');
+}
+
+// === BULLETIN BOARD ===
+let bulletins=[];
+
+async function loadBulletins(){
+  const data=await jsonpCall(new URLSearchParams({action:'get_bulletins'}));
+  if(!data||!data.length){document.getElementById('bulletinArea').style.display='none';return}
+  bulletins=data;
+  renderBulletins();
+}
+
+function renderBulletins(){
+  const dismissed=JSON.parse(sessionStorage.getItem('aub-dismissed-bulletins')||'[]');
+  const visible=bulletins.filter((_,i)=>!dismissed.includes(i));
+  if(!visible.length){document.getElementById('bulletinArea').style.display='none';return}
+  document.getElementById('bulletinArea').style.display='';
+  document.getElementById('bulletinCards').innerHTML=visible.map((b,idx)=>{
+    const origIdx=bulletins.indexOf(b);
+    const d=b.Timestamp?new Date(b.Timestamp).toLocaleDateString('en-US',{month:'short',day:'numeric'}):'';
+    return `<div class="bulletin-card">
+      <button class="bulletin-dismiss" onclick="dismissBulletin(${origIdx})">&times;</button>
+      <div class="bulletin-card-title">${b.Title||'Announcement'}</div>
+      <div class="bulletin-card-msg">${b.Message||''}</div>
+      <div class="bulletin-card-date">${d}</div>
+    </div>`;
+  }).join('');
+}
+
+function dismissBulletin(idx){
+  const dismissed=JSON.parse(sessionStorage.getItem('aub-dismissed-bulletins')||'[]');
+  dismissed.push(idx);
+  sessionStorage.setItem('aub-dismissed-bulletins',JSON.stringify(dismissed));
+  renderBulletins();
+}
+
+async function postBulletin(){
+  const title=document.getElementById('bulletinTitle').value.trim();
+  const msg=document.getElementById('bulletinMsg').value.trim();
+  if(!title||!msg){alert('Please fill in both title and message.');return}
+  await jsonpCall(new URLSearchParams({action:'post_bulletin',Title:title,Message:msg}));
+  document.getElementById('bulletinTitle').value='';
+  document.getElementById('bulletinMsg').value='';
+  const s=document.getElementById('bulletinSuccess');
+  s.textContent='Bulletin posted!';s.style.display='block';
+  setTimeout(()=>s.style.display='none',3000);
+  await loadBulletins();
+  loadAdminBulletins();
+}
+
+async function loadAdminBulletins(){
+  if(!isAdmin)return;
+  const data=await jsonpCall(new URLSearchParams({action:'get_bulletins'}));
+  const el=document.getElementById('adminBulletinList');
+  if(!el)return;
+  if(!data||!data.length){el.innerHTML='<p style="color:var(--tm);font-size:0.85rem">No bulletins yet.</p>';return}
+  el.innerHTML=data.map(b=>
+    `<div class="trivia-lb-row" style="justify-content:space-between"><span><strong>${b.Title||''}</strong> - ${(b.Message||'').substring(0,40)}...</span><button class="btn-reject" style="padding:4px 12px;font-size:0.75rem" onclick="deleteBulletin(${b.Row})"><span class="mi" style="font-size:14px">delete</span></button></div>`
+  ).join('');
+}
+
+async function deleteBulletin(row){
+  if(!confirm('Delete this bulletin?'))return;
+  await jsonpCall(new URLSearchParams({action:'delete_bulletin',row:row}));
+  await loadBulletins();
+  loadAdminBulletins();
+}
+
+// === MEMORY WALL ===
+let memories=[];
+const PASTEL_COLORS=['#FFF3E0','#E8F5E9','#E3F2FD','#FCE4EC','#F3E5F5','#FFF8E1','#E0F7FA','#FBE9E7','#F1F8E9','#EDE7F6'];
+
+async function loadMemories(){
+  const data=await jsonpCall(new URLSearchParams({action:'get_memories'}));
+  if(!data||!data.length){document.getElementById('memoryWall').innerHTML='<div class="admin-empty"><span class="mi">auto_stories</span>No memories yet. Be the first to share!</div>';return}
+  memories=data;
+  renderMemories();
+}
+
+function renderMemories(){
+  const wall=document.getElementById('memoryWall');
+  wall.innerHTML='<div class="memory-grid">'+memories.map((m,i)=>{
+    const bg=PASTEL_COLORS[i%PASTEL_COLORS.length];
+    const d=m.Timestamp?new Date(m.Timestamp).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'';
+    return `<div class="memory-card" style="background:${bg};border-color:transparent">
+      <div class="memory-quote">&ldquo;</div>
+      <div class="memory-text">${(m.Memory||'').replace(/</g,'&lt;')}</div>
+      <div class="memory-author">${(m.Name||'Anonymous').replace(/</g,'&lt;')} ${d?'&middot; '+d:''}</div>
+    </div>`;
+  }).join('')+'</div>';
+}
+
+async function submitMemory(){
+  const text=document.getElementById('memoryText').value.trim();
+  const author=document.getElementById('memoryAuthor').value.trim();
+  if(!text){alert('Write a memory first!');return}
+  if(!author){alert('Enter your name!');return}
+  await jsonpCall(new URLSearchParams({action:'add_memory',Name:author,Memory:text}));
+  document.getElementById('memoryText').value='';
+  document.getElementById('memoryAuthor').value='';
+  document.getElementById('memCharCount').textContent='0/280';
+  const s=document.getElementById('memorySuccess');
+  s.textContent='Memory shared!';s.style.display='block';
+  setTimeout(()=>s.style.display='none',3000);
+  await loadMemories();
+}
+
 // === INIT ===
 window.addEventListener('DOMContentLoaded',()=>{
   initDarkMode();
   initMap();
   loadData();
-  // Rotate spotlight every 8 seconds
+  checkAdmin();
+  loadBulletins();
   setInterval(()=>{if(alumni.length)renderSpotlight()},8000);
 });
 </script>
